@@ -1,15 +1,112 @@
 /**
  * IGGO KULINER — Design System & Custom Styling
  * Iwan Goreng-Goreng (Since 2005)
- * CRM Loyalty Member Pass
+ * Ultra-Modern VIP Member Pass & Loyalty CRM
  */
 
 /* ==============================================================
-   VIP MEMBER CARD STYLING (METALLIC GOLD & MAROON EFFECT)
+   MODERN VIP MEMBER CARD (METALLIC OBSIDIAN & MAROON LUXURY)
+   Standard Card Dimension Ratio: 85.6mm x 54mm (~ 1.58 : 1)
    ============================================================== */
-.vip-card-mesh {
-    background: radial-gradient(circle at 10% 20%, rgba(216, 150, 36, 0.25) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(139, 30, 30, 0.4) 0%, transparent 50%),
+.iggo-card-mesh {
+    background: radial-gradient(circle at 15% 15%, rgba(224, 168, 56, 0.22) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(139, 20, 20, 0.4) 0%, transparent 50%),
+                linear-gradient(135deg, #1A0505 0%, #3B0A0A 40%, #520F0F 70%, #1F0505 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle Geometric Luxury Watermark */
+.card-geometric-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(245, 190, 88, 0.08) 1px, transparent 1px);
+    background-size: 16px 16px;
+    pointer-events: none;
+}
+
+/* Metallic Gold Foil Border & Glow */
+.gold-card-border {
+    border: 1.5px solid rgba(245, 190, 88, 0.4);
+    box-shadow: inset 0 0 20px rgba(216, 150, 36, 0.15),
+                0 15px 35px -10px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(0, 0, 0, 0.3);
+}
+
+/* Metallic Embossed Text */
+.gold-foil-text {
+    background: linear-gradient(135deg, #FFFFFF 0%, #FDE6B0 40%, #E0A838 80%, #C4881A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(224, 168, 56, 0.3);
+}
+
+.gold-sub-foil {
+    color: #F8D38D;
+    letter-spacing: 0.15em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Smart EMV Chip Graphic */
+.smart-chip-gold {
+    background: linear-gradient(135deg, #D4AF37 0%, #FFF2A1 50%, #AA771C 100%);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.5), 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Card QR Code Constraint (Rapi, Proporsional, Tidak Pecah & Elegan) */
+.card-qr-box {
+    width: 80px !important;
+    height: 80px !important;
+    min-width: 80px !important;
+    min-height: 80px !important;
+    max-width: 80px !important;
+    max-height: 80px !important;
+    background: #ffffff !important;
+    padding: 6px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+    border: 1.5px solid rgba(245, 190, 88, 0.6) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+}
+
+#printCardQr {
+    width: 68px !important;
+    height: 68px !important;
+    min-width: 68px !important;
+    min-height: 68px !important;
+    max-width: 68px !important;
+    max-height: 68px !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+/* Glossy Magnetic Stripe for Card Back */
+.magnetic-stripe {
+    background: linear-gradient(180deg, #110E0E 0%, #1C1717 50%, #0A0808 100%);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8), 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Signature & Security Strip */
+.signature-strip {
+    background: repeating-linear-gradient(
+        45deg,
+        #F5EBE1,
+        #F5EBE1 8px,
+        #EDE0D2 8px,
+        #EDE0D2 16px
+    );
+    border: 1px solid #D8C7B5;
+}
+
+/* ==============================================================
+   LOYALTY STAMP CARD STYLING (BAGIAN KHUSUS STEMPEL 10 CAP)
+   ============================================================== */
+.loyalty-card-mesh {
+    background: radial-gradient(circle at 10% 20%, rgba(216, 150, 36, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(139, 30, 30, 0.35) 0%, transparent 50%),
                 linear-gradient(135deg, #4A0C0C 0%, #6B1414 45%, #3D0909 100%);
 }
 
@@ -25,19 +122,13 @@
                  0 0 12px rgba(245, 190, 88, 0.4);
 }
 
-.stamp-ribbon {
-    background: linear-gradient(135deg, #D89624 0%, #F5BE58 50%, #D89624 100%);
-}
-
-/* ==============================================================
-   MICRO-ANIMATIONS & TRANSITIONS
-   ============================================================== */
+/* Micro-animations */
 @keyframes pulse-subtle {
     0%, 100% {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.03);
+        transform: scale(1.025);
     }
 }
 
@@ -45,12 +136,7 @@
     animation: pulse-subtle 3s infinite ease-in-out;
 }
 
-/* Smooth Focus States for Inputs */
-input:focus, textarea:focus, select:focus {
-    transition: all 0.2s ease-in-out;
-}
-
-/* Custom Scrollbar for Smooth UX */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -67,4 +153,46 @@ input:focus, textarea:focus, select:focus {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #6B1414;
+}
+
+/* ==============================================================
+   PRINT MEDIA STYLES (CETAK KHUSUS KARTU MEMBER TANPA WEBSITE)
+   ============================================================== */
+@media print {
+    /* Sembunyikan semua elemen website */
+    body * {
+        visibility: hidden !important;
+    }
+
+    /* Tampilkan hanya area kartu cetak */
+    #printableCardArea, #printableCardArea * {
+        visibility: visible !important;
+    }
+
+    #printableCardArea {
+        position: fixed !important;
+        left: 50% !important;
+        top: 20px !important;
+        transform: translateX(-50%) !important;
+        width: 100% !important;
+        max-width: 500px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 25px !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 auto !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .iggo-card-mesh {
+        box-shadow: none !important;
+        border: 1px solid #C59A45 !important;
+        page-break-inside: avoid !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
 }

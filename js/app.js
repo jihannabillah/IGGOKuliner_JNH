@@ -5,13 +5,13 @@
  * ==============================================================
  * 
  * Features:
- * 1. Google Sheets GViz Real-time Database Reader
+ * 1. Google Sheets GViz Real-time Database Reader with Error Isolation
  * 2. Headless Google Form Registration Integration (No Login Required)
- * 3. Dynamic VIP Member Card Generator (HTML5 Canvas PNG Export)
- * 4. 10-Stamp Interactive Loyalty Visualizer with Milestone Rewards
+ * 3. Modern Luxury VIP Member Card (Front & Back - Obsidian & Gold Style)
+ * 4. Separate 10-Stamp Interactive Loyalty Card with Milestone Rewards
  * 5. Robust QR Code & URL Routing (Auto-detects ?id=... and #portalCek?id=...)
  * 6. LocalStorage Caching for Instant Card Re-opening
- * 7. Interactive Cashier Simulation Mode for College Presentations
+ * 7. Cashier Simulation Panel for Presentations
  */
 
 // ==============================================================
@@ -29,6 +29,17 @@ const CONFIG = {
 let currentMemberData = null;
 let isFormSubmitted = false;
 let simulatedStampCount = null;
+
+// Safe DOM Setters (Mencegah runtime crash jika salah satu ID DOM absen)
+function setElText(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = (text !== undefined && text !== null) ? text : "-";
+}
+
+function setElSrc(id, src) {
+    const el = document.getElementById(id);
+    if (el) el.src = src || "";
+}
 
 // ==============================================================
 // 2. INITIALIZATION & URL ROUTING
@@ -73,7 +84,6 @@ function checkLocalStorageCache() {
         if (cached) {
             const data = JSON.parse(cached);
             if (data && data.idMember) {
-                // Tampilkan info kartu yang tersimpan sebelumnya
                 document.getElementById("queryInput").value = data.idMember;
             }
         }
@@ -92,21 +102,22 @@ function switchFormTab(tab) {
     const btnGform = document.getElementById("tabBtnGform");
 
     if (tab === "native") {
-        nativeCont.classList.remove("hidden");
-        gformCont.classList.add("hidden");
-        btnNative.className = "bg-iggo-maroon text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow-sm";
-        btnGform.className = "bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold px-4 py-2 rounded-xl transition";
+        if (nativeCont) nativeCont.classList.remove("hidden");
+        if (gformCont) gformCont.classList.add("hidden");
+        if (btnNative) btnNative.className = "bg-iggo-maroon text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow-sm";
+        if (btnGform) btnGform.className = "bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold px-4 py-2 rounded-xl transition";
     } else {
-        nativeCont.classList.add("hidden");
-        gformCont.classList.remove("hidden");
-        btnGform.className = "bg-iggo-maroon text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow-sm";
-        btnNative.className = "bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold px-4 py-2 rounded-xl transition";
+        if (nativeCont) nativeCont.classList.add("hidden");
+        if (gformCont) gformCont.classList.remove("hidden");
+        if (btnGform) btnGform.className = "bg-iggo-maroon text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow-sm";
+        if (btnNative) btnNative.className = "bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold px-4 py-2 rounded-xl transition";
     }
 }
 
 function toggleEmbedIframe() {
     const wrapper = document.getElementById("embedIframeWrapper");
     const btn = document.getElementById("btnToggleIframe");
+    if (!wrapper || !btn) return;
     if (wrapper.classList.contains("hidden")) {
         wrapper.classList.remove("hidden");
         btn.textContent = "Sembunyikan Sematan Form";
@@ -121,10 +132,11 @@ function toggleEmbedIframe() {
 // ==============================================================
 function submitMemberForm(event) {
     const btn = document.getElementById("btnSubmitReg");
-    btn.disabled = true;
-    btn.innerHTML = `<span class="inline-block animate-spin mr-2">⏳</span> Mengirim & Menerbitkan Kartu VIP...`;
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = `<span class="inline-block animate-spin mr-2">⏳</span> Mengirim & Menerbitkan Kartu VIP...`;
+    }
     isFormSubmitted = true;
-    // Form akan otomatis post ke hidden_iframe tanpa merefresh halaman
 }
 
 function onIframeFormResponse() {
@@ -132,23 +144,24 @@ function onIframeFormResponse() {
     isFormSubmitted = false;
 
     const btn = document.getElementById("btnSubmitReg");
-    btn.disabled = false;
-    btn.innerHTML = `<span>✨</span> Buat Kartu Member VIP Sekarang (Otomatis)`;
+    if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = `<span>✨</span> Buat Kartu Member VIP Sekarang (Otomatis)`;
+    }
 
-    const nama = document.getElementById("regNama").value.trim();
-    const alamat = document.getElementById("regAlamat").value.trim();
-    const hp = document.getElementById("regHp").value.trim();
-    const ig = document.getElementById("regIg").value.trim();
-    const email = document.getElementById("regEmail").value.trim();
-    const tgl = document.getElementById("regTanggal").value.trim();
+    const nama = document.getElementById("regNama") ? document.getElementById("regNama").value.trim() : "";
+    const alamat = document.getElementById("regAlamat") ? document.getElementById("regAlamat").value.trim() : "";
+    const hp = document.getElementById("regHp") ? document.getElementById("regHp").value.trim() : "";
+    const ig = document.getElementById("regIg") ? document.getElementById("regIg").value.trim() : "";
+    const email = document.getElementById("regEmail") ? document.getElementById("regEmail").value.trim() : "";
+    const tgl = document.getElementById("regTanggal") ? document.getElementById("regTanggal").value.trim() : "";
 
     // Generate ID Member Baru Instan
     const randSuffix = Math.floor(100 + Math.random() * 900);
     const newMemberId = "IGGO-" + randSuffix;
 
-    alert(`🎉 SELAMAT! Pendaftaran VIP Member IGGO Kuliner berhasil.\nID Member Anda: ${newMemberId}\n\nKartu Member Digital Anda sekarang langsung ditampilkan di bawah!`);
+    alert(`🎉 SELAMAT! Pendaftaran VIP Member IGGO Kuliner berhasil.\nID Member Anda: ${newMemberId}\n\nKartu Member dan Kartu Loyalitas Anda langsung ditampilkan di bawah!`);
 
-    // Langsung buat dan tampilkan kartu VIP Member di layar detik ini juga
     const newMember = {
         nama: nama,
         alamat: alamat,
@@ -166,24 +179,30 @@ function onIframeFormResponse() {
     saveToLocalStorage(newMember);
 
     renderCard(newMember);
-    document.getElementById("portalContent").classList.remove("hidden");
-    document.getElementById("portalCek").scrollIntoView({ behavior: "smooth" });
+    const portalContent = document.getElementById("portalContent");
+    const portalCek = document.getElementById("portalCek");
+    if (portalContent) portalContent.classList.remove("hidden");
+    if (portalCek) portalCek.scrollIntoView({ behavior: "smooth" });
 
     // Reset Form
-    document.getElementById("formPendaftaran").reset();
-    document.getElementById("regTanggal").value = new Date().toISOString().split("T")[0];
+    const regForm = document.getElementById("formPendaftaran");
+    if (regForm) regForm.reset();
+    const tglInput = document.getElementById("regTanggal");
+    if (tglInput) tglInput.value = new Date().toISOString().split("T")[0];
 }
 
 // ==============================================================
 // 5. GOOGLE SHEETS GVIZ DATA FETCHER & SEARCH ENGINE
 // ==============================================================
 function quickTestSearch(id) {
-    document.getElementById("queryInput").value = id;
+    const input = document.getElementById("queryInput");
+    if (input) input.value = id;
     searchMember();
 }
 
 async function searchMember() {
-    const query = document.getElementById("queryInput").value.trim().toLowerCase();
+    const input = document.getElementById("queryInput");
+    const query = input ? input.value.trim().toLowerCase() : "";
     if (!query) {
         alert("Silakan masukkan ID Member, No. HP, atau Email Anda terlebih dahulu.");
         return;
@@ -191,31 +210,32 @@ async function searchMember() {
 
     const loading = document.getElementById("loadingIndicator");
     const content = document.getElementById("portalContent");
-    loading.classList.remove("hidden");
-    content.classList.add("hidden");
+    if (loading) loading.classList.remove("hidden");
+    if (content) content.classList.add("hidden");
 
+    let rows = [];
+    let colMap = {
+        nama: 1,
+        alamat: 2,
+        hp: 3,
+        ig: 4,
+        tanggal: 5,
+        email: 6,
+        idMember: 7,
+        barcode: 8,
+        totalCap: 9
+    };
+
+    // LANGKAH 1: FETCH DATA SPREADSHEET (TERISOLASI DARI RENDER ERROR)
     try {
         const url = `https://docs.google.com/spreadsheets/d/${CONFIG.SPREADSHEET_ID}/gviz/tq?tqx=out:json&gid=${CONFIG.SHEET_GID}`;
         const res = await fetch(url);
         const text = await res.text();
         const jsonString = text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1);
         const data = JSON.parse(jsonString);
-        const rows = data.table.rows;
+        rows = (data && data.table && data.table.rows) ? data.table.rows : [];
 
-        // Pemetaan kolom fleksibel terverifikasi
-        let colMap = {
-            nama: 1,
-            alamat: 2,
-            hp: 3,
-            ig: 4,
-            tanggal: 5,
-            email: 6,
-            idMember: 7,
-            barcode: 8,
-            totalCap: 9
-        };
-
-        if (data.table.cols && data.table.cols.length > 0) {
+        if (data.table && data.table.cols && data.table.cols.length > 0) {
             data.table.cols.forEach((col, idx) => {
                 if (!col || !col.label) return;
                 const lbl = col.label.trim().toLowerCase();
@@ -230,68 +250,75 @@ async function searchMember() {
                 else if (lbl.includes("total cap") || lbl.includes("cap")) colMap.totalCap = idx;
             });
         }
+    } catch (networkErr) {
+        if (loading) loading.classList.add("hidden");
+        console.error("Gagal terhubung ke Google Sheets:", networkErr);
+        alert("Gagal membaca database Google Sheets.\nPastikan koneksi internet aktif dan izin berbagi spreadsheet adalah 'Anyone with the link' (Viewer).");
+        return;
+    }
 
-        let found = null;
-        const numOnlyQuery = query.replace(/[^0-9]/g, "");
+    if (loading) loading.classList.add("hidden");
 
-        for (let r of rows) {
-            if (!r.c) continue;
+    // LANGKAH 2: CARI DATA MEMBER
+    let found = null;
+    const numOnlyQuery = query.replace(/[^0-9]/g, "");
 
-            const getVal = (idx) => {
-                if (!r.c[idx]) return "";
-                return (r.c[idx].f || String(r.c[idx].v || "")).trim();
+    for (let r of rows) {
+        if (!r.c) continue;
+
+        const getVal = (idx) => {
+            if (!r.c[idx]) return "";
+            return (r.c[idx].f || String(r.c[idx].v || "")).trim();
+        };
+
+        const nama = getVal(colMap.nama);
+        const alamat = getVal(colMap.alamat);
+        const hpRaw = getVal(colMap.hp);
+        const hpNum = hpRaw.replace(/[^0-9]/g, "");
+        const ig = getVal(colMap.ig);
+        const tanggal = getVal(colMap.tanggal);
+        const email = getVal(colMap.email);
+        const idMember = getVal(colMap.idMember);
+        const barcodeRaw = getVal(colMap.barcode);
+
+        let totalCap = 0;
+        if (r.c[colMap.totalCap] && r.c[colMap.totalCap].v !== null) {
+            totalCap = Number(r.c[colMap.totalCap].v) || 0;
+        }
+
+        const matchId = idMember && idMember.toLowerCase() === query;
+        const matchEmail = email && email.toLowerCase() === query;
+        const matchHp = numOnlyQuery.length >= 8 && hpNum.endsWith(numOnlyQuery.slice(-8));
+
+        if (matchId || matchEmail || matchHp) {
+            found = {
+                nama: nama || "-",
+                alamat: alamat || "-",
+                hp: hpRaw || "-",
+                ig: ig || "-",
+                tanggal: tanggal || "-",
+                email: email || "-",
+                idMember: idMember || "-",
+                barcode: barcodeRaw,
+                totalCap: totalCap
             };
-
-            const nama = getVal(colMap.nama);
-            const alamat = getVal(colMap.alamat);
-            const hpRaw = getVal(colMap.hp);
-            const hpNum = hpRaw.replace(/[^0-9]/g, "");
-            const ig = getVal(colMap.ig);
-            const tanggal = getVal(colMap.tanggal);
-            const email = getVal(colMap.email);
-            const idMember = getVal(colMap.idMember);
-            const barcodeRaw = getVal(colMap.barcode);
-
-            let totalCap = 0;
-            if (r.c[colMap.totalCap] && r.c[colMap.totalCap].v !== null) {
-                totalCap = Number(r.c[colMap.totalCap].v) || 0;
-            }
-
-            const matchId = idMember && idMember.toLowerCase() === query;
-            const matchEmail = email && email.toLowerCase() === query;
-            const matchHp = numOnlyQuery.length >= 8 && hpNum.endsWith(numOnlyQuery.slice(-8));
-
-            if (matchId || matchEmail || matchHp) {
-                found = {
-                    nama: nama || "-",
-                    alamat: alamat || "-",
-                    hp: hpRaw || "-",
-                    ig: ig || "-",
-                    tanggal: tanggal || "-",
-                    email: email || "-",
-                    idMember: idMember || "-",
-                    barcode: barcodeRaw,
-                    totalCap: totalCap
-                };
-                break;
-            }
+            break;
         }
+    }
 
-        loading.classList.add("hidden");
-
-        if (found) {
-            currentMemberData = found;
-            simulatedStampCount = null;
-            saveToLocalStorage(found);
+    // LANGKAH 3: RENDER HASIL
+    if (found) {
+        currentMemberData = found;
+        simulatedStampCount = null;
+        saveToLocalStorage(found);
+        try {
             renderCard(found);
-            content.classList.remove("hidden");
-        } else {
-            alert("Data Member tidak ditemukan.\nPastikan ID Member (misal: JNH-016), No. HP, atau Email Anda sudah terdaftar di Google Form.");
+            if (content) content.classList.remove("hidden");
+        } catch (renderErr) {
+            console.error("Kesalahan saat merender kartu:", renderErr);
         }
-    } catch (err) {
-        loading.classList.add("hidden");
-        console.error(err);
-        alert("Gagal membaca database Google Sheets.\nPastikan izin berbagi spreadsheet telah diatur ke 'Anyone with the link' (Viewer).");
+    } else {
+        alert("Data Member tidak ditemukan.\nPastikan ID Member (misal: JNH-016), No. HP, atau Email Anda sudah terdaftar di Google Form.");
     }
 }
 
@@ -304,94 +331,111 @@ function saveToLocalStorage(data) {
 }
 
 // ==============================================================
-// 6. VIP MEMBER CARD RENDERER & 10 STAMPS VISUALIZER
+// 6. RENDER DUA KARTU: KARTU MEMBER CETAK & LOYALTY CARD 10 CAP
 // ==============================================================
 function renderCard(m) {
     const effectiveCap = simulatedStampCount !== null ? simulatedStampCount : m.totalCap;
 
-    // Render Data ke Wajah Kartu VIP
-    document.getElementById("cardNama").textContent = m.nama;
-    document.getElementById("cardId").textContent = m.idMember;
-    document.getElementById("cardTanggal").textContent = "Member Sejak: " + m.tanggal;
-    document.getElementById("cardStampCounter").textContent = `${effectiveCap} / 10 Cap`;
+    // --- BAGIAN 1: KARTU MEMBER CETAK (MODERN LUXURY VIP CARD) ---
+    // Depan
+    setElText("printCardNama", m.nama);
+    setElText("printCardId", m.idMember);
+    setElText("printCardDate", "MEMBER SEJAK: " + m.tanggal);
 
-    // Render ke Biodata Detail
-    document.getElementById("viewAlamat").textContent = m.alamat;
-    document.getElementById("viewHp").textContent = m.hp;
-    document.getElementById("viewIg").textContent = m.ig.startsWith("@") ? m.ig : (m.ig !== "-" ? "@" + m.ig : "-");
-    document.getElementById("viewEmail").textContent = m.email;
+    // Belakang
+    setElText("printCardBackId", "ID: " + m.idMember);
+    setElText("printCardBackNama", m.nama);
 
-    // Render 10 Slot Stempel Interaktif di dalam Kartu
-    const grid = document.getElementById("cardStampsGrid");
-    grid.innerHTML = "";
+    // QR Code URL Generator (Standar ?id=[ID_MEMBER]#portalCek)
+    const targetUrl = window.location.origin + window.location.pathname + "?id=" + encodeURIComponent(m.idMember) + "#portalCek";
+    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=3&data=${encodeURIComponent(targetUrl)}`;
+    setElSrc("printCardQr", qrApiUrl);
 
-    for (let i = 1; i <= 10; i++) {
-        const isFilled = i <= effectiveCap;
-        const slot = document.createElement("div");
-        let baseClass = "h-9 sm:h-10 flex flex-col items-center justify-center rounded-xl text-[10px] font-bold transition-all ";
+    // --- BAGIAN 2: KARTU LOYALITAS (LOYALTY STAMP CARD - 10 CAP) ---
+    setElText("loyaltyNama", m.nama);
+    setElText("loyaltyId", m.idMember);
+    setElText("loyaltyCountText", `${effectiveCap} / 10 Cap Terkumpul`);
 
-        if (isFilled) {
-            // Stempel Terisi
-            if (i === 5) {
-                slot.className = baseClass + "bg-gradient-to-br from-amber-400 to-yellow-600 text-iggo-dark shadow-sm border border-yellow-300 font-extrabold";
-                slot.innerHTML = "<span>🍹 5</span>";
-            } else if (i === 10) {
-                slot.className = baseClass + "bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-500 text-iggo-dark shadow-md border-2 border-white animate-subtle font-black";
-                slot.innerHTML = "<span>👑 10</span>";
+    // Render 10 Slot Stempel Interaktif di Loyalty Card
+    const grid = document.getElementById("loyaltyStampsGrid");
+    if (grid) {
+        grid.innerHTML = "";
+        for (let i = 1; i <= 10; i++) {
+            const isFilled = i <= effectiveCap;
+            const slot = document.createElement("div");
+            let baseClass = "h-12 sm:h-14 flex flex-col items-center justify-center rounded-2xl text-xs font-bold transition-all ";
+
+            if (isFilled) {
+                if (i === 5) {
+                    slot.className = baseClass + "bg-gradient-to-br from-amber-400 to-yellow-600 text-iggo-dark shadow-md border-2 border-yellow-300 font-extrabold";
+                    slot.innerHTML = "<span class='text-base'>🍹</span><span class='text-[9px]'>Cap 5 Free</span>";
+                } else if (i === 10) {
+                    slot.className = baseClass + "bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-500 text-iggo-dark shadow-lg border-2 border-white animate-subtle font-black";
+                    slot.innerHTML = "<span class='text-base'>👑</span><span class='text-[9px]'>50% OFF</span>";
+                } else {
+                    slot.className = baseClass + "bg-gradient-to-br from-iggo-amber to-red-600 text-white shadow-sm border border-orange-300";
+                    slot.innerHTML = "<span class='text-sm'>🍤</span><span class='text-[8px] opacity-80'>Cap " + i + "</span>";
+                }
             } else {
-                slot.className = baseClass + "bg-gradient-to-br from-iggo-amber to-red-600 text-white shadow-sm border border-orange-300";
-                slot.innerHTML = "<span>🍤</span>";
+                if (i === 5) {
+                    slot.className = baseClass + "bg-white/10 text-yellow-300 border-2 border-dashed border-yellow-400/60";
+                    slot.innerHTML = "<span class='text-xs'>5</span><span class='text-[8px] text-yellow-200'>FREE TEH</span>";
+                } else if (i === 10) {
+                    slot.className = baseClass + "bg-white/10 text-yellow-300 border-2 border-dashed border-yellow-400/80";
+                    slot.innerHTML = "<span class='text-xs'>10</span><span class='text-[8px] text-yellow-200'>50% OFF</span>";
+                } else {
+                    slot.className = baseClass + "bg-white/5 text-stone-400 border border-dashed border-white/20";
+                    slot.innerHTML = "<span class='text-xs'>" + i + "</span>";
+                }
             }
-        } else {
-            // Slot Belum Terisi
-            if (i === 5) {
-                slot.className = baseClass + "bg-white/10 text-yellow-300 border border-dashed border-yellow-400/60";
-                slot.innerHTML = "<span class='text-[8px] leading-tight text-center'>5<br><span class='text-[6px] text-yellow-200'>FREE TEH</span></span>";
-            } else if (i === 10) {
-                slot.className = baseClass + "bg-white/10 text-yellow-300 border border-dashed border-yellow-400/80";
-                slot.innerHTML = "<span class='text-[8px] leading-tight text-center'>10<br><span class='text-[6px] text-yellow-200'>50% OFF</span></span>";
-            } else {
-                slot.className = baseClass + "bg-white/5 text-stone-400 border border-dashed border-white/20";
-                slot.innerText = i;
-            }
+            grid.appendChild(slot);
         }
-        grid.appendChild(slot);
     }
 
     // Milestone Reward Banner Detail
     const banner = document.getElementById("rewardBanner");
-    const rem = 10 - effectiveCap;
-    if (effectiveCap >= 10) {
-        banner.className = "bg-gradient-to-r from-yellow-100 to-amber-100 border-2 border-yellow-400 rounded-2xl p-4 text-center text-xs text-amber-950 font-bold leading-relaxed shadow-md";
-        banner.innerHTML = "👑 <strong>Luar Biasa! 10 Cap Lengkap Tercapai.</strong><br>Tunjukkan kartu ini ke kasir IGGO Kuliner sekarang untuk klaim <strong>Diskon 50% All Menu</strong> atau <strong>1 Porsi Menu Signature Spesial</strong>!";
-    } else if (effectiveCap >= 5) {
-        banner.className = "bg-gradient-to-r from-orange-50 to-amber-50 border border-amber-300 rounded-2xl p-4 text-center text-xs text-amber-900 font-medium leading-relaxed shadow-sm";
-        banner.innerHTML = `🍹 <strong>Cap ke-5 Tercapai (Klaim Free Es Teh Jumbo)!</strong><br>Kumpulkan <strong>${rem} stempel lagi</strong> untuk membuka Hadiah Akbar <strong>Diskon 50%</strong> di Cap ke-10!`;
-    } else {
-        banner.className = "bg-gradient-to-r from-amber-50/70 to-orange-50/70 border border-amber-200 rounded-2xl p-4 text-center text-xs text-stone-700 font-medium leading-relaxed shadow-sm";
-        banner.innerHTML = `✨ Kumpulkan <strong>${5 - effectiveCap} stempel lagi</strong> untuk menikmati <strong>Free Es Teh Jumbo Segar</strong> di Cap ke-5!`;
+    if (banner) {
+        const rem = 10 - effectiveCap;
+        if (effectiveCap >= 10) {
+            banner.className = "bg-gradient-to-r from-yellow-100 to-amber-100 border-2 border-yellow-400 rounded-2xl p-4 text-center text-xs text-amber-950 font-bold leading-relaxed shadow-md";
+            banner.innerHTML = "👑 <strong>Luar Biasa! 10 Cap Lengkap Tercapai.</strong><br>Tunjukkan kartu ini ke kasir IGGO Kuliner sekarang untuk klaim <strong>Diskon 50% All Menu</strong> atau <strong>1 Porsi Menu Signature Spesial</strong>!";
+        } else if (effectiveCap >= 5) {
+            banner.className = "bg-gradient-to-r from-orange-50 to-amber-50 border border-amber-300 rounded-2xl p-4 text-center text-xs text-amber-900 font-medium leading-relaxed shadow-sm";
+            banner.innerHTML = `🍹 <strong>Cap ke-5 Tercapai (Klaim Free Es Teh Jumbo)!</strong><br>Kumpulkan <strong>${rem} stempel lagi</strong> untuk membuka Hadiah Akbar <strong>Diskon 50%</strong> di Cap ke-10!`;
+        } else {
+            banner.className = "bg-gradient-to-r from-amber-50/70 to-orange-50/70 border border-amber-200 rounded-2xl p-4 text-center text-xs text-stone-700 font-medium leading-relaxed shadow-sm";
+            banner.innerHTML = `✨ Kumpulkan <strong>${5 - effectiveCap} stempel lagi</strong> untuk menikmati <strong>Free Es Teh Jumbo Segar</strong> di Cap ke-5!`;
+        }
     }
 
-    // QR Code URL Generator (Standar ?id=[ID_MEMBER]#portalCek)
-    const targetUrl = window.location.origin + window.location.pathname + "?id=" + encodeURIComponent(m.idMember) + "#portalCek";
-    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(targetUrl)}`;
-    document.getElementById("cardQrMini").src = qrApiUrl;
+    // --- BAGIAN 3: BIODATA ANGGOTA LENGKAP ---
+    setElText("viewAlamat", m.alamat);
+    setElText("viewHp", m.hp);
+    setElText("viewIg", m.ig.startsWith("@") ? m.ig : (m.ig !== "-" ? "@" + m.ig : "-"));
+    setElText("viewEmail", m.email);
+    setElText("viewTanggal", "Terdaftar: " + m.tanggal);
 }
 
 // ==============================================================
-// 7. CARD EXPORT (HTML2CANVAS PNG DOWNLOADER)
+// 7. CETAK & UNDUH KARTU MEMBER (PRINT & HTML2CANVAS)
 // ==============================================================
-async function downloadMemberCardImage() {
+function printMemberCard() {
+    window.print();
+}
+
+async function downloadCardFront() {
     if (!currentMemberData) return;
-    const btn = document.getElementById("btnDownloadCard");
-    const originalText = btn.innerHTML;
-    btn.innerHTML = `<span class="inline-block animate-spin mr-2">⏳</span> Mengenerate Gambar Kartu...`;
-    btn.disabled = true;
+    const btn = document.getElementById("btnDownloadFront");
+    const originalText = btn ? btn.innerHTML : "";
+    if (btn) {
+        btn.innerHTML = `<span class="inline-block animate-spin mr-1">⏳</span> Menyimpan...`;
+        btn.disabled = true;
+    }
 
     try {
-        const cardEl = document.getElementById("digitalVipCard");
+        const cardEl = document.getElementById("memberCardFront");
         const canvas = await html2canvas(cardEl, {
-            scale: 3, // Skala tinggi untuk kualitas ultra jernih (HD)
+            scale: 3,
             useCORS: true,
             backgroundColor: null
         });
@@ -399,16 +443,53 @@ async function downloadMemberCardImage() {
         const imgUrl = canvas.toDataURL("image/png");
         const downloadLink = document.createElement("a");
         downloadLink.href = imgUrl;
-        downloadLink.download = `Kartu-VIP-IGGO-${currentMemberData.idMember}-${currentMemberData.nama.replace(/\s+/g, '_')}.png`;
+        downloadLink.download = `Kartu-VIP-Depan-${currentMemberData.idMember}-${currentMemberData.nama.replace(/\s+/g, '_')}.png`;
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
     } catch (err) {
         console.error(err);
-        alert("Gagal mengunduh kartu sebagai gambar. Anda juga dapat mengambil screenshot kartu di layar HP Anda.");
+        alert("Gagal mengunduh kartu. Anda juga dapat menggunakan tombol Cetak Kartu.");
     } finally {
-        btn.innerHTML = originalText;
-        btn.disabled = false;
+        if (btn) {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+    }
+}
+
+async function downloadCardBack() {
+    if (!currentMemberData) return;
+    const btn = document.getElementById("btnDownloadBack");
+    const originalText = btn ? btn.innerHTML : "";
+    if (btn) {
+        btn.innerHTML = `<span class="inline-block animate-spin mr-1">⏳</span> Menyimpan...`;
+        btn.disabled = true;
+    }
+
+    try {
+        const cardEl = document.getElementById("memberCardBack");
+        const canvas = await html2canvas(cardEl, {
+            scale: 3,
+            useCORS: true,
+            backgroundColor: null
+        });
+
+        const imgUrl = canvas.toDataURL("image/png");
+        const downloadLink = document.createElement("a");
+        downloadLink.href = imgUrl;
+        downloadLink.download = `Kartu-VIP-Belakang-${currentMemberData.idMember}.png`;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    } catch (err) {
+        console.error(err);
+        alert("Gagal mengunduh sisi belakang kartu.");
+    } finally {
+        if (btn) {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
     }
 }
 
