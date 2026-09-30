@@ -378,9 +378,15 @@ function renderCard(m) {
     setElText("printCardBackId", "ID: " + m.idMember);
     setElText("printCardBackNama", m.nama);
 
-    // QR Code URL Generator (Standar ?id=[ID_MEMBER]#portalCek)
-    const targetUrl = window.location.origin + window.location.pathname + "?id=" + encodeURIComponent(m.idMember) + "#portalCek";
-    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=3&data=${encodeURIComponent(targetUrl)}`;
+    // QR Code URL Generator (Dapat di-scan kamera HP & Kasir)
+    let baseOrigin = window.location.origin;
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "[::]") {
+        // Gunakan IP Wi-Fi lokal agar smartphone dalam jaringan yang sama bisa langsung membukanya
+        baseOrigin = "http://192.168.0.118:3000";
+    }
+    const targetUrl = baseOrigin + window.location.pathname + "?id=" + encodeURIComponent(m.idMember) + "#portalCek";
+    // margin=8 & ecc=M memberikan zona putih (quiet zone) dan koreksi kesalahan agar instan terbaca kamera HP
+    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=8&ecc=M&data=${encodeURIComponent(targetUrl)}`;
     setElSrc("printCardQr", qrApiUrl);
 
     // --- BAGIAN 2: KARTU LOYALITAS (LOYALTY STAMP CARD - 10 CAP) ---

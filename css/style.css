@@ -53,19 +53,19 @@
     box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.5), 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-/* Card QR Code Constraint (Rapi, Proporsional, Tidak Pecah & Elegan) */
+/* Card QR Code Constraint (Rapi, Proporsional, Mudah Di-scan Kamera Smartphone) */
 .card-qr-box {
-    width: 80px !important;
-    height: 80px !important;
-    min-width: 80px !important;
-    min-height: 80px !important;
-    max-width: 80px !important;
-    max-height: 80px !important;
+    width: 92px !important;
+    height: 92px !important;
+    min-width: 92px !important;
+    min-height: 92px !important;
+    max-width: 92px !important;
+    max-height: 92px !important;
     background: #ffffff !important;
     padding: 6px !important;
     border-radius: 12px !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
-    border: 1.5px solid rgba(245, 190, 88, 0.6) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
+    border: 2px solid rgba(245, 190, 88, 0.7) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -73,12 +73,12 @@
 }
 
 #printCardQr {
-    width: 68px !important;
-    height: 68px !important;
-    min-width: 68px !important;
-    min-height: 68px !important;
-    max-width: 68px !important;
-    max-height: 68px !important;
+    width: 80px !important;
+    height: 80px !important;
+    min-width: 80px !important;
+    min-height: 80px !important;
+    max-width: 80px !important;
+    max-height: 80px !important;
     object-fit: contain !important;
     display: block !important;
 }
