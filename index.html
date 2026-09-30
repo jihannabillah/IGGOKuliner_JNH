@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGGO Kuliner — Iwan Goreng-Goreng (Since 2005) • VIP Member & Loyalty CRM</title>
+    <meta name="description"
+        content="Portal Resmi CRM & Kartu Member VIP IGGO Kuliner (Iwan Goreng-Goreng, Since 2005). Dapatkan stempel setiap transaksi, voucher diskon 50%, dan traktiran spesial!">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap"
+        rel="stylesheet">
+
+    <!-- html2canvas for Instant Card Image Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        iggo: {
+                            maroon: '#6B1414',
+                            maroondark: '#4A0C0C',
+                            maroonlight: '#8B1E1E',
+                            gold: '#D89624',
+                            goldlight: '#F5BE58',
+                            amber: '#EA580C',
+                            cream: '#FDF9F3',
+                            creambg: '#FAF2E4',
+                            warmborder: '#E8D5BE',
+                            dark: '#1E1614',
+                            charcoal: '#2D2321'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'luxury': '0 20px 40px -15px rgba(107, 20, 20, 0.25)',
+                        'card-gold': '0 15px 35px -10px rgba(216, 150, 36, 0.35)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- External Custom Stylesheet (Modular Architecture) -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-iggo-cream text-iggo-dark font-sans antialiased selection:bg-iggo-maroon selection:text-white">
+
+    <!-- TOP PROMO ANNOUNCEMENT BAR -->
+    <div class="bg-iggo-maroondark text-white text-[11px] sm:text-xs py-2 px-4 text-center tracking-wide font-medium border-b border-iggo-gold/20">
+        <span class="inline-flex items-center gap-1.5 flex-wrap justify-center">
+            <span class="bg-iggo-gold text-iggo-dark font-bold text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider">VIP Member Pass</span>
+            <span>Daftar Gratis Hari Ini! Kumpulkan 10 Cap: Klaim <strong>Free Es Teh Jumbo (Cap ke-5)</strong> & <strong>Diskon 50% (Cap ke-10)</strong>! 🍤🔥</span>
+        </span>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-[#FDF9F3]/95 backdrop-blur-md border-b border-iggo-warmborder shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Brand Logo & Title -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="assets/logo-iggo.jpg" alt="Logo IGGO Kuliner"
+                    class="w-11 h-11 rounded-full object-cover border-2 border-iggo-gold shadow-sm group-hover:scale-105 transition-transform">
+                <div>
+                    <span class="font-cinzel font-extrabold text-lg sm:text-xl text-iggo-maroon tracking-wider block leading-none">
+                        IGGO KULINER
+                    </span>
+                    <span class="text-[10px] sm:text-[11px] font-semibold text-iggo-gold block tracking-widest uppercase mt-0.5">
+                        Iwan Goreng-Goreng • Since 2005
+                    </span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <div class="flex items-center gap-2 sm:gap-4 text-xs font-semibold">
+                <a href="#menu" class="text-iggo-charcoal hover:text-iggo-maroon hidden lg:inline-block transition">Menu Pilihan</a>
+                <a href="#keuntungan" class="text-iggo-charcoal hover:text-iggo-maroon hidden md:inline-block transition">Keuntungan CRM</a>
+                <a href="#alur" class="text-iggo-charcoal hover:text-iggo-maroon hidden sm:inline-block transition">Cara Kerja</a>
+                <a href="#daftar"
+                    class="text-iggo-maroon border border-iggo-maroon/30 hover:bg-iggo-maroon hover:text-white px-3.5 py-2 rounded-full transition shadow-sm">
+                    Daftar Member
+                </a>
+                <a href="#portalCek"
+                    class="bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight text-white px-4 py-2 rounded-full transition shadow-md hover:shadow-lg hover:brightness-110 flex items-center gap-1.5">
+                    <span>👑</span> Cek Kartu VIP
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative overflow-hidden pt-10 pb-14 sm:py-16 bg-gradient-to-b from-iggo-creambg via-iggo-cream to-white border-b border-iggo-warmborder">
+        <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 bg-white/80 border border-iggo-gold/40 px-4 py-1.5 rounded-full shadow-sm mb-5">
+                <span class="w-2 h-2 rounded-full bg-iggo-gold animate-ping"></span>
+                <span class="text-[11px] font-bold text-iggo-maroon tracking-wider uppercase">
+                    Kuliner Khas Nusantara Sejak 2005
+                </span>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-extrabold text-iggo-maroon leading-tight">
+                Sensasi Renyah Gurih Nusantara,<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-iggo-maroon via-iggo-amber to-iggo-gold">
+                    Penuh Cerita di Setiap Suapan.
+                </span>
+            </h1>
+
+            <p class="text-sm sm:text-base text-stone-600 mt-5 max-w-2xl mx-auto leading-relaxed font-normal">
+                Selamat datang di Rumah Makan <strong>IGGO Kuliner (Iwan Goreng-Goreng)</strong>. Nikmati aneka sajian goreng-goreng gurih renyah, dapatkan <strong>Kartu Member VIP Digital</strong>, dan kumpulkan stempel kunjungan untuk menikmati beragam traktiran istimewa!
+            </p>
+
+            <!-- Call to Actions -->
+            <div class="mt-8 flex flex-wrap justify-center gap-3.5">
+                <a href="#portalCek"
+                    class="bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight hover:brightness-110 text-white text-xs sm:text-sm font-bold px-7 py-3.5 rounded-xl shadow-luxury transition transform hover:-translate-y-0.5 flex items-center gap-2">
+                    <span>🔍</span> Periksa Kartu Member Saya
+                </a>
+                <a href="#daftar"
+                    class="bg-white border-2 border-iggo-gold text-iggo-maroon hover:bg-iggo-creambg text-xs sm:text-sm font-bold px-7 py-3.5 rounded-xl shadow-sm transition transform hover:-translate-y-0.5 flex items-center gap-2">
+                    <span>📝</span> Daftar VIP Member (Gratis)
+                </a>
+                <a href="#menu"
+                    class="bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs sm:text-sm font-semibold px-5 py-3.5 rounded-xl transition">
+                    Lihat Menu Khas
+                </a>
+            </div>
+
+            <!-- Quick CRM Highlight Badges -->
+            <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto text-left">
+                <div class="bg-white/90 border border-iggo-warmborder p-3.5 rounded-2xl shadow-sm flex items-center gap-3">
+                    <span class="text-2xl">🍤</span>
+                    <div>
+                        <span class="block text-[11px] font-bold text-iggo-maroon">Cita Rasa Sejak 2005</span>
+                        <span class="block text-[10px] text-stone-500">Resep Khas Otentik</span>
+                    </div>
+                </div>
+                <div class="bg-white/90 border border-iggo-warmborder p-3.5 rounded-2xl shadow-sm flex items-center gap-3">
+                    <span class="text-2xl">🎫</span>
+                    <div>
+                        <span class="block text-[11px] font-bold text-iggo-maroon">10 Slot Cap Loyalty</span>
+                        <span class="block text-[10px] text-stone-500">1 Menu = 1 Stempel</span>
+                    </div>
+                </div>
+                <div class="bg-white/90 border border-iggo-warmborder p-3.5 rounded-2xl shadow-sm flex items-center gap-3">
+                    <span class="text-2xl">🍹</span>
+                    <div>
+                        <span class="block text-[11px] font-bold text-iggo-maroon">Hadiah Cap ke-5</span>
+                        <span class="block text-[10px] text-stone-500">Free Es Teh Jumbo</span>
+                    </div>
+                </div>
+                <div class="bg-white/90 border border-iggo-warmborder p-3.5 rounded-2xl shadow-sm flex items-center gap-3">
+                    <span class="text-2xl">👑</span>
+                    <div>
+                        <span class="block text-[11px] font-bold text-iggo-maroon">Hadiah Cap ke-10</span>
+                        <span class="block text-[10px] text-stone-500">Diskon 50% / Free Paket</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECTION MENU SPESIAL IGGO KULINER -->
+    <section id="menu" class="max-w-5xl mx-auto px-4 py-12">
+        <div class="text-center mb-8">
+            <span class="text-[10px] font-bold text-iggo-gold tracking-[0.25em] uppercase bg-iggo-gold/10 px-3 py-1 rounded-full border border-iggo-gold/30">
+                Signature Dishes
+            </span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-iggo-maroon mt-2">Pilihan Menu Khas Iwan Goreng-Goreng</h2>
+            <p class="text-xs sm:text-sm text-stone-500 mt-1 max-w-md mx-auto">Setiap transaksi di kasir berhak mendapatkan 1 stempel resmi pada Kartu Member VIP Anda!</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+            <!-- Item 1: Udang Goreng -->
+            <div class="bg-white rounded-2xl border border-iggo-warmborder p-4 shadow-sm hover:shadow-md transition">
+                <div class="h-32 bg-gradient-to-br from-amber-50 to-orange-100 rounded-xl flex items-center justify-center text-4xl mb-3 border border-orange-200/50">
+                    🍤
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[9px] font-bold text-iggo-gold uppercase tracking-wider">Best Seller Sejak 2005</span>
+                        <h3 class="font-bold text-sm text-iggo-maroon">Udang Goreng Tepung Crispy</h3>
+                    </div>
+                    <span class="text-[11px] font-extrabold text-iggo-amber bg-orange-50 px-2 py-0.5 rounded-md">1 Cap</span>
+                </div>
+                <p class="text-[11px] text-stone-500 mt-1.5 leading-relaxed">
+                    Udang segar pilihan berbalut racikan tepung renyah gurih khas IGGO, disajikan dengan saus cocolan spesial.
+                </p>
+            </div>
+
+            <!-- Item 2: Ayam Goreng Rempah -->
+            <div class="bg-white rounded-2xl border border-iggo-warmborder p-4 shadow-sm hover:shadow-md transition">
+                <div class="h-32 bg-gradient-to-br from-yellow-50 to-amber-100 rounded-xl flex items-center justify-center text-4xl mb-3 border border-yellow-200/50">
+                    🍗
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[9px] font-bold text-iggo-gold uppercase tracking-wider">Favorit Keluarga</span>
+                        <h3 class="font-bold text-sm text-iggo-maroon">Ayam Goreng Kalasan Rempah</h3>
+                    </div>
+                    <span class="text-[11px] font-extrabold text-iggo-amber bg-orange-50 px-2 py-0.5 rounded-md">1 Cap</span>
+                </div>
+                <p class="text-[11px] text-stone-500 mt-1.5 leading-relaxed">
+                    Ungkepan rempah tradisional meresap hingga ke tulang dengan tekstur luar garing dan daging super lembut.
+                </p>
+            </div>
+
+            <!-- Item 3: Lele Terbang Crispy -->
+            <div class="bg-white rounded-2xl border border-iggo-warmborder p-4 shadow-sm hover:shadow-md transition">
+                <div class="h-32 bg-gradient-to-br from-stone-50 to-amber-100 rounded-xl flex items-center justify-center text-4xl mb-3 border border-amber-200/50">
+                    🐟
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[9px] font-bold text-iggo-gold uppercase tracking-wider">Paling Renyah</span>
+                        <h3 class="font-bold text-sm text-iggo-maroon">Lele Terbang Renyah Gurih</h3>
+                    </div>
+                    <span class="text-[11px] font-extrabold text-iggo-amber bg-orange-50 px-2 py-0.5 rounded-md">1 Cap</span>
+                </div>
+                <p class="text-[11px] text-stone-500 mt-1.5 leading-relaxed">
+                    Ikan lele segar dibelah terbang dengan kerenyahan maksimal sampai ke ekor dan kepala, nikmat disantap hangat.
+                </p>
+            </div>
+
+            <!-- Item 4: Nasi Goreng Seafood IGGO -->
+            <div class="bg-white rounded-2xl border border-iggo-warmborder p-4 shadow-sm hover:shadow-md transition">
+                <div class="h-32 bg-gradient-to-br from-amber-50 to-yellow-100 rounded-xl flex items-center justify-center text-4xl mb-3 border border-amber-200/50">
+                    🍳
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[9px] font-bold text-iggo-gold uppercase tracking-wider">Wok Hei Spesial</span>
+                        <h3 class="font-bold text-sm text-iggo-maroon">Nasi Goreng Seafood IGGO</h3>
+                    </div>
+                    <span class="text-[11px] font-extrabold text-iggo-amber bg-orange-50 px-2 py-0.5 rounded-md">1 Cap</span>
+                </div>
+                <p class="text-[11px] text-stone-500 mt-1.5 leading-relaxed">
+                    Dimasak dengan api besar menghasilkan aroma asap harum, disajikan dengan limpahan udang dan telur orak-arik.
+                </p>
+            </div>
+
+            <!-- Item 5: Cumi Goreng Mentega -->
+            <div class="bg-white rounded-2xl border border-iggo-warmborder p-4 shadow-sm hover:shadow-md transition">
+                <div class="h-32 bg-gradient-to-br from-orange-50 to-red-100 rounded-xl flex items-center justify-center text-4xl mb-3 border border-red-200/50">
+                    🦑
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[9px] font-bold text-iggo-gold uppercase tracking-wider">Gurih Manis</span>
+                        <h3 class="font-bold text-sm text-iggo-maroon">Cumi Goreng Saus Mentega</h3>
+                    </div>
+                    <span class="text-[11px] font-extrabold text-iggo-amber bg-orange-50 px-2 py-0.5 rounded-md">1 Cap</span>
+                </div>
+                <p class="text-[11px] text-stone-500 mt-1.5 leading-relaxed">
+                    Kombinasi harum mentega berkualitas dengan gurihnya cumi segar berbalut bawang bombay karamelisasi.
+                </p>
+            </div>
+
+            <!-- Item 6: Sambal Dadak Juara -->
+            <div class="bg-white rounded-2xl border border-iggo-warmborder p-4 shadow-sm hover:shadow-md transition">
+                <div class="h-32 bg-gradient-to-br from-red-50 to-orange-100 rounded-xl flex items-center justify-center text-4xl mb-3 border border-red-200/50">
+                    🌶️
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[9px] font-bold text-iggo-gold uppercase tracking-wider">Pelengkap Wajib</span>
+                        <h3 class="font-bold text-sm text-iggo-maroon">Aneka Sambal Ulek Dadak</h3>
+                    </div>
+                    <span class="text-[11px] font-extrabold text-green-600 bg-green-50 px-2 py-0.5 rounded-md">Free Refill</span>
+                </div>
+                <p class="text-[11px] text-stone-500 mt-1.5 leading-relaxed">
+                    Pilihan sambal terasi matang, sambal bawang pedas nampol, dan sambal tomat segar diulek seketika saat dipesan.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION ALUR SISTEM CRM LOYALITAS (3 LANGKAH MUDAH) -->
+    <section id="alur" class="max-w-5xl mx-auto px-4 py-10 bg-white border-y border-iggo-warmborder">
+        <div class="text-center mb-8">
+            <span class="text-[10px] font-bold text-iggo-maroon tracking-widest uppercase bg-iggo-creambg px-3 py-1 rounded-full border border-iggo-warmborder">
+                Sistem Loyalitas CRM Terintegrasi
+            </span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-iggo-maroon mt-2">Bagaimana Cara Kerja Member VIP?</h2>
+            <p class="text-xs sm:text-sm text-stone-500 mt-1 max-w-md mx-auto">Sinergi antara kartu stempel fisik di kasir restoran dan portal data CRM digital</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- Langkah 1 -->
+            <div class="bg-iggo-cream/60 rounded-2xl p-6 border border-iggo-warmborder text-center shadow-sm relative">
+                <div class="w-12 h-12 mx-auto bg-iggo-maroon text-iggo-gold font-cinzel font-black text-xl rounded-2xl flex items-center justify-center shadow-md mb-4">
+                    1
+                </div>
+                <h3 class="font-bold text-sm text-iggo-maroon">Daftar Mandiri Sekali Klik</h3>
+                <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                    Isi formulir pendaftaran di website ini tanpa biaya sepeser pun. Kartu Member VIP Anda langsung otomatis terbit di layar!
+                </p>
+            </div>
+
+            <!-- Langkah 2 -->
+            <div class="bg-iggo-cream/60 rounded-2xl p-6 border border-iggo-warmborder text-center shadow-sm relative">
+                <div class="w-12 h-12 mx-auto bg-iggo-gold text-iggo-dark font-cinzel font-black text-xl rounded-2xl flex items-center justify-center shadow-md mb-4">
+                    2
+                </div>
+                <h3 class="font-bold text-sm text-iggo-maroon">Makan Enak & Kumpulkan Cap</h3>
+                <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                    Setiap bersantap di IGGO Kuliner, kasir kami akan menambahkan stempel ke riwayat member Anda secara otomatis.
+                </p>
+            </div>
+
+            <!-- Langkah 3 -->
+            <div class="bg-iggo-cream/60 rounded-2xl p-6 border border-iggo-warmborder text-center shadow-sm relative">
+                <div class="w-12 h-12 mx-auto bg-iggo-maroondark text-white font-cinzel font-black text-xl rounded-2xl flex items-center justify-center shadow-md mb-4">
+                    3
+                </div>
+                <h3 class="font-bold text-sm text-iggo-maroon">Scan QR & Nikmati Traktiran</h3>
+                <p class="text-xs text-stone-600 mt-2 leading-relaxed">
+                    Pindai QR Code di kartu untuk cek status cap: Cap ke-5 dapat <strong>Free Es Teh Jumbo</strong>, dan Cap ke-10 klaim <strong>Diskon 50%</strong>!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION KOMPARASI MEMBER VS NON-MEMBER -->
+    <section id="keuntungan" class="max-w-4xl mx-auto px-4 py-12">
+        <div class="text-center mb-8">
+            <span class="text-[10px] font-bold text-iggo-gold tracking-widest uppercase">Eksklusivitas Layanan Pelanggan</span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-iggo-maroon mt-1">Mengapa Wajib Menjadi Member IGGO?</h2>
+            <p class="text-xs text-stone-500 mt-1">Perbedaan keistimewaan pelanggan reguler dibandingkan pemegang Kartu VIP Pass</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <!-- Non-Member Card -->
+            <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm relative opacity-90">
+                <div class="pb-4 border-b border-stone-100">
+                    <span class="text-[10px] bg-stone-100 text-stone-500 font-bold px-3 py-1 rounded-full uppercase tracking-wider">Pelanggan Reguler</span>
+                    <h3 class="text-lg font-bold text-stone-700 mt-2">Non-Member</h3>
+                    <p class="text-xs text-stone-400 mt-0.5">Layanan standar santap di tempat / take away</p>
+                </div>
+                <ul class="mt-4 space-y-3 text-xs text-stone-600">
+                    <li class="flex items-start gap-2">
+                        <span class="text-stone-400 font-bold">✕</span>
+                        <span>Membayar tarif normal penuh untuk semua menu.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-stone-400 font-bold">✕</span>
+                        <span>Tidak berhak atas pengumpulan stempel reward kunjungan.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-stone-400 font-bold">✕</span>
+                        <span>Tidak ada traktiran gratis di Cap ke-5 maupun Cap ke-10.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-stone-400 font-bold">✕</span>
+                        <span>Tidak mendapat voucher diskon di hari ulang tahun.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- VIP Member Card -->
+            <div class="bg-gradient-to-b from-white to-orange-50/40 rounded-2xl p-6 border-2 border-iggo-gold shadow-luxury relative">
+                <div class="absolute -top-3 right-5 bg-gradient-to-r from-iggo-gold to-iggo-amber text-white text-[10px] font-black px-3.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
+                    Sangat Direkomendasikan
+                </div>
+                <div class="pb-4 border-b border-iggo-gold/30">
+                    <span class="text-[10px] bg-iggo-gold/15 text-iggo-maroon font-bold px-3 py-1 rounded-full uppercase tracking-wider">VIP Dining Club</span>
+                    <h3 class="text-lg font-bold text-iggo-maroon mt-2">VIP Member IGGO Kuliner</h3>
+                    <p class="text-xs text-iggo-gold font-semibold mt-0.5">Pendaftaran Gratis 100% Selamanya</p>
+                </div>
+                <ul class="mt-4 space-y-3 text-xs text-iggo-dark">
+                    <li class="flex items-start gap-2">
+                        <span class="text-iggo-gold font-bold">✓</span>
+                        <span><strong>Kartu Member Digital Eksklusif:</strong> Dilengkapi QR Code personal unik.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-iggo-gold font-bold">✓</span>
+                        <span><strong>Milestone Cap ke-5:</strong> Klaim gratis 1x Es Teh Manis Jumbo segar.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-iggo-gold font-bold">✓</span>
+                        <span><strong>Milestone Cap ke-10:</strong> Diskon 50% atau Free 1 Porsi Menu Signature.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-iggo-gold font-bold">✓</span>
+                        <span><strong>Birthday Privilege:</strong> Traktiran hidangan penutup spesial di bulan lahir.</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION REGISTRASI MANDIRI (NATIVE WEB FORM DENGAN INTEGRASI GOOGLE FORM & GOOGLE SHEETS) -->
+    <section id="daftar" class="max-w-3xl mx-auto px-4 py-10">
+        <div class="bg-white rounded-3xl p-6 sm:p-9 shadow-luxury border-2 border-iggo-warmborder relative overflow-hidden">
+            <!-- Decorative Accent -->
+            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-iggo-gold/20 to-transparent rounded-bl-full pointer-events-none"></div>
+
+            <div class="text-center mb-7">
+                <span class="text-[10px] tracking-[0.2em] font-bold text-iggo-maroon uppercase bg-iggo-creambg px-3 py-1 rounded-full border border-iggo-warmborder">
+                    Formulir Pendaftaran Member
+                </span>
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-iggo-maroon mt-2">Daftar VIP Member IGGO Kuliner</h2>
+                <p class="text-xs sm:text-sm text-stone-600 mt-1 max-w-lg mx-auto">
+                    Daftar langsung di bawah ini tanpa perlu login akun Google. Kartu Member VIP Anda akan langsung terbit seketika dan tersinkronisasi ke Google Sheets!
+                </p>
+            </div>
+
+            <!-- Pilihan Metode Pendaftaran Tab -->
+            <div class="flex justify-center gap-2 mb-6">
+                <button type="button" onclick="switchFormTab('native')" id="tabBtnNative"
+                    class="bg-iggo-maroon text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow-sm">
+                    ⚡ Formulir Cepat di Web (Rekomendasi)
+                </button>
+                <button type="button" onclick="switchFormTab('gform')" id="tabBtnGform"
+                    class="bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold px-4 py-2 rounded-xl transition">
+                    📝 Buka Google Form Resmi
+                </button>
+            </div>
+
+            <!-- FORMULIR NATIVE WEB (DIRECT TO GOOGLE FORM ENDPOINT VIA HIDDEN IFRAME) -->
+            <div id="nativeFormContainer">
+                <form id="formPendaftaran"
+                    action="https://docs.google.com/forms/d/e/1FAIpQLSckXFMlNVy-K0sozoJkI-Chx5uKuJaAT0sIZFyDg96AlTF8dA/formResponse"
+                    method="POST" target="hidden_iframe" onsubmit="submitMemberForm(event)" class="space-y-4">
+
+                    <!-- Field 1: Nama Lengkap -->
+                    <div>
+                        <label for="regNama" class="block text-xs font-bold text-iggo-charcoal mb-1">
+                            Nama Lengkap <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" id="regNama" name="entry.888845442" required
+                            placeholder="Contoh: Budi Santoso"
+                            class="w-full text-xs sm:text-sm px-4 py-3 bg-iggo-cream/60 border border-iggo-warmborder rounded-xl focus:outline-none focus:border-iggo-maroon focus:ring-1 focus:ring-iggo-maroon font-medium text-iggo-dark">
+                    </div>
+
+                    <!-- Field 2: Alamat -->
+                    <div>
+                        <label for="regAlamat" class="block text-xs font-bold text-iggo-charcoal mb-1">
+                            Alamat Tempat Tinggal / Kota <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" id="regAlamat" name="entry.766062255" required
+                            placeholder="Contoh: Jl. Sudirman No. 45, Jambi"
+                            class="w-full text-xs sm:text-sm px-4 py-3 bg-iggo-cream/60 border border-iggo-warmborder rounded-xl focus:outline-none focus:border-iggo-maroon focus:ring-1 focus:ring-iggo-maroon font-medium text-iggo-dark">
+                    </div>
+
+                    <!-- Grid Field: No. HP & Instagram -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="regHp" class="block text-xs font-bold text-iggo-charcoal mb-1">
+                                No. HP / WhatsApp <span class="text-red-500">*</span>
+                            </label>
+                            <input type="tel" id="regHp" name="entry.1122809671" required
+                                placeholder="Contoh: 081234567890"
+                                class="w-full text-xs sm:text-sm px-4 py-3 bg-iggo-cream/60 border border-iggo-warmborder rounded-xl focus:outline-none focus:border-iggo-maroon focus:ring-1 focus:ring-iggo-maroon font-medium text-iggo-dark">
+                        </div>
+                        <div>
+                            <label for="regIg" class="block text-xs font-bold text-iggo-charcoal mb-1">
+                                Akun Instagram
+                            </label>
+                            <input type="text" id="regIg" name="entry.483052779"
+                                placeholder="Contoh: @budisantoso"
+                                class="w-full text-xs sm:text-sm px-4 py-3 bg-iggo-cream/60 border border-iggo-warmborder rounded-xl focus:outline-none focus:border-iggo-maroon focus:ring-1 focus:ring-iggo-maroon font-medium text-iggo-dark">
+                        </div>
+                    </div>
+
+                    <!-- Grid Field: Email & Tanggal -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="regEmail" class="block text-xs font-bold text-iggo-charcoal mb-1">
+                                Alamat Email <span class="text-red-500">*</span>
+                            </label>
+                            <input type="email" id="regEmail" name="entry.1889733905" required
+                                placeholder="Contoh: budi@gmail.com"
+                                class="w-full text-xs sm:text-sm px-4 py-3 bg-iggo-cream/60 border border-iggo-warmborder rounded-xl focus:outline-none focus:border-iggo-maroon focus:ring-1 focus:ring-iggo-maroon font-medium text-iggo-dark">
+                        </div>
+                        <div>
+                            <label for="regTanggal" class="block text-xs font-bold text-iggo-charcoal mb-1">
+                                Tanggal Pendaftaran <span class="text-red-500">*</span>
+                            </label>
+                            <input type="date" id="regTanggal" name="entry.143165978" required
+                                class="w-full text-xs sm:text-sm px-4 py-3 bg-iggo-cream/60 border border-iggo-warmborder rounded-xl focus:outline-none focus:border-iggo-maroon focus:ring-1 focus:ring-iggo-maroon font-medium text-iggo-dark">
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-3">
+                        <button type="submit" id="btnSubmitReg"
+                            class="w-full bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight hover:brightness-110 text-white font-bold text-xs sm:text-sm py-4 rounded-xl shadow-luxury transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                            <span>✨</span> Buat Kartu Member VIP Sekarang (Otomatis)
+                        </button>
+                    </div>
+
+                    <p class="text-[10px] text-center text-stone-500 mt-2">
+                        🔒 Data Anda terenkripsi aman dan otomatis disinkronkan ke basis data resmi IGGO Kuliner.
+                    </p>
+                </form>
+
+                <!-- Hidden Iframe Target to prevent page reload on Google Form submit -->
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
+                    onload="onIframeFormResponse()"></iframe>
+            </div>
+
+            <!-- GOOGLE FORM EMBED / LINK ALTERNATIF -->
+            <div id="gformContainer" class="hidden text-center space-y-4 pt-4 border-t border-iggo-warmborder">
+                <p class="text-xs text-stone-600 max-w-md mx-auto">
+                    Anda juga dapat mengisi langsung melalui antarmuka resmi Google Form IGGO Kuliner di bawah ini:
+                </p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSckXFMlNVy-K0sozoJkI-Chx5uKuJaAT0sIZFyDg96AlTF8dA/viewform"
+                        target="_blank" rel="noopener noreferrer"
+                        class="bg-iggo-maroon hover:bg-iggo-maroondark text-white text-xs font-bold px-6 py-3 rounded-xl shadow-md transition inline-flex items-center gap-2">
+                        <span>↗️</span> Buka Form di Tab Baru
+                    </a>
+                    <button type="button" onclick="toggleEmbedIframe()" id="btnToggleIframe"
+                        class="bg-white border border-iggo-warmborder text-iggo-maroon hover:bg-iggo-creambg text-xs font-semibold px-4 py-3 rounded-xl transition">
+                        Tampilkan Sematan Form di Sini
+                    </button>
+                </div>
+                <div id="embedIframeWrapper" class="hidden pt-4">
+                    <iframe id="googleFormIframe"
+                        src="https://docs.google.com/forms/d/e/1FAIpQLSckXFMlNVy-K0sozoJkI-Chx5uKuJaAT0sIZFyDg96AlTF8dA/viewform?embedded=true"
+                        width="100%" height="700" frameborder="0" marginheight="0" marginwidth="0"
+                        class="rounded-2xl border border-iggo-warmborder bg-white shadow-inner">
+                        Memuat formulir pendaftaran...
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION PORTAL CEK KARTU MEMBER & QR CODE GENERATOR INTERAKTIF -->
+    <section id="portalCek" class="max-w-4xl mx-auto px-4 py-12">
+        <div class="bg-white rounded-3xl p-6 sm:p-9 shadow-luxury border-2 border-iggo-warmborder">
+            <div class="text-center mb-6">
+                <span class="text-[10px] tracking-[0.2em] font-bold text-iggo-gold uppercase bg-iggo-gold/10 px-3 py-1 rounded-full border border-iggo-gold/30">
+                    VIP Member Lounge
+                </span>
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-iggo-maroon mt-1">Periksa Kartu & Progres Cap VIP</h2>
+                <p class="text-xs text-stone-500 mt-1">Masukkan ID Member (misal: JNH-016), No. HP, atau Email Anda</p>
+            </div>
+
+            <!-- Search Bar & Demo Quick Picker -->
+            <div class="max-w-xl mx-auto">
+                <div class="flex gap-2">
+                    <input type="text" id="queryInput" placeholder="Contoh: JNH-016 atau 0821xxxx"
+                        class="w-full text-xs sm:text-sm px-4 py-3.5 bg-iggo-cream/60 border border-iggo-warmborder rounded-xl focus:outline-none focus:border-iggo-maroon font-medium text-iggo-dark"
+                        onkeypress="if(event.key==='Enter') searchMember()">
+                    <button onclick="searchMember()" id="btnCariMember"
+                        class="bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight hover:brightness-110 text-white px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold transition shadow-md whitespace-nowrap flex items-center gap-1.5">
+                        <span>🔍</span> Cari Kartu
+                    </button>
+                </div>
+
+                <!-- Quick Test Buttons (Sangat Membantu saat Presentasi Dosen/Penguji!) -->
+                <div class="mt-3 flex items-center justify-between text-[11px] text-stone-500">
+                    <span>💡 Demo Cepat Pengujian:</span>
+                    <div class="flex gap-1.5 flex-wrap">
+                        <button onclick="quickTestSearch('JNH-016')"
+                            class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-2 py-0.5 rounded-md font-mono text-[10px] border border-stone-200">
+                            JNH-016
+                        </button>
+                        <button onclick="quickTestSearch('JNH-007')"
+                            class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-2 py-0.5 rounded-md font-mono text-[10px] border border-stone-200">
+                            JNH-007
+                        </button>
+                        <button onclick="quickTestSearch('JNH-010')"
+                            class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-2 py-0.5 rounded-md font-mono text-[10px] border border-stone-200">
+                            JNH-010
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="hidden text-center py-10">
+                <div class="inline-block animate-spin w-8 h-8 border-3 border-iggo-gold border-t-transparent rounded-full mb-3"></div>
+                <p class="text-xs font-semibold text-iggo-maroon">Menghubungkan ke basis data Google Sheets IGGO Kuliner...</p>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- VISUAL KARTU MEMBER DIGITAL VIP (DIHASILKAN SECARA INSTAN!) -->
+            <!-- ============================================================== -->
+            <div id="portalContent" class="hidden mt-8 pt-8 border-t border-iggo-warmborder space-y-6">
+
+                <!-- Pemberitahuan Status Sinkronisasi Realtime -->
+                <div class="flex items-center justify-between bg-green-50 border border-green-200 px-4 py-2.5 rounded-xl text-green-800 text-xs">
+                    <span class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
+                        <span><strong>Database Terkoneksi:</strong> Data kartu member aktif & sinkron dengan kasir studio.</span>
+                    </span>
+                    <button onclick="searchMember()" class="text-green-700 hover:underline font-bold text-[11px]">
+                        🔄 Refresh Data
+                    </button>
+                </div>
+
+                <!-- WRAPPER KARTU MEMBER DIGITAL (SIAP DIUNDUH / DISCREENSHOT) -->
+                <div class="flex justify-center">
+                    <div id="digitalVipCard"
+                        class="w-full max-w-md rounded-3xl p-6 sm:p-7 vip-card-mesh text-white gold-border-glow shadow-card-gold relative overflow-hidden transition-all duration-300">
+
+                        <!-- Background Ornament & Watermark -->
+                        <div class="absolute -right-8 -bottom-8 opacity-10 pointer-events-none select-none">
+                            <span class="text-9xl">🍤</span>
+                        </div>
+
+                        <!-- Card Top Bar: Logo, Brand & VIP Chip -->
+                        <div class="flex items-center justify-between border-b border-white/15 pb-4">
+                            <div class="flex items-center gap-3">
+                                <img src="assets/logo-iggo.jpg" alt="Logo"
+                                    class="w-12 h-12 rounded-full object-cover border-2 border-iggo-goldlight shadow-md bg-white">
+                                <div>
+                                    <h4 class="font-cinzel font-black text-base sm:text-lg tracking-wider gold-emboss leading-none">
+                                        IGGO KULINER
+                                    </h4>
+                                    <span class="text-[9px] uppercase tracking-widest text-iggo-goldlight font-semibold block mt-0.5">
+                                        Iwan Goreng-Goreng • Since 2005
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- Smart Chip / Contactless Graphic -->
+                            <div class="text-right">
+                                <div class="w-9 h-7 rounded-md bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 p-1 flex items-center justify-center shadow-inner ml-auto">
+                                    <div class="w-full h-full border border-yellow-700/40 rounded flex items-center justify-center">
+                                        <span class="text-[8px] font-bold text-yellow-900">VIP</span>
+                                    </div>
+                                </div>
+                                <span class="text-[8px] tracking-[0.2em] font-bold text-yellow-300/80 block uppercase mt-1">GOLD PASS</span>
+                            </div>
+                        </div>
+
+                        <!-- Card Middle: Nama & ID Member -->
+                        <div class="my-5 flex justify-between items-end">
+                            <div>
+                                <span class="text-[9px] uppercase tracking-widest text-stone-300 block font-medium">NAMA ANGGOTA</span>
+                                <h3 id="cardNama" class="text-lg sm:text-xl font-bold font-serif tracking-wide text-white capitalize leading-tight mt-0.5">
+                                    -
+                                </h3>
+                                <p id="cardTanggal" class="text-[10px] text-stone-300 mt-1">Member Sejak: -</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-[9px] uppercase tracking-widest text-stone-300 block font-medium">ID MEMBER</span>
+                                <span id="cardId"
+                                    class="font-mono text-xs sm:text-sm font-black text-iggo-dark bg-gradient-to-r from-yellow-300 to-amber-300 px-3 py-1 rounded-lg inline-block shadow-sm tracking-wider mt-0.5">
+                                    -
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Card 10 Loyalty Stamp Visualizer Box -->
+                        <div class="bg-black/30 backdrop-blur-sm border border-white/15 rounded-2xl p-3.5 mb-4">
+                            <div class="flex justify-between items-center mb-2.5">
+                                <span class="text-[10px] font-bold text-yellow-300 uppercase tracking-wider flex items-center gap-1">
+                                    <span>🍽️</span> 10 Slot Stempel Kunjungan
+                                </span>
+                                <span id="cardStampCounter" class="text-[10px] font-extrabold text-white bg-white/20 px-2 py-0.5 rounded-full">
+                                    0 / 10 Cap
+                                </span>
+                            </div>
+
+                            <!-- Grid 10 Stempel -->
+                            <div id="cardStampsGrid" class="grid grid-cols-5 gap-1.5 sm:gap-2"></div>
+                        </div>
+
+                        <!-- Card Footer: Personal QR Code & Milestone Status -->
+                        <div class="flex items-center justify-between pt-3 border-t border-white/15">
+                            <div class="text-[9px] text-stone-300 max-w-[210px] leading-tight">
+                                <span class="text-yellow-300 font-bold block mb-0.5">✦ Aturan Hadiah:</span>
+                                Cap ke-5: <strong>Free Es Teh Jumbo</strong><br>
+                                Cap ke-10: <strong>Diskon 50% All Menu</strong>
+                            </div>
+                            <!-- QR Code Mini di Kartu -->
+                            <div class="p-1.5 bg-white rounded-xl shadow-md border border-yellow-400/40">
+                                <img id="cardQrMini" src="" alt="QR Member" class="w-14 h-14 object-contain">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ACTION BUTTONS: DOWNLOAD KARTU, SIMPAN GAMBAR, BAGIKAN -->
+                <div class="flex flex-wrap justify-center gap-3 pt-2">
+                    <button onclick="downloadMemberCardImage()" id="btnDownloadCard"
+                        class="bg-gradient-to-r from-iggo-gold to-iggo-amber hover:brightness-110 text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-card-gold transition flex items-center gap-2">
+                        <span>📥</span> Unduh Kartu Member (Gambar PNG)
+                    </button>
+                    <button onclick="shareToWhatsApp()"
+                        class="bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-md transition flex items-center gap-2">
+                        <span>📲</span> Tunjukkan ke WhatsApp Kasir
+                    </button>
+                    <button onclick="copyCardLink()"
+                        class="bg-white border border-iggo-warmborder text-iggo-maroon hover:bg-iggo-creambg font-semibold text-xs sm:text-sm px-4 py-3.5 rounded-xl transition flex items-center gap-1.5">
+                        <span>🔗</span> Salin Tautan Kartu
+                    </button>
+                </div>
+
+                <!-- BANNER REWARD MILESTONE DETAIL -->
+                <div id="rewardBanner"
+                    class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-4 text-center text-xs text-amber-950 font-medium leading-relaxed shadow-sm">
+                </div>
+
+                <!-- BIODATA DETAIL ANGGOTA -->
+                <div class="bg-iggo-cream/60 border border-iggo-warmborder rounded-2xl p-4 sm:p-5">
+                    <h4 class="text-xs font-bold text-iggo-maroon uppercase tracking-wider mb-3">Detail Biodata Member</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div class="bg-white p-3 rounded-xl border border-iggo-warmborder">
+                            <span class="text-[9px] text-stone-400 font-bold uppercase block">Alamat Lengkap</span>
+                            <span id="viewAlamat" class="font-semibold text-iggo-dark block mt-0.5">-</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-iggo-warmborder">
+                            <span class="text-[9px] text-stone-400 font-bold uppercase block">No. HP / WhatsApp</span>
+                            <span id="viewHp" class="font-semibold text-iggo-dark block mt-0.5">-</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-iggo-warmborder">
+                            <span class="text-[9px] text-stone-400 font-bold uppercase block">Instagram</span>
+                            <span id="viewIg" class="font-semibold text-iggo-dark block mt-0.5">-</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-iggo-warmborder">
+                            <span class="text-[9px] text-stone-400 font-bold uppercase block">Email</span>
+                            <span id="viewEmail" class="font-semibold text-iggo-dark block mt-0.5">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIMULASI PRESENTASI DOSEN: TAMBAH CAP SEMENTARA -->
+                <div class="bg-[#FFFDF7] border-2 border-dashed border-iggo-gold/60 rounded-2xl p-4 text-center">
+                    <span class="text-[10px] font-bold text-iggo-maroon uppercase tracking-widest block mb-1">
+                        🛠️ Panel Demo Interaktif Kasir (Uji Coba Presentasi)
+                    </span>
+                    <p class="text-[11px] text-stone-500 mb-3">
+                        Gunakan tombol di bawah untuk mendemonstrasikan penambahan stempel secara langsung di hadapan dosen/penguji:
+                    </p>
+                    <div class="flex justify-center gap-2">
+                        <button onclick="demoAddStamp()"
+                            class="bg-iggo-gold hover:bg-iggo-goldlight text-iggo-dark font-bold text-xs px-4 py-2 rounded-lg transition shadow-sm">
+                            +1 Tambah Stempel Demo
+                        </button>
+                        <button onclick="demoResetStamp()"
+                            class="bg-stone-200 hover:bg-stone-300 text-stone-700 font-semibold text-xs px-4 py-2 rounded-lg transition">
+                            Reset ke Data Asli Sheet
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION FAQ & TEORI CRM UNTUK TUGAS/DOSEN -->
+    <section id="faq" class="max-w-4xl mx-auto px-4 py-12">
+        <div class="text-center mb-8">
+            <span class="text-[10px] font-bold text-iggo-gold tracking-widest uppercase">Edukasi Akademik CRM</span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-iggo-maroon mt-1">Frequently Asked Questions & Studi Kasus CRM</h2>
+            <p class="text-xs text-stone-500 mt-1">Penjelasan integrasi teori CRM dengan sistem operasional restoran IGGO Kuliner</p>
+        </div>
+
+        <div class="space-y-3.5 text-xs sm:text-sm">
+            <div class="bg-white p-5 rounded-2xl border border-iggo-warmborder shadow-sm">
+                <h4 class="font-bold text-iggo-maroon text-sm flex items-center gap-2">
+                    <span>📌</span> Bagaimana dimensi CRM diimplementasikan pada sistem IGGO Kuliner ini?
+                </h4>
+                <p class="text-stone-600 mt-2 leading-relaxed text-xs">
+                    Sistem ini mengintegrasikan 4 pilar utama CRM:
+                    <br><strong>1. Customer Acquisition:</strong> Registrasi digital mandiri tanpa hambatan login yang merekrut pelanggan baru ke ekosistem resto.
+                    <br><strong>2. Customer Retention:</strong> Gamifikasi 10-slot cap yang memicu pelanggan untuk terus kembali berkunjung (repeat order).
+                    <br><strong>3. Customer Development:</strong> Insentif traktiran es teh di cap ke-5 dan diskon 50% di cap ke-10 yang meningkatkan <em>Customer Lifetime Value (CLV)</em>.
+                    <br><strong>4. CRM Analytics:</strong> Basis data Google Sheets terpusat yang mencatat biodata dan frekuensi transaksi secara real-time.
+                </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-iggo-warmborder shadow-sm">
+                <h4 class="font-bold text-iggo-maroon text-sm flex items-center gap-2">
+                    <span>📱</span> Mengapa QR Code langsung mengarahkan ke Kartu Member Visual?
+                </h4>
+                <p class="text-stone-600 mt-2 leading-relaxed text-xs">
+                    Alih-alih hanya membuka baris data mentah yang membosankan, pemindaian QR Code secara instan merekonstruksi Kartu VIP Member visual beresolusi tinggi dengan stempel interaktif. Hal ini memberikan *Customer Experience (CX)* premium yang membangun *Brand Loyalty* kuat bagi IGGO Kuliner.
+                </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-iggo-warmborder shadow-sm">
+                <h4 class="font-bold text-iggo-maroon text-sm flex items-center gap-2">
+                    <span>⚡</span> Bagaimana data dari website terkirim ke Google Sheets?
+                </h4>
+                <p class="text-stone-600 mt-2 leading-relaxed text-xs">
+                    Website memanfaatkan form endpoint submission resmi Google Forms yang disalurkan melalui iframe tersembunyi (*headless form submission*). Dengan metode ini, pelanggan tidak perlu login ke akun Google dan data langsung tertulis secara otomatis ke spreadsheet studio.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-iggo-warmborder bg-white py-10 text-center text-xs text-stone-500">
+        <div class="max-w-xl mx-auto px-4 space-y-3">
+            <div class="flex items-center justify-center gap-2.5">
+                <img src="assets/logo-iggo.jpg" alt="Logo" class="w-8 h-8 rounded-full border border-iggo-gold">
+                <span class="font-cinzel font-extrabold text-base text-iggo-maroon">IGGO KULINER</span>
+            </div>
+            <p class="italic text-[11px] text-stone-600">“Iwan Goreng-Goreng — Cita Rasa Otentik Gurih Renyah Nusantara Sejak 2005.”</p>
+            <p class="pt-2 text-[11px]">
+                Studi Kasus Praktikum CRM & Basis Data Terintegrasi • Dikembangkan untuk Presentasi & Operasional Restoran
+            </p>
+            <p class="text-[10px] text-stone-400">© 2005 - 2026 IGGO Kuliner. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- EXTERNAL CRM LOGIC ENGINE (MODULAR ARCHITECTURE) -->
+    <script src="js/app.js" defer></script>
+</body>
+
+</html>
