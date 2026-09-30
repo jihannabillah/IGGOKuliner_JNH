@@ -149,46 +149,39 @@ function onIframeFormResponse() {
         btn.innerHTML = `<span>✨</span> Buat Kartu Member VIP Sekarang (Otomatis)`;
     }
 
-    const nama = document.getElementById("regNama") ? document.getElementById("regNama").value.trim() : "";
-    const alamat = document.getElementById("regAlamat") ? document.getElementById("regAlamat").value.trim() : "";
     const hp = document.getElementById("regHp") ? document.getElementById("regHp").value.trim() : "";
-    const ig = document.getElementById("regIg") ? document.getElementById("regIg").value.trim() : "";
     const email = document.getElementById("regEmail") ? document.getElementById("regEmail").value.trim() : "";
-    const tgl = document.getElementById("regTanggal") ? document.getElementById("regTanggal").value.trim() : "";
 
-    // Generate ID Member Baru Instan
-    const randSuffix = Math.floor(100 + Math.random() * 900);
-    const newMemberId = "IGGO-" + randSuffix;
-
-    alert(`🎉 SELAMAT! Pendaftaran VIP Member IGGO Kuliner berhasil.\nID Member Anda: ${newMemberId}\n\nKartu Member dan Kartu Loyalitas Anda langsung ditampilkan di bawah!`);
-
-    const newMember = {
-        nama: nama,
-        alamat: alamat,
-        hp: hp,
-        ig: ig || "-",
-        tanggal: tgl,
-        email: email,
-        idMember: newMemberId,
-        barcode: "",
-        totalCap: 1 // Member baru otomatis mendapat 1 stempel selamat datang!
-    };
-
-    currentMemberData = newMember;
-    simulatedStampCount = null;
-    saveToLocalStorage(newMember);
-
-    renderCard(newMember);
-    const portalContent = document.getElementById("portalContent");
-    const portalCek = document.getElementById("portalCek");
-    if (portalContent) portalContent.classList.remove("hidden");
-    if (portalCek) portalCek.scrollIntoView({ behavior: "smooth" });
+    alert("🎉 Pendaftaran VIP Member IGGO Kuliner berhasil dikirim!\nData Anda sedang disinkronkan langsung ke basis data Google Sheets...");
 
     // Reset Form
     const regForm = document.getElementById("formPendaftaran");
     if (regForm) regForm.reset();
     const tglInput = document.getElementById("regTanggal");
     if (tglInput) tglInput.value = new Date().toISOString().split("T")[0];
+
+    // Isi kolom pencarian dengan No. HP atau Email pendaftar
+    const searchVal = hp || email;
+    const queryInput = document.getElementById("queryInput");
+    if (queryInput && searchVal) {
+        queryInput.value = searchVal;
+    }
+
+    // Scroll ke bagian kartu member
+    const portalCek = document.getElementById("portalCek");
+    if (portalCek) portalCek.scrollIntoView({ behavior: "smooth" });
+
+    // Beri jeda 1.8 detik agar Google Form selesai menulis baris baru di Google Sheets,
+    // lalu otomatis cari data member resmi secara real-time dari spreadsheet.
+    setTimeout(async () => {
+        const ok = await searchMember(true);
+        if (!ok) {
+            // Jika spreadsheet butuh waktu tambahan beberapa detik untuk formula trigger
+            setTimeout(async () => {
+                await searchMember(false);
+            }, 2500);
+        }
+    }, 1800);
 }
 
 // ==============================================================
@@ -200,12 +193,12 @@ function quickTestSearch(id) {
     searchMember();
 }
 
-async function searchMember() {
+async function searchMember(silent = false) {
     const input = document.getElementById("queryInput");
     const query = input ? input.value.trim().toLowerCase() : "";
     if (!query) {
-        alert("Silakan masukkan ID Member, No. HP, atau Email Anda terlebih dahulu.");
-        return;
+        if (!silent) alert("Silakan masukkan ID Member, No. HP, atau Email Anda terlebih dahulu.");
+        return false;
     }
 
     const loading = document.getElementById("loadingIndicator");
@@ -317,8 +310,12 @@ async function searchMember() {
         } catch (renderErr) {
             console.error("Kesalahan saat merender kartu:", renderErr);
         }
+        return true;
     } else {
-        alert("Data Member tidak ditemukan.\nPastikan ID Member (misal: JNH-016), No. HP, atau Email Anda sudah terdaftar di Google Form.");
+        if (!silent) {
+            alert("Data Member tidak ditemukan.\nPastikan ID Member (misal: JNH-016), No. HP, atau Email Anda sudah terdaftar di Google Form.");
+        }
+        return false;
     }
 }
 
