@@ -128,31 +128,57 @@ function toggleEmbedIframe() {
 }
 
 // ==============================================================
-// 4. GOOGLE FORM SUBMISSION ENGINE (HEADLESS)
+// 4. GOOGLE FORM SUBMISSION ENGINE (FETCH NO-CORS DIRECT)
 // ==============================================================
-function submitMemberForm(event) {
+async function submitMemberForm(event) {
+    if (event) event.preventDefault();
+
     const btn = document.getElementById("btnSubmitReg");
+    const origBtnHtml = btn ? btn.innerHTML : "";
     if (btn) {
         btn.disabled = true;
         btn.innerHTML = `<span class="inline-block animate-spin mr-2">⏳</span> Mengirim & Menerbitkan Kartu VIP...`;
     }
-    isFormSubmitted = true;
-}
 
-function onIframeFormResponse() {
-    if (!isFormSubmitted) return;
-    isFormSubmitted = false;
+    const nama = document.getElementById("regNama") ? document.getElementById("regNama").value.trim() : "";
+    const alamat = document.getElementById("regAlamat") ? document.getElementById("regAlamat").value.trim() : "";
+    const hp = document.getElementById("regHp") ? document.getElementById("regHp").value.trim() : "";
+    const ig = document.getElementById("regIg") ? document.getElementById("regIg").value.trim() : "";
+    const email = document.getElementById("regEmail") ? document.getElementById("regEmail").value.trim() : "";
+    const tgl = document.getElementById("regTanggal") ? document.getElementById("regTanggal").value.trim() : "";
 
-    const btn = document.getElementById("btnSubmitReg");
-    if (btn) {
-        btn.disabled = false;
-        btn.innerHTML = `<span>✨</span> Buat Kartu Member VIP Sekarang (Otomatis)`;
+    if (!nama || !alamat || !hp || !email || !tgl) {
+        alert("Harap lengkapi semua bidang pendaftaran bertanda bintang (*).");
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = origBtnHtml;
+        }
+        return false;
     }
 
-    const hp = document.getElementById("regHp") ? document.getElementById("regHp").value.trim() : "";
-    const email = document.getElementById("regEmail") ? document.getElementById("regEmail").value.trim() : "";
+    // Siapkan URLSearchParams untuk submission resmi Google Form
+    const params = new URLSearchParams();
+    params.append("entry.888845442", nama);
+    params.append("entry.766062255", alamat);
+    params.append("entry.1122809671", hp);
+    params.append("entry.483052779", ig || "-");
+    params.append("entry.1889733905", email);
+    params.append("entry.143165978", tgl);
 
-    alert("🎉 Pendaftaran VIP Member IGGO Kuliner berhasil dikirim!\nData Anda sedang disinkronkan langsung ke basis data Google Sheets...");
+    const formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSckXFMlNVy-K0sozoJkI-Chx5uKuJaAT0sIZFyDg96AlTF8dA/formResponse";
+
+    try {
+        await fetch(formUrl, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: params.toString()
+        });
+    } catch (e) {
+        console.warn("Direct fetch notification:", e);
+    }
 
     // Reset Form
     const regForm = document.getElementById("formPendaftaran");
@@ -160,28 +186,37 @@ function onIframeFormResponse() {
     const tglInput = document.getElementById("regTanggal");
     if (tglInput) tglInput.value = new Date().toISOString().split("T")[0];
 
-    // Isi kolom pencarian dengan No. HP atau Email pendaftar
-    const searchVal = hp || email;
-    const queryInput = document.getElementById("queryInput");
-    if (queryInput && searchVal) {
-        queryInput.value = searchVal;
+    if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = `<span>✨</span> Buat Kartu Member VIP Sekarang (Otomatis)`;
     }
+
+    alert(`🎉 Pendaftaran ${nama} berhasil dikirim ke Google Sheets!\nSistem sedang menyiapkan Kartu Member VIP resmi Anda...`);
+
+    // Isi kolom pencarian kartu dengan No. HP pendaftar
+    const queryInput = document.getElementById("queryInput");
+    if (queryInput) queryInput.value = hp || email;
 
     // Scroll ke bagian kartu member
     const portalCek = document.getElementById("portalCek");
     if (portalCek) portalCek.scrollIntoView({ behavior: "smooth" });
 
-    // Beri jeda 1.8 detik agar Google Form selesai menulis baris baru di Google Sheets,
-    // lalu otomatis cari data member resmi secara real-time dari spreadsheet.
+    // Tunggu jeda agar formula Google Sheets membuat ID resmi (JNH-xxx)
     setTimeout(async () => {
         const ok = await searchMember(true);
         if (!ok) {
-            // Jika spreadsheet butuh waktu tambahan beberapa detik untuk formula trigger
             setTimeout(async () => {
                 await searchMember(false);
             }, 2500);
         }
-    }, 1800);
+    }, 2000);
+
+    return false;
+}
+
+// Fallback jika iframe form response dipanggil
+function onIframeFormResponse() {
+    // Dipelihara untuk kompatibilitas jika iframe digunakan
 }
 
 // ==============================================================
@@ -219,10 +254,10 @@ async function searchMember(silent = false) {
         totalCap: 9
     };
 
-    // LANGKAH 1: FETCH DATA SPREADSHEET (TERISOLASI DARI RENDER ERROR)
+    // LANGKAH 1: FETCH DATA SPREADSHEET (NO CACHE & TIMESTAMP BUSTING)
     try {
-        const url = `https://docs.google.com/spreadsheets/d/${CONFIG.SPREADSHEET_ID}/gviz/tq?tqx=out:json&gid=${CONFIG.SHEET_GID}`;
-        const res = await fetch(url);
+        const url = `https://docs.google.com/spreadsheets/d/${CONFIG.SPREADSHEET_ID}/gviz/tq?tqx=out:json&gid=${CONFIG.SHEET_GID}&_t=${Date.now()}`;
+        const res = await fetch(url, { cache: "no-store" });
         const text = await res.text();
         const jsonString = text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1);
         const data = JSON.parse(jsonString);

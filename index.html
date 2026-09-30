@@ -307,7 +307,7 @@
             <div id="nativeFormContainer">
                 <form id="formPendaftaran"
                     action="https://docs.google.com/forms/d/e/1FAIpQLSckXFMlNVy-K0sozoJkI-Chx5uKuJaAT0sIZFyDg96AlTF8dA/formResponse"
-                    method="POST" target="hidden_iframe" onsubmit="submitMemberForm(event)" class="space-y-4">
+                    method="POST" onsubmit="return submitMemberForm(event)" class="space-y-4">
 
                     <div>
                         <label for="regNama" class="block text-xs font-bold text-iggo-charcoal mb-1">
@@ -825,7 +825,7 @@
     </footer>
 
     <!-- EXTERNAL CRM LOGIC ENGINE (MODULAR ARCHITECTURE) -->
-    <script src="js/app.js?v=2.2" defer></script>
+    <script src="js/app.js?v=2.3" defer></script>
 </body>
 
 </html>
