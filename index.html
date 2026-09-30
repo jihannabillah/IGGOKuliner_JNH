@@ -56,21 +56,40 @@
     </script>
 
     <!-- External Custom Stylesheet (Modular Architecture) -->
-    <link rel="stylesheet" href="css/style.css?v=2.3">
+    <link rel="stylesheet" href="css/style.css?v=2.5">
 </head>
 
 <body class="bg-iggo-cream text-iggo-dark font-sans antialiased selection:bg-iggo-maroon selection:text-white">
 
-    <!-- TOP PROMO ANNOUNCEMENT BAR (HIDDEN IN PRINT) -->
-    <div class="no-print bg-iggo-maroondark text-white text-[11px] sm:text-xs py-2 px-4 text-center tracking-wide font-medium border-b border-iggo-gold/20">
+    <!-- DEDICATED MEMBER PASS TOP BAR (MUNCUL OTOMATIS SAAT SCAN QR CODE) -->
+    <div id="memberPassHeader" class="hidden no-print sticky top-0 z-50 bg-iggo-maroondark text-white py-3 px-4 sm:px-8 border-b border-iggo-gold/30 shadow-md">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="assets/logo-iggo.jpg" alt="Logo IGGO" class="w-8 h-8 rounded-full border border-iggo-gold object-cover shadow-sm">
+                <div>
+                    <h2 class="font-cinzel text-xs sm:text-sm font-bold tracking-wider gold-foil-text leading-tight">
+                        IGGO KULINER VIP PASS
+                    </h2>
+                    <span class="text-[9px] text-yellow-200/80 block">Kartu Keanggotaan & Verifikasi Kasir Resmi</span>
+                </div>
+            </div>
+            <button onclick="exitMemberPassMode()"
+                class="text-[10px] sm:text-xs bg-white/10 hover:bg-white/20 text-yellow-200 font-semibold px-3 py-1.5 rounded-lg border border-yellow-400/30 transition flex items-center gap-1.5 shadow-sm">
+                <span>🏠</span> Buka Web Lengkap
+            </button>
+        </div>
+    </div>
+
+    <!-- TOP PROMO ANNOUNCEMENT BAR (HIDDEN IN PRINT & MEMBER PASS) -->
+    <div class="landing-page-only no-print bg-iggo-maroondark text-white text-[11px] sm:text-xs py-2 px-4 text-center tracking-wide font-medium border-b border-iggo-gold/20">
         <span class="inline-flex items-center gap-1.5 flex-wrap justify-center">
             <span class="bg-iggo-gold text-iggo-dark font-bold text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider">VIP Member Pass</span>
             <span>Daftar Gratis! Cetak Kartu Member VIP Modern & Kumpulkan 10 Stempel Loyalitas IGGO Kuliner! 🍤🔥</span>
         </span>
     </div>
 
-    <!-- MAIN NAVBAR (HIDDEN IN PRINT) -->
-    <nav class="no-print sticky top-0 z-50 bg-[#FDF9F3]/95 backdrop-blur-md border-b border-iggo-warmborder shadow-sm">
+    <!-- MAIN NAVBAR (HIDDEN IN PRINT & MEMBER PASS) -->
+    <nav class="landing-page-only no-print sticky top-0 z-50 bg-[#FDF9F3]/95 backdrop-blur-md border-b border-iggo-warmborder shadow-sm">
         <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
             <!-- Brand Logo & Title -->
             <a href="#" class="flex items-center gap-3 group">
@@ -103,8 +122,8 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION (HIDDEN IN PRINT) -->
-    <header class="no-print relative overflow-hidden pt-10 pb-14 sm:py-16 bg-gradient-to-b from-iggo-creambg via-iggo-cream to-white border-b border-iggo-warmborder">
+    <!-- HERO SECTION (HIDDEN IN PRINT & MEMBER PASS) -->
+    <header class="landing-page-only no-print relative overflow-hidden pt-10 pb-14 sm:py-16 bg-gradient-to-b from-iggo-creambg via-iggo-cream to-white border-b border-iggo-warmborder">
         <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
             <div class="inline-flex items-center gap-2 bg-white/80 border border-iggo-gold/40 px-4 py-1.5 rounded-full shadow-sm mb-5">
                 <span class="w-2 h-2 rounded-full bg-iggo-gold animate-ping"></span>
@@ -169,8 +188,8 @@
         </div>
     </header>
 
-    <!-- SECTION MENU SPESIAL (HIDDEN IN PRINT) -->
-    <section id="menu" class="no-print max-w-5xl mx-auto px-4 py-12">
+    <!-- SECTION MENU SPESIAL (HIDDEN IN PRINT & MEMBER PASS) -->
+    <section id="menu" class="landing-page-only no-print max-w-5xl mx-auto px-4 py-12">
         <div class="text-center mb-8">
             <span class="text-[10px] font-bold text-iggo-gold tracking-[0.25em] uppercase bg-iggo-gold/10 px-3 py-1 rounded-full border border-iggo-gold/30">
                 Signature Dishes
@@ -278,8 +297,8 @@
         </div>
     </section>
 
-    <!-- SECTION REGISTRASI MANDIRI (HIDDEN IN PRINT) -->
-    <section id="daftar" class="no-print max-w-3xl mx-auto px-4 py-10">
+    <!-- SECTION REGISTRASI MANDIRI (HIDDEN IN PRINT & MEMBER PASS) -->
+    <section id="daftar" class="landing-page-only no-print max-w-3xl mx-auto px-4 py-10">
         <div class="bg-white rounded-3xl p-6 sm:p-9 shadow-luxury border-2 border-iggo-warmborder relative overflow-hidden">
             <div class="text-center mb-7">
                 <span class="text-[10px] tracking-[0.2em] font-bold text-iggo-maroon uppercase bg-iggo-creambg px-3 py-1 rounded-full border border-iggo-warmborder">
@@ -414,41 +433,51 @@
     <section id="portalCek" class="max-w-4xl mx-auto px-4 py-12">
         <div class="bg-white rounded-3xl p-6 sm:p-9 shadow-luxury border-2 border-iggo-warmborder">
             
-            <div class="no-print text-center mb-6">
-                <span class="text-[10px] tracking-[0.2em] font-bold text-iggo-gold uppercase bg-iggo-gold/10 px-3 py-1 rounded-full border border-iggo-gold/30">
-                    VIP Member & Loyalty Lounge
-                </span>
-                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-iggo-maroon mt-1">Cetak Kartu Member & Cek Loyalitas</h2>
-                <p class="text-xs text-stone-500 mt-1">Masukkan ID Member (misal: JNH-016), No. HP, atau Email Anda</p>
+            <!-- DEDICATED MEMBER PASS NOTICE (MUNCUL HANYA DI MODE KARTU MEMBER) -->
+            <div id="memberPassNotice" class="hidden no-print mb-6 text-center">
+                <div class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500/10 via-yellow-400/20 to-amber-500/10 border border-yellow-500/40 text-iggo-maroon px-4 py-2 rounded-full text-xs font-bold shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span>
+                    <span>VIP Member Pass Terverifikasi • <strong>Hanya Menampilkan Data & Kartu Pelanggan</strong></span>
+                </div>
             </div>
 
-            <!-- Search Bar & Demo Quick Picker -->
-            <div class="no-print max-w-xl mx-auto mb-6">
-                <div class="flex gap-2">
-                    <input type="text" id="queryInput" placeholder="Contoh: JNH-016 atau 0821xxxx"
-                        class="w-full text-xs sm:text-sm px-4 py-3.5 bg-iggo-cream/60 border border-iggo-warmborder rounded-xl focus:outline-none focus:border-iggo-maroon font-medium text-iggo-dark"
-                        onkeypress="if(event.key==='Enter') searchMember()">
-                    <button onclick="searchMember()" id="btnCariMember"
-                        class="bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight hover:brightness-110 text-white px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold transition shadow-md whitespace-nowrap flex items-center gap-1.5">
-                        <span>🔍</span> Cari Kartu
-                    </button>
+            <!-- Search Bar & Demo Quick Picker (Disembunyikan Otomatis di Mode Kartu) -->
+            <div id="portalSearchBox" class="no-print">
+                <div class="text-center mb-6">
+                    <span class="text-[10px] tracking-[0.2em] font-bold text-iggo-gold uppercase bg-iggo-gold/10 px-3 py-1 rounded-full border border-iggo-gold/30">
+                        VIP Member & Loyalty Lounge
+                    </span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-iggo-maroon mt-1">Cetak Kartu Member & Cek Loyalitas</h2>
+                    <p class="text-xs text-stone-500 mt-1">Masukkan ID Member (misal: JNH-016), No. HP, atau Email Anda</p>
                 </div>
 
-                <div class="mt-3 flex items-center justify-between text-[11px] text-stone-500">
-                    <span>💡 Demo Cepat Pengujian:</span>
-                    <div class="flex gap-1.5 flex-wrap">
-                        <button onclick="quickTestSearch('JNH-016')"
-                            class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-2.5 py-0.5 rounded-md font-mono text-[10px] border border-stone-200 font-semibold">
-                            JNH-016 (Jihan)
+                <div class="max-w-xl mx-auto mb-6">
+                    <div class="flex gap-2">
+                        <input type="text" id="queryInput" placeholder="Contoh: JNH-016 atau 0821xxxx"
+                            class="w-full text-xs sm:text-sm px-4 py-3.5 bg-iggo-cream/60 border border-iggo-warmborder rounded-xl focus:outline-none focus:border-iggo-maroon font-medium text-iggo-dark"
+                            onkeypress="if(event.key==='Enter') searchMember()">
+                        <button onclick="searchMember()" id="btnCariMember"
+                            class="bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight hover:brightness-110 text-white px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold transition shadow-md whitespace-nowrap flex items-center gap-1.5">
+                            <span>🔍</span> Cari Kartu
                         </button>
-                        <button onclick="quickTestSearch('JNH-007')"
-                            class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-2.5 py-0.5 rounded-md font-mono text-[10px] border border-stone-200 font-semibold">
-                            JNH-007 (Novi)
-                        </button>
-                        <button onclick="quickTestSearch('JNH-010')"
-                            class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-2.5 py-0.5 rounded-md font-mono text-[10px] border border-stone-200 font-semibold">
-                            JNH-010 (Azza)
-                        </button>
+                    </div>
+
+                    <div class="mt-3 flex items-center justify-between text-[11px] text-stone-500">
+                        <span>💡 Demo Cepat Pengujian:</span>
+                        <div class="flex gap-1.5 flex-wrap">
+                            <button onclick="quickTestSearch('JNH-016')"
+                                class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-2.5 py-0.5 rounded-md font-mono text-[10px] border border-stone-200 font-semibold">
+                                JNH-016 (Jihan)
+                            </button>
+                            <button onclick="quickTestSearch('JNH-007')"
+                                class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-2.5 py-0.5 rounded-md font-mono text-[10px] border border-stone-200 font-semibold">
+                                JNH-007 (Novi)
+                            </button>
+                            <button onclick="quickTestSearch('JNH-010')"
+                                class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-2.5 py-0.5 rounded-md font-mono text-[10px] border border-stone-200 font-semibold">
+                                JNH-010 (Azza)
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -780,8 +809,8 @@
         </div>
     </section>
 
-    <!-- SECTION FAQ & TEORI CRM (HIDDEN IN PRINT) -->
-    <section id="faq" class="no-print max-w-4xl mx-auto px-4 py-12">
+    <!-- SECTION FAQ & TEORI CRM (HIDDEN IN PRINT & MEMBER PASS) -->
+    <section id="faq" class="landing-page-only no-print max-w-4xl mx-auto px-4 py-12">
         <div class="text-center mb-8">
             <span class="text-[10px] font-bold text-iggo-gold tracking-widest uppercase">Edukasi Akademik CRM</span>
             <h2 class="font-serif text-2xl sm:text-3xl font-bold text-iggo-maroon mt-1">Frequently Asked Questions & Studi Kasus CRM</h2>
@@ -809,8 +838,8 @@
         </div>
     </section>
 
-    <!-- FOOTER (HIDDEN IN PRINT) -->
-    <footer class="no-print border-t border-iggo-warmborder bg-white py-10 text-center text-xs text-stone-500">
+    <!-- FOOTER (HIDDEN IN PRINT & MEMBER PASS) -->
+    <footer class="landing-page-only no-print border-t border-iggo-warmborder bg-white py-10 text-center text-xs text-stone-500">
         <div class="max-w-xl mx-auto px-4 space-y-3">
             <div class="flex items-center justify-center gap-2.5">
                 <img src="assets/logo-iggo.jpg" alt="Logo" class="w-8 h-8 rounded-full border border-iggo-gold">
@@ -825,7 +854,7 @@
     </footer>
 
     <!-- EXTERNAL CRM LOGIC ENGINE (MODULAR ARCHITECTURE) -->
-    <script src="js/app.js?v=2.4" defer></script>
+    <script src="js/app.js?v=2.5" defer></script>
 </body>
 
 </html>

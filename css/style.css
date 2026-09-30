@@ -196,3 +196,29 @@
         print-color-adjust: exact !important;
     }
 }
+
+/* ==============================================================
+   MODE KHUSUS KARTU MEMBER (SAAT DI-SCAN DARI QR CODE)
+   Hanya menampilkan Kartu Member, Stempel & Data Pelanggan.
+   Menyembunyikan seluruh landing page web (Menu, Form, FAQ, dll.)
+   ============================================================== */
+body.member-pass-mode .landing-page-only {
+    display: none !important;
+}
+
+body.member-pass-mode #memberPassHeader {
+    display: block !important;
+}
+
+body.member-pass-mode #portalSearchBox {
+    display: none !important;
+}
+
+body.member-pass-mode #memberPassNotice {
+    display: block !important;
+}
+
+body.member-pass-mode #portalCek {
+    padding-top: 1.25rem !important;
+    padding-bottom: 2.5rem !important;
+}

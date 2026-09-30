@@ -66,14 +66,46 @@ function initApp() {
         queryId = hashParams.get("id") || hashParams.get("wa") || hashParams.get("email");
     }
 
+    const isPassRequested = searchParams.get("view") === "pass" || window.location.hash.includes("view=pass") || Boolean(queryId);
+
     if (queryId) {
         document.getElementById("queryInput").value = queryId;
-        const portal = document.getElementById("portalCek");
-        if (portal) portal.scrollIntoView({ behavior: "smooth" });
+        if (isPassRequested) {
+            enterMemberPassMode();
+        } else {
+            const portal = document.getElementById("portalCek");
+            if (portal) portal.scrollIntoView({ behavior: "smooth" });
+        }
         searchMember();
     } else {
         // Cek apakah ada kartu tersimpan di LocalStorage perangkat ini
         checkLocalStorageCache();
+    }
+}
+
+// ==============================================================
+// 2B. MEMBER PASS VIEW CONTROLLER (MODE KHUSUS DATA MEMBER SAJA)
+// ==============================================================
+function enterMemberPassMode() {
+    document.body.classList.add("member-pass-mode");
+    const portal = document.getElementById("portalCek");
+    if (portal) {
+        setTimeout(() => {
+            portal.scrollIntoView({ behavior: "instant" });
+        }, 100);
+    }
+}
+
+function exitMemberPassMode() {
+    document.body.classList.remove("member-pass-mode");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function toggleMemberPassMode() {
+    if (document.body.classList.contains("member-pass-mode")) {
+        exitMemberPassMode();
+    } else {
+        enterMemberPassMode();
     }
 }
 
@@ -384,7 +416,7 @@ function renderCard(m) {
         // Gunakan IP Wi-Fi lokal agar smartphone dalam jaringan yang sama bisa langsung membukanya
         baseOrigin = "http://192.168.0.118:3000";
     }
-    const targetUrl = baseOrigin + window.location.pathname + "?id=" + encodeURIComponent(m.idMember) + "#portalCek";
+    const targetUrl = baseOrigin + window.location.pathname + "?id=" + encodeURIComponent(m.idMember) + "&view=pass#portalCek";
     // margin=8 & ecc=M memberikan zona putih (quiet zone) dan koreksi kesalahan agar instan terbaca kamera HP
     const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=8&ecc=M&data=${encodeURIComponent(targetUrl)}`;
     setElSrc("printCardQr", qrApiUrl);
