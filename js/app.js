@@ -22,34 +22,52 @@ const CONFIG = {
     SHEET_GID: "2034393288",
     GOOGLE_FORM_VIEW_URL: "https://docs.google.com/forms/d/e/1FAIpQLSckXFMlNVy-K0sozoJkI-Chx5uKuJaAT0sIZFyDg96AlTF8dA/viewform",
     FORM_RESPONSE_URL: "https://docs.google.com/forms/d/e/1FAIpQLSckXFMlNVy-K0sozoJkI-Chx5uKuJaAT0sIZFyDg96AlTF8dA/formResponse",
-    STORAGE_KEY: "iggo_crm_active_member"
+    STORAGE_KEY: "iggo_crm_active_member",
+    SERVER_IP: "192.168.0.102"
 };
 
 // Application State
 let currentMemberData = null;
 let isFormSubmitted = false;
 let simulatedStampCount = null;
-let qrCodeMode = "text"; // Default: "text" (Hanya Data Customer) atau "url" (Tautan Web)
 
-function setQrMode(mode) {
-    qrCodeMode = mode;
-    const btnText = document.getElementById("btnQrModeText");
-    const btnUrl = document.getElementById("btnQrModeUrl");
-    const desc = document.getElementById("qrModeDescription");
-    if (btnText && btnUrl) {
-        if (mode === "text") {
-            btnText.className = "bg-iggo-maroon text-white font-bold text-[11px] px-3.5 py-2 rounded-xl transition shadow-sm flex items-center gap-1.5";
-            btnUrl.className = "bg-white hover:bg-stone-100 text-stone-700 font-semibold text-[11px] px-3.5 py-2 rounded-xl border border-stone-200 transition flex items-center gap-1.5";
-            if (desc) desc.textContent = "✅ Mode Aktif: Kamera HP langsung memunculkan biodata member di layar tanpa buka website.";
-        } else {
-            btnUrl.className = "bg-iggo-maroon text-white font-bold text-[11px] px-3.5 py-2 rounded-xl transition shadow-sm flex items-center gap-1.5";
-            btnText.className = "bg-white hover:bg-stone-100 text-stone-700 font-semibold text-[11px] px-3.5 py-2 rounded-xl border border-stone-200 transition flex items-center gap-1.5";
-            if (desc) desc.textContent = "🌐 Mode Aktif: Kamera HP membuka tautan web VIP Member Pass di browser.";
-        }
+// Dynamic Server IP Helpers (Memastikan QR Code selalu akurat & dapat dibuka HP)
+function getServerOrigin() {
+    if (window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1" && window.location.hostname !== "[::]") {
+        return window.location.origin;
     }
-    if (currentMemberData) {
-        renderCard(currentMemberData);
+    const savedIp = localStorage.getItem("iggo_server_ip") || CONFIG.SERVER_IP || "192.168.0.102";
+    return `http://${savedIp}:3000`;
+}
+
+function changeServerIp() {
+    const current = localStorage.getItem("iggo_server_ip") || CONFIG.SERVER_IP || "192.168.0.102";
+    const newIp = prompt("Masukkan Alamat IP Wi-Fi Komputer Anda (contoh: 192.168.0.102):", current);
+    if (newIp && newIp.trim()) {
+        localStorage.setItem("iggo_server_ip", newIp.trim());
+        updateDisplayServerIp();
+        if (currentMemberData) renderCard(currentMemberData);
+        alert("Alamat IP Host QR berhasil diubah ke: " + newIp.trim() + ":3000\nQR Code kartu member otomatis diperbarui!");
     }
+}
+
+function updateDisplayServerIp() {
+    const el = document.getElementById("displayServerIp");
+    if (el) {
+        const savedIp = localStorage.getItem("iggo_server_ip") || CONFIG.SERVER_IP || "192.168.0.102";
+        el.textContent = `${savedIp}:3000`;
+    }
+}
+
+function copyPassLink() {
+    if (!currentMemberData) return;
+    const baseOrigin = getServerOrigin();
+    const targetUrl = `${baseOrigin}${window.location.pathname}?id=${encodeURIComponent(currentMemberData.idMember)}&view=pass#portalCek`;
+    navigator.clipboard.writeText(targetUrl).then(() => {
+        alert("Tautan Sistem VIP Pass berhasil disalin ke clipboard:\n" + targetUrl);
+    }).catch(() => {
+        prompt("Salin tautan ini:", targetUrl);
+    });
 }
 
 // Safe DOM Setters (Mencegah runtime crash jika salah satu ID DOM absen)
@@ -71,6 +89,8 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function initApp() {
+    updateDisplayServerIp();
+
     // Set default tanggal pendaftaran ke hari ini (YYYY-MM-DD)
     const today = new Date().toISOString().split("T")[0];
     const tglInput = document.getElementById("regTanggal");
@@ -432,35 +452,45 @@ function renderCard(m) {
     setElText("printCardBackId", "ID: " + m.idMember);
     setElText("printCardBackNama", m.nama);
 
-    // QR Code Generator (Teks Biodata Langsung ATAU Tautan Web VIP Pass)
-    let qrPayload = "";
-    if (qrCodeMode === "text") {
-        // Mode 1 (Rekomendasi Utama): Teks Biodata Member
-        // Langsung muncul di layar kamera HP (iOS & Android) tanpa buka web, bebas error "Situs tidak dapat dijangkau"
-        qrPayload = `✨ KARTU MEMBER VIP IGGO KULINER ✨\n` +
-                    `--------------------------------\n` +
-                    `ID MEMBER : ${m.idMember || "-"}\n` +
-                    `NAMA      : ${m.nama || "-"}\n` +
-                    `NO. HP    : ${m.hp || "-"}\n` +
-                    `ALAMAT    : ${m.alamat || "-"}\n` +
-                    `TOTAL CAP : ${effectiveCap} / 10 Stempel\n` +
-                    `TERDAFTAR : ${m.tanggal || "-"}\n` +
-                    `STATUS    : VIP GOLD PASS (AKTIF)\n` +
-                    `--------------------------------\n` +
-                    `Resto Iwan Goreng-Goreng • Since 2005`;
-    } else {
-        // Mode 2: Tautan Web VIP Pass
-        let baseOrigin = window.location.origin;
-        if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "[::]") {
-            // Gunakan IP lokal yang aktif saat ini (192.168.0.102)
-            baseOrigin = "http://192.168.0.102:3000";
-        }
-        qrPayload = `${baseOrigin}${window.location.pathname}?id=${encodeURIComponent(m.idMember)}&view=pass#portalCek`;
-    }
+    // QR Code System Pass URL Generator (Buka Sistem Web VIP Pass & Tampilkan Total Cap)
+    const baseOrigin = getServerOrigin();
+    const targetUrl = `${baseOrigin}${window.location.pathname}?id=${encodeURIComponent(m.idMember)}&view=pass#portalCek`;
 
     // margin=8 & ecc=M memberikan zona putih (quiet zone) dan koreksi kesalahan agar instan terbaca kamera HP
-    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=8&ecc=M&data=${encodeURIComponent(qrPayload)}`;
+    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=8&ecc=M&data=${encodeURIComponent(targetUrl)}`;
     setElSrc("printCardQr", qrApiUrl);
+
+    // Update link preview & test button
+    const testLink = document.getElementById("btnTestPassUrl");
+    if (testLink) {
+        testLink.href = targetUrl;
+    }
+    const qrPreviewLink = document.getElementById("qrPreviewUrl");
+    if (qrPreviewLink) {
+        qrPreviewLink.textContent = targetUrl;
+    }
+
+    // Live VIP Pass Status (Tampil Khusus Saat Di-Scan di HP atau Mode Pass)
+    setElText("passLiveNama", m.nama);
+    setElText("passLiveId", "ID: " + m.idMember);
+    setElText("passLiveCapCount", effectiveCap);
+    const passProgress = document.getElementById("passLiveProgressBar");
+    if (passProgress) {
+        passProgress.style.width = Math.min(100, (effectiveCap / 10) * 100) + "%";
+    }
+    const passRewardBadge = document.getElementById("passRewardBadge");
+    if (passRewardBadge) {
+        if (effectiveCap >= 10) {
+            passRewardBadge.className = "bg-amber-400 text-stone-900 border-2 border-yellow-300 px-3.5 py-2 rounded-xl text-xs font-black shadow-md";
+            passRewardBadge.innerHTML = "👑 Hadiah Siap Klaim: Diskon 50% All Menu!";
+        } else if (effectiveCap >= 5) {
+            passRewardBadge.className = "bg-amber-500/20 text-yellow-200 border border-yellow-300/40 px-3.5 py-2 rounded-xl text-xs font-bold";
+            passRewardBadge.innerHTML = `🍹 Free Es Teh Jumbo Aktif • Sisa ${10 - effectiveCap} cap menuju Diskon 50%`;
+        } else {
+            passRewardBadge.className = "bg-white/10 text-stone-200 border border-white/20 px-3.5 py-2 rounded-xl text-xs font-medium";
+            passRewardBadge.innerHTML = `🎯 Sisa ${5 - effectiveCap} stempel lagi menuju Free Es Teh Jumbo`;
+        }
+    }
 
     // --- BAGIAN 2: KARTU LOYALITAS (LOYALTY STAMP CARD - 10 CAP) ---
     setElText("loyaltyNama", m.nama);

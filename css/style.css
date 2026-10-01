@@ -225,3 +225,15 @@ body.member-pass-mode #portalCek {
     padding-top: 1.25rem !important;
     padding-bottom: 2.5rem !important;
 }
+
+.pass-only {
+    display: none !important;
+}
+
+body.member-pass-mode .pass-only {
+    display: block !important;
+}
+
+body.member-pass-mode .pass-hide {
+    display: none !important;
+}

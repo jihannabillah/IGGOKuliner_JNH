@@ -56,7 +56,7 @@
     </script>
 
     <!-- External Custom Stylesheet (Modular Architecture) -->
-    <link rel="stylesheet" href="css/style.css?v=2.6">
+    <link rel="stylesheet" href="css/style.css?v=2.7">
 </head>
 
 <body class="bg-iggo-cream text-iggo-dark font-sans antialiased selection:bg-iggo-maroon selection:text-white">
@@ -548,9 +548,9 @@
             <!-- HASIL PENCARIAN ANGGOTA -->
             <div id="portalContent" class="hidden space-y-10">
 
-                <!-- STATUS DATABASE -->
+                <!-- STATUS DATABASE (PASS-HIDE) -->
                 <div
-                    class="no-print flex items-center justify-between bg-green-50 border border-green-200 px-4 py-2.5 rounded-xl text-green-800 text-xs">
+                    class="no-print pass-hide flex items-center justify-between bg-green-50 border border-green-200 px-4 py-2.5 rounded-xl text-green-800 text-xs">
                     <span class="flex items-center gap-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
                         <span><strong>Database Terkoneksi:</strong> Data anggota aktif & tersinkronisasi secara
@@ -559,6 +559,70 @@
                     <button onclick="searchMember()" class="text-green-700 hover:underline font-bold text-[11px]">
                         🔄 Refresh Data
                     </button>
+                </div>
+
+                <!-- DEDICATED LIVE STATUS TOTAL CAP (MUNCUL OTOMATIS SAAT KARTU DI-SCAN) -->
+                <div id="memberPassLiveStatus" class="pass-only">
+                    <div class="bg-gradient-to-br from-[#2A0505] via-iggo-maroon to-[#150202] text-white rounded-3xl p-6 sm:p-8 shadow-luxury gold-card-border relative overflow-hidden">
+                        <div class="card-geometric-pattern"></div>
+                        
+                        <div class="relative z-10 space-y-5">
+                            <!-- Top Verification Badge -->
+                            <div class="flex items-center justify-between border-b border-white/15 pb-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-yellow-300">
+                                        Member Terverifikasi • Status VIP Aktif
+                                    </span>
+                                </div>
+                                <span class="font-mono text-xs text-yellow-200 font-bold bg-black/40 px-2.5 py-1 rounded-md border border-white/10" id="passLiveId">-</span>
+                            </div>
+
+                            <!-- Greeting & Customer Name -->
+                            <div>
+                                <span class="text-xs text-stone-300 uppercase tracking-wider block">Selamat Datang, Pelanggan Setia:</span>
+                                <h3 class="font-serif text-2xl sm:text-4xl font-extrabold text-white mt-1 capitalize gold-emboss" id="passLiveNama">-</h3>
+                            </div>
+
+                            <!-- HIGHLIGHT UTAMA: TOTAL CAP TERKUMPUL SAAT INI -->
+                            <div class="bg-black/45 backdrop-blur-md rounded-2xl p-5 border border-yellow-400/30">
+                                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                                    <div>
+                                        <span class="text-[10px] sm:text-[11px] uppercase font-bold text-yellow-300 tracking-widest block">
+                                            🎯 TOTAL STEMPEL ANDA SAAT INI:
+                                        </span>
+                                        <div class="text-3xl sm:text-5xl font-black font-mono text-yellow-300 mt-1 flex items-center justify-center sm:justify-start gap-2">
+                                            <span id="passLiveCapCount">0</span>
+                                            <span class="text-sm sm:text-lg text-stone-300 font-normal">/ 10 Stempel</span>
+                                        </div>
+                                    </div>
+                                    <div id="passRewardBadge" class="bg-amber-400/20 text-yellow-200 border border-yellow-300/40 px-4 py-2.5 rounded-xl text-xs font-semibold max-w-sm">
+                                        Memuat status reward...
+                                    </div>
+                                </div>
+
+                                <!-- Progress Bar Stempel -->
+                                <div class="mt-5">
+                                    <div class="w-full bg-white/10 rounded-full h-3.5 overflow-hidden p-0.5 border border-white/20">
+                                        <div id="passLiveProgressBar" class="bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 h-full rounded-full transition-all duration-700 shadow-sm" style="width: 0%"></div>
+                                    </div>
+                                    <div class="flex justify-between text-[9px] sm:text-[10px] text-stone-300 mt-2 font-mono">
+                                        <span>0 Cap (Mulai)</span>
+                                        <span class="text-yellow-300">Cap 5: Free Es Teh</span>
+                                        <span class="text-yellow-300">Cap 10: Diskon 50%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Footer Instruction -->
+                            <div class="flex flex-wrap items-center justify-between text-[10px] sm:text-[11px] text-stone-300 border-t border-white/15 pt-3 gap-2">
+                                <span class="flex items-center gap-1.5">
+                                    <span>🍽️</span> <span>Tunjukkan layar ini saat pembayaran di kasir untuk klaim stempel & reward.</span>
+                                </span>
+                                <span class="text-yellow-300 font-semibold bg-white/10 px-2 py-0.5 rounded">1 Makan = 1 Cap</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- ============================================================== -->
@@ -748,8 +812,8 @@
 
                     </div>
 
-                    <!-- TOMBOL AKSI CETAK & UNDUH KARTU MEMBER -->
-                    <div class="no-print mt-6 flex flex-wrap justify-center gap-3">
+                    <!-- TOMBOL AKSI CETAK & UNDUH KARTU MEMBER (PASS-HIDE) -->
+                    <div class="no-print pass-hide mt-6 flex flex-wrap justify-center gap-3">
                         <button onclick="printMemberCard()"
                             class="bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight hover:brightness-110 text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-md transition flex items-center gap-2">
                             <span>🖨️</span> Cetak Kartu Member (Print / PDF)
@@ -764,23 +828,31 @@
                         </button>
                     </div>
 
-                    <!-- PILIHAN FORMAT OUTPUT QR CODE -->
-                    <div class="no-print mt-5 bg-amber-50/60 border border-amber-200/80 rounded-2xl p-4 max-w-lg mx-auto text-center shadow-xs">
-                        <div class="text-[11px] font-bold text-stone-700 flex items-center justify-center gap-1.5 mb-2.5">
-                            <span>📲</span> <span>Format Hasil Saat QR Di-Scan Kamera HP:</span>
+                    <!-- STATUS TAUTAN QR & HOST SERVER (PASS-HIDE) -->
+                    <div class="no-print pass-hide mt-5 bg-amber-50/70 border border-amber-200/80 rounded-2xl p-4 max-w-xl mx-auto shadow-xs">
+                        <div class="flex items-center justify-between text-xs font-bold text-stone-700 mb-2">
+                            <span class="flex items-center gap-1.5">
+                                <span>📲</span> <span>Tautan Sistem QR Code (Saat Di-Scan):</span>
+                            </span>
+                            <div class="flex items-center gap-1">
+                                <button type="button" onclick="changeServerIp()" class="text-iggo-maroon bg-white hover:bg-stone-100 border border-stone-200 text-[10px] px-2.5 py-1 rounded-lg transition font-semibold flex items-center gap-1 shadow-2xs">
+                                    <span>✏️</span> Ubah IP Host (<span id="displayServerIp">192.168.0.102:3000</span>)
+                                </button>
+                            </div>
                         </div>
-                        <div class="flex flex-wrap justify-center gap-2">
-                            <button type="button" id="btnQrModeText" onclick="setQrMode('text')"
-                                class="bg-iggo-maroon text-white font-bold text-[11px] px-3.5 py-2 rounded-xl transition shadow-sm flex items-center gap-1.5">
-                                <span>📄</span> Teks Biodata Saja (Offline & Cepat)
-                            </button>
-                            <button type="button" id="btnQrModeUrl" onclick="setQrMode('url')"
-                                class="bg-white hover:bg-stone-100 text-stone-700 font-semibold text-[11px] px-3.5 py-2 rounded-xl border border-stone-200 transition flex items-center gap-1.5">
-                                <span>🌐</span> Tautan Web VIP Pass
-                            </button>
+                        <div class="bg-white border border-stone-200 rounded-xl p-2.5 flex items-center justify-between gap-2 text-[11px] font-mono text-stone-600">
+                            <span id="qrPreviewUrl" class="truncate">http://192.168.0.102:3000/...</span>
+                            <div class="flex items-center gap-1.5 flex-shrink-0">
+                                <button type="button" onclick="copyPassLink()" class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-2.5 py-1 rounded-md text-[10px] font-sans font-semibold transition">
+                                    📋 Salin
+                                </button>
+                                <a id="btnTestPassUrl" href="#" target="_blank" class="bg-iggo-maroon hover:brightness-110 text-white px-2.5 py-1 rounded-md text-[10px] font-sans font-semibold transition flex items-center gap-1">
+                                    <span>🧪</span> Tes Tampilan HP
+                                </a>
+                            </div>
                         </div>
-                        <p id="qrModeDescription" class="text-[10px] text-stone-500 mt-2 leading-relaxed">
-                            ✅ Mode Aktif: Kamera HP langsung memunculkan biodata member di layar tanpa buka website.
+                        <p class="text-[10px] text-stone-500 mt-2 leading-relaxed text-center">
+                            💡 <strong>Sistem Otomatis:</strong> Kartu cetak fisik tidak memuat jumlah cap. Saat QR di-scan oleh kamera HP, sistem langsung menampilkan total cap dan status hadiah pelanggan secara real-time!
                         </p>
                     </div>
                 </div>
@@ -866,9 +938,9 @@
                     <div id="rewardBanner" class="mt-5 max-w-xl mx-auto rounded-2xl p-4 text-center text-xs shadow-sm">
                     </div>
 
-                    <!-- PANEL SIMULASI KASIR DEMO (UNTUK PRESENTASI DOSEN) -->
+                    <!-- PANEL SIMULASI KASIR DEMO (UNTUK PRESENTASI DOSEN - PASS-HIDE) -->
                     <div
-                        class="max-w-xl mx-auto mt-6 bg-[#FFFDF7] border-2 border-dashed border-iggo-gold/60 rounded-2xl p-4 text-center">
+                        class="pass-hide max-w-xl mx-auto mt-6 bg-[#FFFDF7] border-2 border-dashed border-iggo-gold/60 rounded-2xl p-4 text-center">
                         <span class="text-[10px] font-bold text-iggo-maroon uppercase tracking-widest block mb-1">
                             🛠️ Panel Demo Interaktif Kasir (Uji Coba Presentasi)
                         </span>
@@ -987,7 +1059,7 @@
     </footer>
 
     <!-- EXTERNAL CRM LOGIC ENGINE (MODULAR ARCHITECTURE) -->
-    <script src="js/app.js?v=2.6" defer></script>
+    <script src="js/app.js?v=2.7" defer></script>
 </body>
 
 </html>
