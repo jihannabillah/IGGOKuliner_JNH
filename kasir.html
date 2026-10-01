@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Kasir — IGGO Kuliner CRM</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        iggo: {
+                            maroon: '#6B1414',
+                            maroondark: '#4A0C0C',
+                            maroonlight: '#8B2020',
+                            gold: '#D89624',
+                            goldlight: '#F5BE58',
+                            amber: '#E06D10',
+                            cream: '#FAF6F0',
+                            creambg: '#F5EFE6',
+                            warmborder: '#E8DCC4',
+                            dark: '#1C1917'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        body: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="css/style.css?v=2.7">
+</head>
+
+<body class="bg-stone-100 text-stone-900 font-sans antialiased min-h-screen">
+
+    <!-- TOP NAVBAR KASIR -->
+    <header class="bg-iggo-maroondark text-white border-b-2 border-iggo-gold shadow-md">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="assets/logo-iggo.jpg" alt="Logo" class="w-10 h-10 rounded-full border border-iggo-gold">
+                <div>
+                    <h1 class="font-serif font-black text-base sm:text-lg tracking-wider text-yellow-300 leading-tight">
+                        IGGO KULINER • TERMINAL KASIR
+                    </h1>
+                    <span class="text-[10px] text-stone-300 block">Sistem Validasi & Penambahan Stempel Transaksi</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="hidden sm:inline-flex items-center gap-1.5 bg-green-500/20 text-green-300 border border-green-500/30 px-3 py-1 rounded-full text-xs font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> Kasir Aktif
+                </span>
+                <button onclick="lockTerminal()"
+                    class="bg-white/10 hover:bg-white/20 text-stone-200 text-xs px-3 py-1.5 rounded-lg border border-white/20 transition flex items-center gap-1">
+                    <span>🔒</span> Kunci
+                </button>
+                <a href="index.html"
+                    class="bg-white/10 hover:bg-white/20 text-yellow-300 text-xs px-3 py-1.5 rounded-lg border border-yellow-400/30 transition flex items-center gap-1">
+                    <span>🏠</span> Web
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- PIN SECURITY OVERLAY MODAL -->
+    <div id="pinModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl border-2 border-iggo-warmborder space-y-4">
+            <div class="w-12 h-12 bg-iggo-cream rounded-full flex items-center justify-center mx-auto text-2xl border border-iggo-warmborder">
+                🔐
+            </div>
+            <div>
+                <h2 class="font-serif text-lg font-bold text-iggo-maroon">Otentikasi Staf Kasir</h2>
+                <p class="text-xs text-stone-500 mt-1">Masukkan PIN Kasir untuk membuka terminal operasional:</p>
+            </div>
+            <form onsubmit="handlePinSubmit(event)" class="space-y-3">
+                <input type="password" id="inputPin" maxlength="6" placeholder="Masukkan PIN Kasir"
+                    class="w-full text-center tracking-[0.5em] text-xl font-bold px-4 py-3 bg-stone-50 border-2 border-stone-200 rounded-xl focus:outline-none focus:border-iggo-maroon"
+                    autofocus>
+                <button type="submit"
+                    class="w-full bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight text-white font-bold py-3 rounded-xl shadow-md transition hover:brightness-110 text-sm">
+                    Buka Terminal Kasir
+                </button>
+            </form>
+            <p class="text-[11px] text-stone-400">
+                💡 <em>Default PIN Demo: <strong>1234</strong> atau <strong>2005</strong></em>
+            </p>
+        </div>
+    </div>
+
+    <!-- MAIN TERMINAL CONTENT -->
+    <main class="max-w-5xl mx-auto px-4 py-6 sm:py-8 space-y-6">
+
+        <!-- STEP 1: SCAN OR INPUT ID MEMBER -->
+        <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-sm border border-stone-200 space-y-4">
+            <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+                <div class="flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-full bg-iggo-maroon text-white text-xs font-bold flex items-center justify-center">1</span>
+                    <h2 class="font-serif font-bold text-sm sm:text-base text-iggo-maroon">Cari & Verifikasi Pelanggan</h2>
+                </div>
+                <span class="text-[11px] text-stone-500 font-mono" id="kasirLiveClock">--:--:--</span>
+            </div>
+
+            <!-- Search Form -->
+            <div class="flex flex-col sm:flex-row gap-2.5">
+                <div class="relative flex-1">
+                    <input type="text" id="kasirQuery" placeholder="Ketik ID Member (contoh: JNH-016) atau No. HP..."
+                        class="w-full text-sm px-4 py-3.5 bg-stone-50 border border-stone-300 rounded-xl focus:outline-none focus:border-iggo-maroon font-medium font-mono"
+                        onkeypress="if(event.key==='Enter') kasirSearchMember()">
+                </div>
+                <button onclick="kasirSearchMember()"
+                    class="bg-iggo-maroon hover:bg-iggo-maroondark text-white font-bold px-6 py-3.5 rounded-xl text-sm transition shadow-sm flex items-center justify-center gap-2">
+                    <span>🔍</span> Cari Member
+                </button>
+            </div>
+
+            <!-- Quick Demo Selectors -->
+            <div class="flex items-center gap-2 flex-wrap pt-1 text-xs text-stone-500">
+                <span class="text-[11px] font-semibold text-stone-400">⚡ Demo Cepat:</span>
+                <button onclick="quickKasirSelect('JNH-016')" class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-2.5 py-1 rounded-lg font-mono text-[11px] border border-stone-200 font-semibold transition">
+                    JNH-016 (Jihan)
+                </button>
+                <button onclick="quickKasirSelect('JNH-007')" class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-2.5 py-1 rounded-lg font-mono text-[11px] border border-stone-200 font-semibold transition">
+                    JNH-007 (Novi)
+                </button>
+                <button onclick="quickKasirSelect('JNH-010')" class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-2.5 py-1 rounded-lg font-mono text-[11px] border border-stone-200 font-semibold transition">
+                    JNH-010 (Azza)
+                </button>
+            </div>
+        </div>
+
+        <!-- LOADING INDICATOR -->
+        <div id="kasirLoading" class="hidden text-center py-10">
+            <div class="inline-block animate-spin w-8 h-8 border-3 border-iggo-gold border-t-transparent rounded-full mb-2"></div>
+            <p class="text-xs font-semibold text-stone-600">Mengambil data dari Google Sheets...</p>
+        </div>
+
+        <!-- STEP 2: MEMBER CARD & STAMP CONTROLLER (MUNCUL SETELAH DICARI) -->
+        <div id="kasirResultPanel" class="hidden space-y-6">
+
+            <!-- CUSTOMER INFO & ACTION CARD -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-md border-2 border-iggo-gold/40 relative overflow-hidden">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-stone-200">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-300">
+                                ✅ MEMBER TERVERIFIKASI
+                            </span>
+                            <span id="kasirMemberId" class="font-mono text-xs font-bold text-iggo-maroon bg-stone-100 px-2 py-0.5 rounded border border-stone-300">-</span>
+                        </div>
+                        <h2 id="kasirNama" class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mt-1 capitalize">-</h2>
+                        <p class="text-xs text-stone-500 mt-0.5">
+                            No. HP: <span id="kasirHp" class="font-mono font-semibold text-stone-700">-</span> • 
+                            Terdaftar: <span id="kasirTanggal" class="font-semibold text-stone-700">-</span>
+                        </p>
+                    </div>
+
+                    <!-- TOTAL CAP PROMINENT COUNTER -->
+                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-300 rounded-2xl p-4 sm:p-5 text-center min-w-[200px] shadow-sm">
+                        <span class="text-[10px] font-bold text-amber-900 uppercase tracking-widest block">Total Cap Terkumpul</span>
+                        <div class="text-3xl sm:text-4xl font-black font-mono text-iggo-maroon mt-1">
+                            <span id="kasirCapCount">0</span>
+                            <span class="text-base font-normal text-stone-500">/ 10</span>
+                        </div>
+                        <span id="kasirMilestoneStatus" class="text-[10px] text-amber-800 font-semibold block mt-1">
+                            Memuat status...
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 10-STEMPEL PROGRESS GRID -->
+                <div class="pt-6 space-y-3">
+                    <span class="text-xs font-bold text-stone-700 uppercase tracking-wider block">
+                        🍽️ Visual 10 Stempel Pelanggan:
+                    </span>
+                    <div id="kasirStampsGrid" class="grid grid-cols-5 sm:grid-cols-10 gap-2">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+
+                <!-- KASIR ACTIONS -->
+                <div class="mt-8 pt-6 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-xs text-stone-500 text-center sm:text-left">
+                        <span class="font-bold text-stone-700 block">Aturan Kasir:</span>
+                        <span>1 Struk Transaksi = 1 Tambahan Stempel Kunjungan</span>
+                    </div>
+
+                    <div class="flex items-center gap-3 w-full sm:w-auto">
+                        <button onclick="kasirAddStamp()"
+                            class="flex-1 sm:flex-none bg-gradient-to-r from-iggo-maroon to-iggo-amber hover:brightness-110 text-white font-extrabold text-sm sm:text-base px-8 py-4 rounded-2xl shadow-lg transition flex items-center justify-center gap-2">
+                            <span>➕</span> Tambah 1 Stempel Transaksi
+                        </button>
+                        <button onclick="kasirResetToSheet()" title="Muat Ulang Data Asli Sheet"
+                            class="bg-stone-100 hover:bg-stone-200 text-stone-600 font-bold px-4 py-4 rounded-2xl border border-stone-300 transition text-sm">
+                            🔄
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TRANSACTION LOG (SESI SHIFT INI) -->
+            <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-sm border border-stone-200 space-y-3">
+                <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+                    <h3 class="font-serif font-bold text-sm text-stone-800 flex items-center gap-2">
+                        <span>📜</span> Riwayat Transaksi Shift Kasir
+                    </h3>
+                    <span id="logCount" class="text-xs text-stone-400 font-mono">0 Transaksi</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-stone-50 text-stone-500 text-[10px] uppercase font-bold border-b border-stone-200">
+                            <tr>
+                                <th class="py-2.5 px-3">Waktu</th>
+                                <th class="py-2.5 px-3">ID Member</th>
+                                <th class="py-2.5 px-3">Nama Pelanggan</th>
+                                <th class="py-2.5 px-3">Total Cap</th>
+                                <th class="py-2.5 px-3">Keterangan Reward</th>
+                            </tr>
+                        </thead>
+                        <tbody id="kasirLogTbody" class="divide-y divide-stone-100 font-mono text-[11px]">
+                            <tr id="emptyLogNotice">
+                                <td colspan="5" class="py-6 text-center text-stone-400 font-sans italic">
+                                    Belum ada transaksi stempel pada shift ini.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- CELEBRATION MODAL (REWARD TRIGGER) -->
+    <div id="rewardModal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center shadow-2xl border-4 border-yellow-400 space-y-4 animate-bounce-short">
+            <div id="rewardModalIcon" class="text-5xl">🍹</div>
+            <h3 id="rewardModalTitle" class="font-serif text-xl font-black text-iggo-maroon">Klaim Hadiah Member!</h3>
+            <p id="rewardModalDesc" class="text-xs text-stone-600 leading-relaxed">
+                Pelanggan telah mencapai target stempel!
+            </p>
+            <button onclick="closeRewardModal()"
+                class="w-full bg-iggo-maroon hover:bg-iggo-maroondark text-white font-bold py-3 rounded-xl shadow-md transition text-sm">
+                Oke, Sudah Diberikan ke Pelanggan
+            </button>
+        </div>
+    </footer>
+
+    <!-- SCRIPT LOGIC KASIR -->
+    <script src="js/kasir.js?v=1.0"></script>
+</body>
+
+</html>

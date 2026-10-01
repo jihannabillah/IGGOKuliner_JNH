@@ -62,7 +62,7 @@ function updateDisplayServerIp() {
 function copyPassLink() {
     if (!currentMemberData) return;
     const baseOrigin = getServerOrigin();
-    const targetUrl = `${baseOrigin}${window.location.pathname}?id=${encodeURIComponent(currentMemberData.idMember)}&view=pass#portalCek`;
+    const targetUrl = `${baseOrigin}/pass.html?id=${encodeURIComponent(currentMemberData.idMember)}`;
     navigator.clipboard.writeText(targetUrl).then(() => {
         alert("Tautan Sistem VIP Pass berhasil disalin ke clipboard:\n" + targetUrl);
     }).catch(() => {
@@ -452,9 +452,9 @@ function renderCard(m) {
     setElText("printCardBackId", "ID: " + m.idMember);
     setElText("printCardBackNama", m.nama);
 
-    // QR Code System Pass URL Generator (Buka Sistem Web VIP Pass & Tampilkan Total Cap)
+    // QR Code System Pass URL Generator (Buka Halaman Mobile VIP Pass Pelanggan: pass.html)
     const baseOrigin = getServerOrigin();
-    const targetUrl = `${baseOrigin}${window.location.pathname}?id=${encodeURIComponent(m.idMember)}&view=pass#portalCek`;
+    const targetUrl = `${baseOrigin}/pass.html?id=${encodeURIComponent(m.idMember)}`;
 
     // margin=8 & ecc=M memberikan zona putih (quiet zone) dan koreksi kesalahan agar instan terbaca kamera HP
     const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=8&ecc=M&data=${encodeURIComponent(targetUrl)}`;
