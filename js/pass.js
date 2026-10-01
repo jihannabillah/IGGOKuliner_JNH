@@ -42,6 +42,17 @@ async function loadMemberPass() {
     try {
         const liveMember = await fetchMemberFromSheets(memberId);
         if (liveMember) {
+            // Sinkronisasi Real-Time dengan Server Kasir API
+            try {
+                const apiRes = await fetch(`/api/stamps?id=${encodeURIComponent(memberId)}&_t=${Date.now()}`);
+                const apiData = await apiRes.json();
+                if (apiData && apiData.cap !== null && apiData.cap !== undefined) {
+                    liveMember.totalCap = Number(apiData.cap);
+                }
+            } catch (apiErr) {
+                console.log("Kasir sync API offline, using sheets value:", apiErr);
+            }
+
             saveCachedMember(memberId, liveMember);
             renderPassData(liveMember);
         } else if (!cached) {

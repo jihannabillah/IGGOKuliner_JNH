@@ -141,9 +141,21 @@ async function kasirSearchMember() {
 
         if (found) {
             currentKasirMember = found;
-            // Cek apakah ada penambahan lokal dari sesi kasir
-            const localSaved = localStorage.getItem("iggo_cap_override_" + found.idMember.toLowerCase());
-            currentCapCount = localSaved !== null ? Number(localSaved) : found.totalCap;
+            let finalCap = found.totalCap;
+            try {
+                const apiRes = await fetch(`/api/stamps?id=${encodeURIComponent(found.idMember)}&_t=${Date.now()}`);
+                const apiData = await apiRes.json();
+                if (apiData && apiData.cap !== null && apiData.cap !== undefined) {
+                    finalCap = Number(apiData.cap);
+                } else {
+                    const localSaved = localStorage.getItem("iggo_cap_override_" + found.idMember.toLowerCase());
+                    if (localSaved !== null) finalCap = Number(localSaved);
+                }
+            } catch (e) {
+                const localSaved = localStorage.getItem("iggo_cap_override_" + found.idMember.toLowerCase());
+                if (localSaved !== null) finalCap = Number(localSaved);
+            }
+            currentCapCount = finalCap;
             renderKasirMember();
             if (result) result.classList.remove("hidden");
         } else {
@@ -209,32 +221,44 @@ function renderKasirMember() {
     }
 }
 
-// 3. ACTION: TAMBAH 1 STEMPEL TRANSAKSI
-function kasirAddStamp() {
+// 3. ACTION: TAMBAH 1 STEMPEL TRANSAKSI (SINKRON REAL-TIME DENGAN SERVER & HP)
+async function kasirAddStamp() {
     if (!currentKasirMember) return;
+    const memberId = currentKasirMember.idMember.toLowerCase();
 
     if (currentCapCount >= 10) {
         if (!confirm("Pelanggan ini sudah mencapai 10 cap (Maksimal). Apakah Anda ingin mereset siklus loyalty kartu ini?")) {
             return;
         }
         currentCapCount = 0;
+        try {
+            await fetch("/api/stamps", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: memberId, action: "set", value: 0 })
+            });
+        } catch (e) {}
     }
 
     currentCapCount++;
 
-    // Simpan ke localStorage agar view pass pelanggan juga langsung terupdate secara real-time
-    localStorage.setItem("iggo_cap_override_" + currentKasirMember.idMember.toLowerCase(), currentCapCount);
-
-    // Update pass cache
-    const passCacheKey = "iggo_member_pass_cache_" + currentKasirMember.idMember.toLowerCase();
+    // 1. Simpan Real-Time ke Server API (Sinkron langsung ke HP Pelanggan saat scan QR!)
     try {
-        const raw = localStorage.getItem(passCacheKey);
-        if (raw) {
-            const parsed = JSON.parse(raw);
-            parsed.totalCap = currentCapCount;
-            localStorage.setItem(passCacheKey, JSON.stringify(parsed));
+        const res = await fetch("/api/stamps", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: memberId, action: "set", value: currentCapCount })
+        });
+        const data = await res.json();
+        if (data && data.success) {
+            currentCapCount = data.cap;
         }
-    } catch (e) {}
+    } catch (e) {
+        console.warn("Gagal simpan ke server sync API:", e);
+    }
+
+    // 2. Simpan ke localStorage cadangan
+    localStorage.setItem("iggo_cap_override_" + memberId, currentCapCount);
 
     renderKasirMember();
 
@@ -251,10 +275,18 @@ function kasirAddStamp() {
     addTransactionToLog(currentKasirMember.idMember, currentKasirMember.nama, currentCapCount, rewardNotice);
 }
 
-function kasirResetToSheet() {
+async function kasirResetToSheet() {
     if (!currentKasirMember) return;
+    const memberId = currentKasirMember.idMember.toLowerCase();
     if (confirm("Reset stempel member " + currentKasirMember.nama + " kembali ke data awal spreadsheet?")) {
-        localStorage.removeItem("iggo_cap_override_" + currentKasirMember.idMember.toLowerCase());
+        try {
+            await fetch("/api/stamps", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: memberId, action: "reset" })
+            });
+        } catch (e) {}
+        localStorage.removeItem("iggo_cap_override_" + memberId);
         currentCapCount = currentKasirMember.totalCap;
         renderKasirMember();
         alert("Data stempel berhasil di-reset ke nilai asli Google Sheets.");
