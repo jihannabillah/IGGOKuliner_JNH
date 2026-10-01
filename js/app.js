@@ -29,6 +29,28 @@ const CONFIG = {
 let currentMemberData = null;
 let isFormSubmitted = false;
 let simulatedStampCount = null;
+let qrCodeMode = "text"; // Default: "text" (Hanya Data Customer) atau "url" (Tautan Web)
+
+function setQrMode(mode) {
+    qrCodeMode = mode;
+    const btnText = document.getElementById("btnQrModeText");
+    const btnUrl = document.getElementById("btnQrModeUrl");
+    const desc = document.getElementById("qrModeDescription");
+    if (btnText && btnUrl) {
+        if (mode === "text") {
+            btnText.className = "bg-iggo-maroon text-white font-bold text-[11px] px-3.5 py-2 rounded-xl transition shadow-sm flex items-center gap-1.5";
+            btnUrl.className = "bg-white hover:bg-stone-100 text-stone-700 font-semibold text-[11px] px-3.5 py-2 rounded-xl border border-stone-200 transition flex items-center gap-1.5";
+            if (desc) desc.textContent = "✅ Mode Aktif: Kamera HP langsung memunculkan biodata member di layar tanpa buka website.";
+        } else {
+            btnUrl.className = "bg-iggo-maroon text-white font-bold text-[11px] px-3.5 py-2 rounded-xl transition shadow-sm flex items-center gap-1.5";
+            btnText.className = "bg-white hover:bg-stone-100 text-stone-700 font-semibold text-[11px] px-3.5 py-2 rounded-xl border border-stone-200 transition flex items-center gap-1.5";
+            if (desc) desc.textContent = "🌐 Mode Aktif: Kamera HP membuka tautan web VIP Member Pass di browser.";
+        }
+    }
+    if (currentMemberData) {
+        renderCard(currentMemberData);
+    }
+}
 
 // Safe DOM Setters (Mencegah runtime crash jika salah satu ID DOM absen)
 function setElText(id, text) {
@@ -410,15 +432,34 @@ function renderCard(m) {
     setElText("printCardBackId", "ID: " + m.idMember);
     setElText("printCardBackNama", m.nama);
 
-    // QR Code URL Generator (Dapat di-scan kamera HP & Kasir)
-    let baseOrigin = window.location.origin;
-    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "[::]") {
-        // Gunakan IP Wi-Fi lokal agar smartphone dalam jaringan yang sama bisa langsung membukanya
-        baseOrigin = "http://192.168.0.118:3000";
+    // QR Code Generator (Teks Biodata Langsung ATAU Tautan Web VIP Pass)
+    let qrPayload = "";
+    if (qrCodeMode === "text") {
+        // Mode 1 (Rekomendasi Utama): Teks Biodata Member
+        // Langsung muncul di layar kamera HP (iOS & Android) tanpa buka web, bebas error "Situs tidak dapat dijangkau"
+        qrPayload = `✨ KARTU MEMBER VIP IGGO KULINER ✨\n` +
+                    `--------------------------------\n` +
+                    `ID MEMBER : ${m.idMember || "-"}\n` +
+                    `NAMA      : ${m.nama || "-"}\n` +
+                    `NO. HP    : ${m.hp || "-"}\n` +
+                    `ALAMAT    : ${m.alamat || "-"}\n` +
+                    `TOTAL CAP : ${effectiveCap} / 10 Stempel\n` +
+                    `TERDAFTAR : ${m.tanggal || "-"}\n` +
+                    `STATUS    : VIP GOLD PASS (AKTIF)\n` +
+                    `--------------------------------\n` +
+                    `Resto Iwan Goreng-Goreng • Since 2005`;
+    } else {
+        // Mode 2: Tautan Web VIP Pass
+        let baseOrigin = window.location.origin;
+        if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "[::]") {
+            // Gunakan IP lokal yang aktif saat ini (192.168.0.102)
+            baseOrigin = "http://192.168.0.102:3000";
+        }
+        qrPayload = `${baseOrigin}${window.location.pathname}?id=${encodeURIComponent(m.idMember)}&view=pass#portalCek`;
     }
-    const targetUrl = baseOrigin + window.location.pathname + "?id=" + encodeURIComponent(m.idMember) + "&view=pass#portalCek";
+
     // margin=8 & ecc=M memberikan zona putih (quiet zone) dan koreksi kesalahan agar instan terbaca kamera HP
-    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=8&ecc=M&data=${encodeURIComponent(targetUrl)}`;
+    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=8&ecc=M&data=${encodeURIComponent(qrPayload)}`;
     setElSrc("printCardQr", qrApiUrl);
 
     // --- BAGIAN 2: KARTU LOYALITAS (LOYALTY STAMP CARD - 10 CAP) ---
