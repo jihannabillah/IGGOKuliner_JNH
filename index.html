@@ -56,7 +56,7 @@
     </script>
 
     <!-- External Custom Stylesheet (Modular Architecture) -->
-    <link rel="stylesheet" href="css/style.css?v=2.7">
+    <link rel="stylesheet" href="css/style.css?v=3.0">
 </head>
 
 <body class="bg-iggo-cream text-iggo-dark font-sans antialiased selection:bg-iggo-maroon selection:text-white">
@@ -97,38 +97,39 @@
     <!-- MAIN NAVBAR (HIDDEN IN PRINT & MEMBER PASS) -->
     <nav
         class="landing-page-only no-print sticky top-0 z-50 bg-[#FDF9F3]/95 backdrop-blur-md border-b border-iggo-warmborder shadow-sm">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div class="max-w-6xl mx-auto px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between gap-2">
             <!-- Brand Logo & Title -->
-            <a href="#" class="flex items-center gap-3 group">
+            <a href="#" class="flex items-center gap-2 sm:gap-3 group flex-shrink-0">
                 <img src="assets/logo-iggo.jpg" alt="Logo IGGO Kuliner"
-                    class="w-11 h-11 rounded-full object-cover border-2 border-iggo-gold shadow-sm group-hover:scale-105 transition-transform">
+                    class="w-9 h-9 sm:w-11 sm:h-11 rounded-full object-cover border-2 border-iggo-gold shadow-sm group-hover:scale-105 transition-transform">
                 <div>
                     <span
-                        class="font-cinzel font-extrabold text-lg sm:text-xl text-iggo-maroon tracking-wider block leading-none">
+                        class="font-cinzel font-extrabold text-sm sm:text-xl text-iggo-maroon tracking-wider block leading-none">
                         IGGO KULINER
                     </span>
                     <span
-                        class="text-[10px] sm:text-[11px] font-semibold text-iggo-gold block tracking-widest uppercase mt-0.5">
-                        Iwan Goreng-Goreng • Since 2005
+                        class="text-[8px] sm:text-[11px] font-semibold text-iggo-gold block tracking-widest uppercase mt-0.5">
+                        Since 2005
                     </span>
                 </div>
             </a>
 
-            <!-- Navigation Links -->
-            <div class="flex items-center gap-2 sm:gap-3 text-xs font-semibold">
+            <!-- Navigation Links (Compact on Mobile) -->
+            <div class="flex items-center gap-1.5 sm:gap-2.5 text-xs font-semibold flex-shrink-0">
                 <a href="#menu" class="text-iggo-charcoal hover:text-iggo-maroon hidden lg:inline-block transition">Menu</a>
                 <a href="#keuntungan" class="text-iggo-charcoal hover:text-iggo-maroon hidden md:inline-block transition">Loyalty 10 Cap</a>
                 <a href="#daftar"
-                    class="text-iggo-maroon border border-iggo-maroon/30 hover:bg-iggo-maroon hover:text-white px-3 py-1.5 rounded-full transition shadow-2xs">
-                    Daftar Member
+                    class="text-iggo-maroon border border-iggo-maroon/30 hover:bg-iggo-maroon hover:text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full transition text-[11px] sm:text-xs">
+                    <span class="hidden sm:inline">Daftar Member</span>
+                    <span class="sm:hidden">+ Daftar</span>
                 </a>
                 <a href="kasir.html"
-                    class="bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 px-3 py-1.5 rounded-full transition shadow-2xs flex items-center gap-1 font-bold">
-                    <span>🛒</span> Kasir
+                    class="bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full transition flex items-center gap-1 font-bold text-[11px] sm:text-xs">
+                    <span>🛒</span> <span class="hidden sm:inline">Kasir</span>
                 </a>
                 <a href="admin.html"
-                    class="bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight text-white px-3.5 py-1.5 rounded-full transition shadow-sm hover:brightness-110 flex items-center gap-1 font-bold">
-                    <span>👑</span> Admin Resto
+                    class="bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight text-white px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full transition shadow-xs hover:brightness-110 flex items-center gap-1 font-bold text-[11px] sm:text-xs">
+                    <span>👑</span> <span class="hidden sm:inline">Admin Resto</span>
                 </a>
             </div>
         </div>
@@ -139,14 +140,14 @@
         class="landing-page-only no-print relative overflow-hidden pt-10 pb-14 sm:py-16 bg-gradient-to-b from-iggo-creambg via-iggo-cream to-white border-b border-iggo-warmborder">
         <div class="max-w-5xl mx-auto px-4 text-center relative z-10">
             <div
-                class="inline-flex items-center gap-2 bg-white/80 border border-iggo-gold/40 px-4 py-1.5 rounded-full shadow-sm mb-5">
-                <span class="w-2 h-2 rounded-full bg-iggo-gold animate-ping"></span>
-                <span class="text-[11px] font-bold text-iggo-maroon tracking-wider uppercase">
-                    Kuliner Khas Nusantara Sejak 2005
+                class="inline-flex items-center gap-2 bg-white/90 border border-amber-300 px-4 py-1.5 rounded-full shadow-xs mb-5">
+                <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+                <span class="text-[11px] font-extrabold text-iggo-maroon tracking-wider uppercase flex items-center gap-1.5">
+                    <span>🍤</span> Spesialis Seafood & Iwan Goreng-Goreng • Sejak 2005 <span>🦀</span>
                 </span>
             </div>
 
-            <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-extrabold text-iggo-maroon leading-tight">
+            <h1 class="font-serif text-2xl sm:text-5xl md:text-6xl font-extrabold text-iggo-maroon leading-tight">
                 Sensasi Renyah Gurih Nusantara,<br>
                 <span
                     class="text-transparent bg-clip-text bg-gradient-to-r from-iggo-maroon via-iggo-amber to-iggo-gold">
@@ -154,55 +155,53 @@
                 </span>
             </h1>
 
-            <p class="text-sm sm:text-base text-stone-600 mt-5 max-w-2xl mx-auto leading-relaxed font-normal">
-                Selamat datang di Rumah Makan <strong>IGGO Kuliner (Iwan Goreng-Goreng)</strong>. Dapatkan <strong>Kartu
-                    Member VIP Modern Eksklusif</strong> serta kumpulkan <strong>10 Stempel Loyalitas Kunjungan</strong>
-                Anda untuk menikmati beragam traktiran istimewa!
+            <p class="text-xs sm:text-base text-stone-600 mt-3 sm:mt-5 max-w-2xl mx-auto leading-relaxed font-normal">
+                Selamat datang di Rumah Makan <strong>IGGO Kuliner (Iwan Goreng-Goreng)</strong> — Spesialis Olahan Seafood & Aneka Masakan Renyah Nusantara. Dapatkan <strong>Kartu Member VIP Spesial Seafood</strong> serta kumpulkan <strong>10 Stempel Loyalitas Kunjungan</strong> Anda untuk menikmati beragam traktiran istimewa!
             </p>
 
-            <div class="mt-8 flex flex-wrap justify-center gap-3.5">
+            <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center gap-2.5 sm:gap-3.5 max-w-md mx-auto">
                 <a href="#portalCek"
-                    class="bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight hover:brightness-110 text-white text-xs sm:text-sm font-bold px-7 py-3.5 rounded-xl shadow-luxury transition transform hover:-translate-y-0.5 flex items-center gap-2">
+                    class="w-full sm:w-auto bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight hover:brightness-110 text-white text-xs sm:text-sm font-bold px-6 py-3 sm:py-3.5 rounded-xl shadow-luxury transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
                     <span>💳</span> Cetak & Periksa Kartu Saya
                 </a>
                 <a href="#daftar"
-                    class="bg-white border-2 border-iggo-gold text-iggo-maroon hover:bg-iggo-creambg text-xs sm:text-sm font-bold px-7 py-3.5 rounded-xl shadow-sm transition transform hover:-translate-y-0.5 flex items-center gap-2">
+                    class="w-full sm:w-auto bg-white border-2 border-iggo-gold text-iggo-maroon hover:bg-iggo-creambg text-xs sm:text-sm font-bold px-6 py-3 sm:py-3.5 rounded-xl shadow-sm transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
                     <span>📝</span> Daftar VIP Member (Gratis)
                 </a>
             </div>
 
             <!-- Quick CRM Highlights -->
-            <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto text-left">
+            <div class="mt-8 sm:mt-10 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 max-w-3xl mx-auto text-left">
                 <div
-                    class="bg-white/90 border border-iggo-warmborder p-3.5 rounded-2xl shadow-sm flex items-center gap-3">
-                    <span class="text-2xl">💳</span>
+                    class="bg-white/90 border border-iggo-warmborder p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl shadow-sm flex items-center gap-2 sm:gap-3">
+                    <span class="text-xl sm:text-2xl">💳</span>
                     <div>
-                        <span class="block text-[11px] font-bold text-iggo-maroon">Kartu VIP Modern</span>
-                        <span class="block text-[10px] text-stone-500">Desain Gold & Maroon</span>
+                        <span class="block text-[10px] sm:text-[11px] font-bold text-iggo-maroon">Kartu VIP</span>
+                        <span class="block text-[9px] sm:text-[10px] text-stone-500">Gold & Maroon</span>
                     </div>
                 </div>
                 <div
-                    class="bg-white/90 border border-iggo-warmborder p-3.5 rounded-2xl shadow-sm flex items-center gap-3">
-                    <span class="text-2xl">🎫</span>
+                    class="bg-white/90 border border-iggo-warmborder p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl shadow-sm flex items-center gap-2 sm:gap-3">
+                    <span class="text-xl sm:text-2xl">🎫</span>
                     <div>
-                        <span class="block text-[11px] font-bold text-iggo-maroon">Loyalty Stamp Card</span>
-                        <span class="block text-[10px] text-stone-500">10 Stempel Terpisah</span>
+                        <span class="block text-[10px] sm:text-[11px] font-bold text-iggo-maroon">Loyalty Card</span>
+                        <span class="block text-[9px] sm:text-[10px] text-stone-500">10 Stempel</span>
                     </div>
                 </div>
                 <div
-                    class="bg-white/90 border border-iggo-warmborder p-3.5 rounded-2xl shadow-sm flex items-center gap-3">
-                    <span class="text-2xl">🍹</span>
+                    class="bg-white/90 border border-iggo-warmborder p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl shadow-sm flex items-center gap-2 sm:gap-3">
+                    <span class="text-xl sm:text-2xl">🍹</span>
                     <div>
-                        <span class="block text-[11px] font-bold text-iggo-maroon">Cap ke-5 Free</span>
-                        <span class="block text-[10px] text-stone-500">Es Teh Jumbo Segar</span>
+                        <span class="block text-[10px] sm:text-[11px] font-bold text-iggo-maroon">Cap ke-5 Free</span>
+                        <span class="block text-[9px] sm:text-[10px] text-stone-500">Es Teh Jumbo</span>
                     </div>
                 </div>
                 <div
-                    class="bg-white/90 border border-iggo-warmborder p-3.5 rounded-2xl shadow-sm flex items-center gap-3">
-                    <span class="text-2xl">👑</span>
+                    class="bg-white/90 border border-iggo-warmborder p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl shadow-sm flex items-center gap-2 sm:gap-3">
+                    <span class="text-xl sm:text-2xl">👑</span>
                     <div>
-                        <span class="block text-[11px] font-bold text-iggo-maroon">Cap ke-10 Hadiah</span>
-                        <span class="block text-[10px] text-stone-500">Diskon 50% All Menu</span>
+                        <span class="block text-[10px] sm:text-[11px] font-bold text-iggo-maroon">Cap ke-10</span>
+                        <span class="block text-[9px] sm:text-[10px] text-stone-500">Diskon 50%</span>
                     </div>
                 </div>
             </div>
@@ -343,15 +342,15 @@
     </section>
 
     <!-- SECTION REGISTRASI MANDIRI (HIDDEN IN PRINT & MEMBER PASS) -->
-    <section id="daftar" class="landing-page-only no-print max-w-3xl mx-auto px-4 py-10">
+    <section id="daftar" class="landing-page-only no-print max-w-3xl mx-auto px-3 sm:px-4 py-8 sm:py-10">
         <div
-            class="bg-white rounded-3xl p-6 sm:p-9 shadow-luxury border-2 border-iggo-warmborder relative overflow-hidden">
-            <div class="text-center mb-7">
+            class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-9 shadow-luxury border-2 border-iggo-warmborder relative overflow-hidden">
+            <div class="text-center mb-6 sm:mb-7">
                 <span
-                    class="text-[10px] tracking-[0.2em] font-bold text-iggo-maroon uppercase bg-iggo-creambg px-3 py-1 rounded-full border border-iggo-warmborder">
+                    class="text-[9px] sm:text-[10px] tracking-[0.2em] font-bold text-iggo-maroon uppercase bg-iggo-creambg px-3 py-1 rounded-full border border-iggo-warmborder">
                     Formulir Pendaftaran Member
                 </span>
-                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-iggo-maroon mt-2">Daftar VIP Member IGGO
+                <h2 class="font-serif text-xl sm:text-3xl font-bold text-iggo-maroon mt-2">Daftar VIP Member IGGO
                     Kuliner</h2>
                 <p class="text-xs sm:text-sm text-stone-600 mt-1 max-w-lg mx-auto">
                     Daftar langsung di bawah ini tanpa perlu login akun Google. Kartu Member Anda akan langsung terbit
@@ -360,13 +359,13 @@
             </div>
 
             <!-- Tab Switcher -->
-            <div class="flex justify-center gap-2 mb-6">
+            <div class="flex flex-col sm:flex-row justify-center gap-2 mb-6">
                 <button type="button" onclick="switchFormTab('native')" id="tabBtnNative"
-                    class="bg-iggo-maroon text-white text-xs font-bold px-4 py-2 rounded-xl transition shadow-sm">
+                    class="w-full sm:w-auto bg-iggo-maroon text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-sm text-center">
                     ⚡ Formulir Cepat di Web (Rekomendasi)
                 </button>
                 <button type="button" onclick="switchFormTab('gform')" id="tabBtnGform"
-                    class="bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold px-4 py-2 rounded-xl transition">
+                    class="w-full sm:w-auto bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-semibold px-4 py-2.5 rounded-xl transition text-center">
                     📝 Buka Google Form Resmi
                 </button>
             </div>
@@ -478,13 +477,13 @@
     <!-- ============================================================== -->
     <!-- SECTION PORTAL: CETAK KARTU MEMBER & KARTU LOYALITAS TERPISAH -->
     <!-- ============================================================== -->
-    <section id="portalCek" class="max-w-4xl mx-auto px-4 py-12">
-        <div class="bg-white rounded-3xl p-6 sm:p-9 shadow-luxury border-2 border-iggo-warmborder">
+    <section id="portalCek" class="max-w-4xl mx-auto px-3 sm:px-4 py-8 sm:py-12">
+        <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-9 shadow-luxury border-2 border-iggo-warmborder">
 
             <!-- DEDICATED MEMBER PASS NOTICE (MUNCUL HANYA DI MODE KARTU MEMBER) -->
-            <div id="memberPassNotice" class="hidden no-print mb-6 text-center">
+            <div id="memberPassNotice" class="hidden no-print mb-5 sm:mb-6 text-center">
                 <div
-                    class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500/10 via-yellow-400/20 to-amber-500/10 border border-yellow-500/40 text-iggo-maroon px-4 py-2 rounded-full text-xs font-bold shadow-sm">
+                    class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500/10 via-yellow-400/20 to-amber-500/10 border border-yellow-500/40 text-iggo-maroon px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold shadow-sm">
                     <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span>
                     <span>VIP Member Pass Terverifikasi • <strong>Hanya Menampilkan Data & Kartu
                             Pelanggan</strong></span>
@@ -493,29 +492,29 @@
 
             <!-- Search Bar & Demo Quick Picker (Disembunyikan Otomatis di Mode Kartu) -->
             <div id="portalSearchBox" class="no-print">
-                <div class="text-center mb-6">
+                <div class="text-center mb-5 sm:mb-6">
                     <span
-                        class="text-[10px] tracking-[0.2em] font-bold text-iggo-gold uppercase bg-iggo-gold/10 px-3 py-1 rounded-full border border-iggo-gold/30">
+                        class="text-[9px] sm:text-[10px] tracking-[0.2em] font-bold text-iggo-gold uppercase bg-iggo-gold/10 px-3 py-1 rounded-full border border-iggo-gold/30">
                         VIP Member & Loyalty Lounge
                     </span>
-                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-iggo-maroon mt-1">Cetak Kartu Member & Cek
+                    <h2 class="font-serif text-xl sm:text-3xl font-bold text-iggo-maroon mt-1.5">Cetak Kartu Member & Cek
                         Loyalitas</h2>
                     <p class="text-xs text-stone-500 mt-1">Masukkan ID Member (misal: JNH-016), No. HP, atau Email Anda
                     </p>
                 </div>
 
                 <div class="max-w-xl mx-auto mb-6">
-                    <div class="flex gap-2">
+                    <div class="flex flex-col sm:flex-row gap-2">
                         <input type="text" id="queryInput" placeholder="Contoh: JNH-016 atau 0821xxxx"
-                            class="w-full text-xs sm:text-sm px-4 py-3.5 bg-iggo-cream/60 border border-iggo-warmborder rounded-xl focus:outline-none focus:border-iggo-maroon font-medium text-iggo-dark"
+                            class="w-full text-xs sm:text-sm px-4 py-3 sm:py-3.5 bg-iggo-cream/60 border border-iggo-warmborder rounded-xl focus:outline-none focus:border-iggo-maroon font-medium text-iggo-dark"
                             onkeypress="if(event.key==='Enter') searchMember()">
                         <button onclick="searchMember()" id="btnCariMember"
-                            class="bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight hover:brightness-110 text-white px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold transition shadow-md whitespace-nowrap flex items-center gap-1.5">
+                            class="w-full sm:w-auto bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight hover:brightness-110 text-white px-6 py-3 sm:py-3.5 rounded-xl text-xs sm:text-sm font-bold transition shadow-md whitespace-nowrap flex items-center justify-center gap-1.5">
                             <span>🔍</span> Cari Kartu
                         </button>
                     </div>
 
-                    <div class="mt-3 flex items-center justify-between text-[11px] text-stone-500">
+                    <div class="mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-[11px] text-stone-500">
                         <span>💡 Demo Cepat Pengujian:</span>
                         <div class="flex gap-1.5 flex-wrap">
                             <button onclick="quickTestSearch('JNH-016')"
@@ -562,63 +561,63 @@
 
                 <!-- DEDICATED LIVE STATUS TOTAL CAP (MUNCUL OTOMATIS SAAT KARTU DI-SCAN) -->
                 <div id="memberPassLiveStatus" class="pass-only">
-                    <div class="bg-gradient-to-br from-[#2A0505] via-iggo-maroon to-[#150202] text-white rounded-3xl p-6 sm:p-8 shadow-luxury gold-card-border relative overflow-hidden">
+                    <div class="bg-gradient-to-br from-[#2A0505] via-iggo-maroon to-[#150202] text-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 shadow-luxury gold-card-border relative overflow-hidden">
                         <div class="card-geometric-pattern"></div>
                         
-                        <div class="relative z-10 space-y-5">
+                        <div class="relative z-10 space-y-4 sm:space-y-5">
                             <!-- Top Verification Badge -->
-                            <div class="flex items-center justify-between border-b border-white/15 pb-3">
-                                <div class="flex items-center gap-2">
-                                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                    <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-yellow-300">
-                                        Member Terverifikasi • Status VIP Aktif
+                            <div class="flex items-center justify-between border-b border-white/15 pb-2.5 sm:pb-3">
+                                <div class="flex items-center gap-1.5 sm:gap-2">
+                                    <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    <span class="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-yellow-300">
+                                        Member Terverifikasi • VIP Aktif
                                     </span>
                                 </div>
-                                <span class="font-mono text-xs text-yellow-200 font-bold bg-black/40 px-2.5 py-1 rounded-md border border-white/10" id="passLiveId">-</span>
+                                <span class="font-mono text-[10px] sm:text-xs text-yellow-200 font-bold bg-black/40 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded border border-white/10" id="passLiveId">-</span>
                             </div>
 
                             <!-- Greeting & Customer Name -->
                             <div>
-                                <span class="text-xs text-stone-300 uppercase tracking-wider block">Selamat Datang, Pelanggan Setia:</span>
-                                <h3 class="font-serif text-2xl sm:text-4xl font-extrabold text-white mt-1 capitalize gold-emboss" id="passLiveNama">-</h3>
+                                <span class="text-[10px] sm:text-xs text-stone-300 uppercase tracking-wider block">Pelanggan Setia:</span>
+                                <h3 class="font-serif text-xl sm:text-4xl font-extrabold text-white mt-0.5 capitalize gold-emboss leading-tight" id="passLiveNama">-</h3>
                             </div>
 
                             <!-- HIGHLIGHT UTAMA: TOTAL CAP TERKUMPUL SAAT INI -->
-                            <div class="bg-black/45 backdrop-blur-md rounded-2xl p-5 border border-yellow-400/30">
-                                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                            <div class="bg-black/45 backdrop-blur-md rounded-xl sm:rounded-2xl p-3.5 sm:p-5 border border-yellow-400/30">
+                                <div class="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left">
                                     <div>
-                                        <span class="text-[10px] sm:text-[11px] uppercase font-bold text-yellow-300 tracking-widest block">
+                                        <span class="text-[9px] sm:text-[11px] uppercase font-bold text-yellow-300 tracking-widest block">
                                             🎯 TOTAL STEMPEL ANDA SAAT INI:
                                         </span>
-                                        <div class="text-3xl sm:text-5xl font-black font-mono text-yellow-300 mt-1 flex items-center justify-center sm:justify-start gap-2">
+                                        <div class="text-3xl sm:text-5xl font-black font-mono text-yellow-300 mt-0.5 flex items-center justify-center sm:justify-start gap-1.5 sm:gap-2">
                                             <span id="passLiveCapCount">0</span>
-                                            <span class="text-sm sm:text-lg text-stone-300 font-normal">/ 10 Stempel</span>
+                                            <span class="text-xs sm:text-lg text-stone-300 font-normal">/ 10 Stempel</span>
                                         </div>
                                     </div>
-                                    <div id="passRewardBadge" class="bg-amber-400/20 text-yellow-200 border border-yellow-300/40 px-4 py-2.5 rounded-xl text-xs font-semibold max-w-sm">
+                                    <div id="passRewardBadge" class="w-full sm:w-auto bg-amber-400/20 text-yellow-200 border border-yellow-300/40 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl text-[11px] sm:text-xs font-semibold max-w-sm">
                                         Memuat status reward...
                                     </div>
                                 </div>
 
                                 <!-- Progress Bar Stempel -->
-                                <div class="mt-5">
-                                    <div class="w-full bg-white/10 rounded-full h-3.5 overflow-hidden p-0.5 border border-white/20">
+                                <div class="mt-3.5 sm:mt-5">
+                                    <div class="w-full bg-white/10 rounded-full h-3 sm:h-3.5 overflow-hidden p-0.5 border border-white/20">
                                         <div id="passLiveProgressBar" class="bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 h-full rounded-full transition-all duration-700 shadow-sm" style="width: 0%"></div>
                                     </div>
-                                    <div class="flex justify-between text-[9px] sm:text-[10px] text-stone-300 mt-2 font-mono">
+                                    <div class="flex justify-between text-[8px] sm:text-[10px] text-stone-300 mt-1.5 font-mono">
                                         <span>0 Cap (Mulai)</span>
-                                        <span class="text-yellow-300">Cap 5: Free Es Teh</span>
+                                        <span class="text-yellow-300">Cap 5: Free Teh</span>
                                         <span class="text-yellow-300">Cap 10: Diskon 50%</span>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Footer Instruction -->
-                            <div class="flex flex-wrap items-center justify-between text-[10px] sm:text-[11px] text-stone-300 border-t border-white/15 pt-3 gap-2">
-                                <span class="flex items-center gap-1.5">
-                                    <span>🍽️</span> <span>Tunjukkan layar ini saat pembayaran di kasir untuk klaim stempel & reward.</span>
+                            <div class="flex flex-wrap items-center justify-between text-[9px] sm:text-[11px] text-stone-300 border-t border-white/15 pt-2.5 sm:pt-3 gap-1.5">
+                                <span class="flex items-center gap-1">
+                                    <span>🍽️</span> <span>Tunjukkan layar ini saat pembayaran di kasir.</span>
                                 </span>
-                                <span class="text-yellow-300 font-semibold bg-white/10 px-2 py-0.5 rounded">1 Makan = 1 Cap</span>
+                                <span class="text-yellow-300 font-semibold bg-white/10 px-2 py-0.5 rounded text-[9px]">1 Makan = 1 Cap</span>
                             </div>
                         </div>
                     </div>
@@ -646,102 +645,72 @@
 
                         <!-- KARTU TAMPAK DEPAN (FRONT SIDE) -->
                         <div class="flex flex-col items-center w-full max-w-[460px]">
-                            <span
-                                class="no-print text-[11px] font-bold text-stone-500 mb-2 uppercase tracking-wider flex items-center gap-1.5">
-                                <span>💳</span> Sisi Depan Kartu
-                            </span>
+                            <div class="no-print flex items-center justify-between w-full mb-2 px-1">
+                                <span
+                                    class="text-[11px] font-bold text-stone-500 uppercase tracking-wider flex items-center gap-1.5">
+                                    <span>💳</span> Sisi Depan Kartu
+                                </span>
+                                <span
+                                    class="text-[10px] font-extrabold text-amber-900 bg-amber-100 border border-amber-300 px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-xs">
+                                    <span>🍤</span> Ciri Khas Seafood IGGO
+                                </span>
+                            </div>
 
                             <div id="memberCardFront"
-                                class="w-full aspect-[1.58/1] rounded-3xl p-4 sm:p-5 iggo-card-mesh gold-card-border text-white flex flex-col justify-between relative shadow-card-gold overflow-hidden">
+                                class="w-full aspect-[1024/569] rounded-2xl sm:rounded-3xl relative shadow-card-gold overflow-hidden border-2 border-red-900/60 select-none iggo-seafood-card">
 
-                                <div class="card-geometric-pattern"></div>
+                                <!-- Gambar Latar Belakang Kartu Asli Seafood IGGO (Ada Logo IGGO, Udang Windu Merah, Kepiting & Frame QR) -->
+                                <img src="assets/card-bg-iggo.png" alt="Kartu Member Seafood IGGO Kuliner"
+                                    class="absolute inset-0 w-full h-full object-cover pointer-events-none z-0">
 
-                                <!-- Card Top Row: Logo, Brand & Contactless Chip -->
+                                <!-- OVERLAY INFORMASI MEMBER (Di area terbuka antara Logo Atas dan Kepiting Bawah) -->
                                 <div
-                                    class="relative z-10 flex items-center justify-between border-b border-white/15 pb-2">
-                                    <div class="flex items-center gap-2.5">
-                                        <img src="assets/logo-iggo.jpg" alt="Logo"
-                                            class="w-10 h-10 rounded-full object-cover border-2 border-yellow-400 shadow-md bg-white flex-shrink-0">
-                                        <div>
-                                            <h4
-                                                class="font-cinzel font-black text-sm sm:text-base tracking-wider gold-foil-text leading-tight">
-                                                IGGO KULINER
-                                            </h4>
+                                    class="absolute z-10 left-[7.5%] top-[37.5%] max-w-[58%] flex flex-col justify-center space-y-0.5 sm:space-y-1.5 pointer-events-none">
+                                    
+                                    <!-- Nama Anggota -->
+                                    <div class="leading-tight">
+                                        <span
+                                            class="text-[7px] sm:text-[9px] font-black uppercase tracking-wider text-[#691212] block">
+                                            Nama Anggota
+                                        </span>
+                                        <h3 id="printCardNama"
+                                            class="text-[13px] sm:text-base md:text-lg font-serif font-black text-[#260505] capitalize truncate tracking-wide drop-shadow-[0_1px_1px_rgba(255,255,255,0.9)]">
+                                            -
+                                        </h3>
+                                    </div>
+
+                                    <!-- Nomor ID Member & Badge VIP -->
+                                    <div>
+                                        <span
+                                            class="text-[6.5px] sm:text-[8px] font-black uppercase tracking-wider text-[#691212] block">
+                                            Nomor ID Member
+                                        </span>
+                                        <div class="flex items-center gap-1 sm:gap-1.5 mt-0.5">
+                                            <span id="printCardId"
+                                                class="font-mono text-[9px] sm:text-xs md:text-sm font-black text-amber-100 bg-[#7B1818] px-1.5 sm:px-2 py-0.5 rounded sm:rounded-md border border-amber-400/60 shadow-xs inline-block">
+                                                -
+                                            </span>
                                             <span
-                                                class="text-[7.5px] sm:text-[8.5px] uppercase tracking-widest gold-sub-foil font-bold block mt-0.5">
-                                                Iwan Goreng-Goreng • Since 2005
+                                                class="text-[6px] sm:text-[7.5px] font-black uppercase tracking-wider bg-gradient-to-r from-amber-400 to-yellow-500 text-stone-900 px-1 sm:px-1.5 py-0.5 rounded-full shadow-xs">
+                                                VIP DINING
                                             </span>
                                         </div>
                                     </div>
-                                    <!-- Contactless Icon & Gold Pass Badge -->
-                                    <div class="text-right flex-shrink-0">
-                                        <div class="flex items-center justify-end gap-1 text-yellow-300">
-                                            <span class="text-xs font-black">✦</span>
-                                            <span class="text-[8.5px] font-bold tracking-widest uppercase">VIP
-                                                DINING</span>
-                                        </div>
-                                        <span
-                                            class="inline-block text-[7.5px] bg-gradient-to-r from-yellow-300 via-amber-400 to-yellow-500 text-iggo-dark font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider mt-0.5 shadow-sm">
-                                            GOLD PASS
+
+                                    <!-- Tanggal Bergabung -->
+                                    <div class="pt-0.5">
+                                        <span id="printCardDate"
+                                            class="font-mono text-[6.5px] sm:text-[8px] font-bold text-[#551010] drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)] block truncate">
+                                            MEMBER SEJAK: -
                                         </span>
                                     </div>
                                 </div>
 
-                                <!-- Card Middle Row: Smart Chip, Member Name, ID & QR Code -->
-                                <div class="relative z-10 flex items-center justify-between gap-4 my-auto py-1">
-                                    <!-- Left: Smart Chip + Info -->
-                                    <div class="space-y-1.5 flex-1 min-w-0">
-                                        <!-- Smart EMV Chip Graphic -->
-                                        <div
-                                            class="w-8 h-6 rounded smart-chip-gold p-0.5 flex items-center justify-center shadow-md">
-                                            <div
-                                                class="w-full h-full border border-yellow-800/40 rounded flex items-center justify-center">
-                                                <span class="text-[6px] font-bold text-yellow-950">CHIP</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="truncate">
-                                            <span
-                                                class="text-[7.5px] tracking-widest text-stone-300 uppercase block font-semibold">NAMA
-                                                ANGGOTA</span>
-                                            <h3 id="printCardNama"
-                                                class="text-base sm:text-lg font-serif font-bold text-white tracking-wide capitalize leading-tight truncate">
-                                                -
-                                            </h3>
-                                        </div>
-
-                                        <div>
-                                            <span
-                                                class="text-[7.5px] tracking-widest text-stone-300 uppercase block font-semibold">NOMOR
-                                                ID MEMBER</span>
-                                            <span id="printCardId"
-                                                class="font-mono text-xs sm:text-sm font-black text-yellow-300 tracking-widest bg-black/40 px-2 py-0.5 rounded border border-yellow-400/30 inline-block">
-                                                -
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Right: Crisp Compact QR Code in Luxury Glass Frame (Proporsional & Rapi) -->
-                                    <div class="flex flex-col items-center flex-shrink-0">
-                                        <div class="card-qr-box">
-                                            <img id="printCardQr" src="" alt="QR Member">
-                                        </div>
-                                        <span
-                                            class="text-[7px] text-yellow-200/90 font-mono tracking-wider mt-1 uppercase font-semibold">Scan
-                                            Kasir</span>
-                                    </div>
-                                </div>
-
-                                <!-- Card Bottom Row: Since Date & Slogan -->
+                                <!-- OVERLAY QR CODE DI DALAM KOTAK PUTIH KARTU SEAFOOD -->
                                 <div
-                                    class="relative z-10 flex items-center justify-between border-t border-white/15 pt-2 text-[7.5px] sm:text-[8.5px] text-stone-300">
-                                    <span id="printCardDate"
-                                        class="font-mono font-medium tracking-wider text-yellow-200 truncate">
-                                        MEMBER SEJAK: -
-                                    </span>
-                                    <span class="font-semibold tracking-wider text-stone-300 uppercase flex-shrink-0">
-                                        Authentic Crispy Soul Food
-                                    </span>
+                                    class="absolute z-10 right-[16.6%] top-[50.8%] w-[14.6%] h-[26.4%] flex items-center justify-center p-0.5 sm:p-1 pointer-events-auto">
+                                    <img id="printCardQr" src="" alt="QR Member"
+                                        class="w-full h-full object-contain rounded-md sm:rounded-lg">
                                 </div>
                             </div>
                         </div>
@@ -754,26 +723,26 @@
                             </span>
 
                             <div id="memberCardBack"
-                                class="w-full aspect-[1.58/1] rounded-3xl iggo-card-mesh gold-card-border text-white flex flex-col justify-between relative shadow-card-gold overflow-hidden">
+                                class="w-full aspect-[1.58/1] rounded-2xl sm:rounded-3xl iggo-card-mesh gold-card-border text-white flex flex-col justify-between relative shadow-card-gold overflow-hidden">
 
                                 <div class="card-geometric-pattern"></div>
 
                                 <!-- Magnetic Stripe -->
-                                <div class="w-full h-9 sm:h-10 magnetic-stripe mt-4 relative z-10"></div>
+                                <div class="w-full h-7 sm:h-9 magnetic-stripe mt-2.5 sm:mt-4 relative z-10"></div>
 
                                 <!-- Center: Signature Panel & Outlet Info Bento Box -->
-                                <div class="relative z-10 px-5 sm:px-6 space-y-2.5 my-auto">
+                                <div class="relative z-10 px-3.5 sm:px-6 space-y-1.5 sm:space-y-2.5 my-auto">
                                     <!-- Signature Panel -->
                                     <div class="flex items-center justify-between">
                                         <div
-                                            class="h-6 sm:h-7 w-44 sm:w-56 signature-strip rounded px-2.5 flex items-center justify-between shadow-inner">
+                                            class="h-5 sm:h-7 w-36 sm:w-56 signature-strip rounded px-2 sm:px-2.5 flex items-center justify-between shadow-inner">
                                             <span id="printCardBackNama"
-                                                class="font-serif text-[9px] font-bold text-stone-800 capitalize">-</span>
-                                            <span class="font-mono text-[7px] text-stone-500 italic">Authorized</span>
+                                                class="font-serif text-[8px] sm:text-[9px] font-bold text-stone-800 capitalize truncate">-</span>
+                                            <span class="font-mono text-[6px] sm:text-[7px] text-stone-500 italic">Authorized</span>
                                         </div>
                                         <div class="text-right">
                                             <span id="printCardBackId"
-                                                class="font-mono text-xs font-bold text-yellow-300">
+                                                class="font-mono text-[10px] sm:text-xs font-bold text-yellow-300">
                                                 ID: -
                                             </span>
                                         </div>
@@ -781,9 +750,9 @@
 
                                     <!-- Modern Bento Outlet & Hours Info -->
                                     <div
-                                        class="bg-black/40 backdrop-blur-sm border border-white/15 rounded-xl p-2.5 text-[8px] sm:text-[9px] text-stone-200 space-y-1">
+                                        class="bg-black/40 backdrop-blur-sm border border-white/15 rounded-xl p-2 sm:p-2.5 text-[7px] sm:text-[9px] text-stone-200 space-y-0.5 sm:space-y-1">
                                         <div
-                                            class="flex items-center justify-between font-semibold text-yellow-200 border-b border-white/10 pb-1">
+                                            class="flex items-center justify-between font-semibold text-yellow-200 border-b border-white/10 pb-0.5 sm:pb-1">
                                             <span>🕒 JAM OPERASIONAL RESTO:</span>
                                             <span>Senin - Minggu</span>
                                         </div>
@@ -792,19 +761,17 @@
                                             <span>Weekend: 10.00 - 22.00 WIB</span>
                                         </div>
                                         <div class="text-stone-300 pt-0.5 flex justify-between">
-                                            <span>📍 Jl. Kol. Abunjani No. 28, Sipin, Jambi</span>
-                                            <span class="text-yellow-200">WA: +62 821-7971-7946</span>
+                                            <span>📍 Jl. Kol. Abunjani No. 28, Sipin</span>
+                                            <span class="text-yellow-200">WA: 0821-7971-7946</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Card Back Bottom Note -->
                                 <div
-                                    class="relative z-10 bg-black/50 px-5 py-2 text-center text-[7px] sm:text-[8px] text-stone-400 border-t border-white/10 leading-tight">
-                                    <p>Tunjukkan kartu ini saat transaksi di kasir untuk klaim stempel & diskon
-                                        keanggotaan.</p>
-                                    <p class="text-stone-500 mt-0.5">© 2005 - 2026 IGGO Kuliner • Hak Cipta Dilindungi
-                                    </p>
+                                    class="relative z-10 bg-black/50 px-3 sm:px-5 py-1.5 sm:py-2 text-center text-[6.5px] sm:text-[8px] text-stone-400 border-t border-white/10 leading-tight">
+                                    <p>Tunjukkan kartu ini saat transaksi di kasir untuk klaim stempel & diskon keanggotaan.</p>
+                                    <p class="text-stone-500 mt-0.5">© 2005 - 2026 IGGO Kuliner • Hak Cipta Dilindungi</p>
                                 </div>
                             </div>
                         </div>
@@ -812,45 +779,43 @@
                     </div>
 
                     <!-- TOMBOL AKSI CETAK & UNDUH KARTU MEMBER (PASS-HIDE) -->
-                    <div class="no-print pass-hide mt-6 flex flex-wrap justify-center gap-3">
+                    <div class="no-print pass-hide mt-6 flex flex-col sm:flex-row justify-center gap-2 sm:gap-3 w-full max-w-xl mx-auto">
                         <button onclick="printMemberCard()"
-                            class="bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight hover:brightness-110 text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-md transition flex items-center gap-2">
-                            <span>🖨️</span> Cetak Kartu Member (Print / PDF)
+                            class="w-full sm:w-auto bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight hover:brightness-110 text-white font-bold text-xs sm:text-sm px-5 py-3 sm:py-3.5 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                            <span>🖨️</span> Cetak Kartu (Print / PDF)
                         </button>
                         <button onclick="downloadCardFront()" id="btnDownloadFront"
-                            class="bg-white border-2 border-iggo-gold text-iggo-maroon hover:bg-iggo-creambg font-bold text-xs sm:text-sm px-5 py-3.5 rounded-xl transition shadow-sm flex items-center gap-1.5">
+                            class="w-full sm:w-auto bg-white border-2 border-iggo-gold text-iggo-maroon hover:bg-iggo-creambg font-bold text-xs sm:text-sm px-4 py-3 sm:py-3.5 rounded-xl transition shadow-sm flex items-center justify-center gap-1.5">
                             <span>📥</span> Unduh Kartu Depan (PNG)
                         </button>
                         <button onclick="downloadCardBack()" id="btnDownloadBack"
-                            class="bg-white border border-iggo-warmborder text-iggo-maroon hover:bg-iggo-creambg font-semibold text-xs sm:text-sm px-5 py-3.5 rounded-xl transition shadow-sm flex items-center gap-1.5">
+                            class="w-full sm:w-auto bg-white border border-iggo-warmborder text-iggo-maroon hover:bg-iggo-creambg font-semibold text-xs sm:text-sm px-4 py-3 sm:py-3.5 rounded-xl transition shadow-sm flex items-center justify-center gap-1.5">
                             <span>📥</span> Unduh Kartu Belakang (PNG)
                         </button>
                     </div>
 
                     <!-- STATUS TAUTAN QR & HOST SERVER (PASS-HIDE) -->
-                    <div class="no-print pass-hide mt-5 bg-amber-50/70 border border-amber-200/80 rounded-2xl p-4 max-w-xl mx-auto shadow-xs">
-                        <div class="flex items-center justify-between text-xs font-bold text-stone-700 mb-2">
+                    <div class="no-print pass-hide mt-5 bg-amber-50/70 border border-amber-200/80 rounded-2xl p-3.5 sm:p-4 max-w-xl mx-auto shadow-xs">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-bold text-stone-700 gap-1.5 mb-2">
                             <span class="flex items-center gap-1.5">
                                 <span>📲</span> <span>Tautan Sistem QR Code (Saat Di-Scan):</span>
                             </span>
-                            <div class="flex items-center gap-1">
-                                <button type="button" onclick="changeServerIp()" class="text-iggo-maroon bg-white hover:bg-stone-100 border border-stone-200 text-[10px] px-2.5 py-1 rounded-lg transition font-semibold flex items-center gap-1 shadow-2xs">
-                                    <span>✏️</span> Ubah IP Host (<span id="displayServerIp">192.168.0.102:3000</span>)
-                                </button>
-                            </div>
+                            <button type="button" onclick="changeServerIp()" class="self-start sm:self-auto text-iggo-maroon bg-white hover:bg-stone-100 border border-stone-200 text-[10px] px-2.5 py-1 rounded-lg transition font-semibold flex items-center gap-1 shadow-2xs">
+                                <span>✏️</span> Ubah IP (<span id="displayServerIp">192.168.0.102:3000</span>)
+                            </button>
                         </div>
-                        <div class="bg-white border border-stone-200 rounded-xl p-2.5 flex items-center justify-between gap-2 text-[11px] font-mono text-stone-600">
-                            <span id="qrPreviewUrl" class="truncate">http://192.168.0.102:3000/...</span>
-                            <div class="flex items-center gap-1.5 flex-shrink-0">
-                                <button type="button" onclick="copyPassLink()" class="bg-stone-100 hover:bg-stone-200 text-stone-700 px-2.5 py-1 rounded-md text-[10px] font-sans font-semibold transition">
+                        <div class="bg-white border border-stone-200 rounded-xl p-2 sm:p-2.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-[10px] sm:text-[11px] font-mono text-stone-600">
+                            <span id="qrPreviewUrl" class="break-all sm:truncate max-w-full">http://192.168.0.102:3000/...</span>
+                            <div class="flex items-center gap-1.5 flex-shrink-0 w-full sm:w-auto justify-end">
+                                <button type="button" onclick="copyPassLink()" class="flex-1 sm:flex-none bg-stone-100 hover:bg-stone-200 text-stone-700 px-2.5 py-1.5 rounded-md text-[10px] font-sans font-semibold transition text-center">
                                     📋 Salin
                                 </button>
-                                <a id="btnTestPassUrl" href="#" target="_blank" class="bg-iggo-maroon hover:brightness-110 text-white px-2.5 py-1 rounded-md text-[10px] font-sans font-semibold transition flex items-center gap-1">
-                                    <span>🧪</span> Tes Tampilan HP
+                                <a id="btnTestPassUrl" href="#" target="_blank" class="flex-1 sm:flex-none bg-iggo-maroon hover:brightness-110 text-white px-2.5 py-1.5 rounded-md text-[10px] font-sans font-semibold transition flex items-center justify-center gap-1">
+                                    <span>🧪</span> Tes HP
                                 </a>
                             </div>
                         </div>
-                        <p class="text-[10px] text-stone-500 mt-2 leading-relaxed text-center">
+                        <p class="text-[9.5px] sm:text-[10px] text-stone-500 mt-2 leading-relaxed text-center sm:text-left">
                             💡 <strong>Sistem Otomatis:</strong> Kartu cetak fisik tidak memuat jumlah cap. Saat QR di-scan oleh kamera HP, sistem langsung menampilkan total cap dan status hadiah pelanggan secara real-time!
                         </p>
                     </div>
@@ -876,21 +841,21 @@
                     <!-- VISUAL LOYALTY CARD 10 CAP -->
                     <div class="flex justify-center">
                         <div id="loyaltyCardWrapper"
-                            class="w-full max-w-xl rounded-3xl p-6 sm:p-8 loyalty-card-mesh text-white gold-border-glow shadow-card-gold relative overflow-hidden">
+                            class="w-full max-w-xl rounded-2xl sm:rounded-3xl p-4 sm:p-8 loyalty-card-mesh text-white gold-border-glow shadow-card-gold relative overflow-hidden">
 
                             <!-- Top Bar Loyalty Card -->
-                            <div class="flex justify-between items-center border-b border-white/20 pb-4 mb-5">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-white/20 pb-3 sm:pb-4 mb-3 sm:mb-5">
                                 <div>
                                     <span
-                                        class="text-[9px] uppercase tracking-widest text-yellow-300 font-bold block">LOYALTY
+                                        class="text-[8px] sm:text-[9px] uppercase tracking-widest text-yellow-300 font-bold block">LOYALTY
                                         PASS • 10 STEMPEL</span>
-                                    <h4 class="font-cinzel font-black text-lg sm:text-xl gold-emboss leading-tight">
+                                    <h4 class="font-cinzel font-black text-base sm:text-xl gold-emboss leading-tight">
                                         IGGO KULINER LOYALTY
                                     </h4>
                                 </div>
-                                <div class="text-right">
+                                <div class="self-start sm:self-auto">
                                     <span id="loyaltyCountText"
-                                        class="font-mono text-xs sm:text-sm font-black text-iggo-dark bg-gradient-to-r from-yellow-300 to-amber-300 px-3.5 py-1.5 rounded-xl shadow-md inline-block">
+                                        class="font-mono text-xs sm:text-sm font-black text-iggo-dark bg-gradient-to-r from-yellow-300 to-amber-300 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-xl shadow-md inline-block">
                                         0 / 10 Cap Terkumpul
                                     </span>
                                 </div>
@@ -898,62 +863,62 @@
 
                             <!-- Member Name on Loyalty Card -->
                             <div
-                                class="flex justify-between items-center mb-5 bg-white/10 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-white/10">
+                                class="flex justify-between items-center mb-3 sm:mb-5 bg-white/10 backdrop-blur-sm px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl border border-white/10 text-xs">
                                 <div>
-                                    <span class="text-[9px] uppercase tracking-wider text-stone-300 block">NAMA
+                                    <span class="text-[8px] sm:text-[9px] uppercase tracking-wider text-stone-300 block">NAMA
                                         MEMBER:</span>
                                     <span id="loyaltyNama"
-                                        class="font-bold text-sm sm:text-base text-white capitalize">-</span>
+                                        class="font-bold text-xs sm:text-base text-white capitalize truncate block max-w-[170px] sm:max-w-none">-</span>
                                 </div>
                                 <div class="text-right">
-                                    <span class="text-[9px] uppercase tracking-wider text-stone-300 block">ID
+                                    <span class="text-[8px] sm:text-[9px] uppercase tracking-wider text-stone-300 block">ID
                                         MEMBER:</span>
                                     <span id="loyaltyId" class="font-mono font-bold text-xs text-yellow-300">-</span>
                                 </div>
                             </div>
 
                             <!-- Grid 10 Slot Stempel Kunjungan -->
-                            <div class="mb-5">
+                            <div class="mb-3.5 sm:mb-5">
                                 <span
-                                    class="text-[10px] font-bold text-yellow-300 uppercase tracking-wider block mb-2.5 flex items-center gap-1.5">
+                                    class="text-[9px] sm:text-[10px] font-bold text-yellow-300 uppercase tracking-wider block mb-2 sm:mb-2.5 flex items-center gap-1.5">
                                     <span>🍽️</span> Progres Akumulasi 10 Stempel Kunjungan:
                                 </span>
-                                <div id="loyaltyStampsGrid" class="grid grid-cols-5 gap-2 sm:gap-2.5"></div>
+                                <div id="loyaltyStampsGrid" class="grid grid-cols-5 gap-1.5 sm:gap-2.5"></div>
                             </div>
 
                             <!-- Aturan Hadiah Footer -->
                             <div
-                                class="border-t border-white/20 pt-3 flex flex-col sm:flex-row items-center justify-between text-[10px] text-stone-300 gap-2">
+                                class="border-t border-white/20 pt-2.5 sm:pt-3 flex flex-col sm:flex-row items-center justify-between text-[9px] sm:text-[10px] text-stone-300 gap-1.5">
                                 <div class="text-center sm:text-left">
                                     <span>🍹 Cap ke-5: <strong>Free Es Teh Jumbo</strong></span> •
                                     <span>👑 Cap ke-10: <strong>Diskon 50% All Menu</strong></span>
                                 </div>
-                                <span class="text-yellow-300 font-semibold text-[9px]">1 Transaksi = 1 Stempel</span>
+                                <span class="text-yellow-300 font-semibold text-[8px] sm:text-[9px]">1 Transaksi = 1 Stempel</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- BANNER STATUS MILESTONE HADIAH -->
-                    <div id="rewardBanner" class="mt-5 max-w-xl mx-auto rounded-2xl p-4 text-center text-xs shadow-sm">
+                    <div id="rewardBanner" class="mt-4 sm:mt-5 max-w-xl mx-auto rounded-xl sm:rounded-2xl p-3.5 sm:p-4 text-center text-xs shadow-sm">
                     </div>
 
                     <!-- PANEL SIMULASI KASIR DEMO (UNTUK PRESENTASI DOSEN - PASS-HIDE) -->
                     <div
-                        class="pass-hide max-w-xl mx-auto mt-6 bg-[#FFFDF7] border-2 border-dashed border-iggo-gold/60 rounded-2xl p-4 text-center">
-                        <span class="text-[10px] font-bold text-iggo-maroon uppercase tracking-widest block mb-1">
+                        class="pass-hide max-w-xl mx-auto mt-5 sm:mt-6 bg-[#FFFDF7] border-2 border-dashed border-iggo-gold/60 rounded-2xl p-3.5 sm:p-4 text-center">
+                        <span class="text-[9px] sm:text-[10px] font-bold text-iggo-maroon uppercase tracking-widest block mb-1">
                             🛠️ Panel Demo Interaktif Kasir (Uji Coba Presentasi)
                         </span>
-                        <p class="text-[11px] text-stone-500 mb-3">
+                        <p class="text-[10px] sm:text-[11px] text-stone-500 mb-2.5 sm:mb-3">
                             Gunakan tombol di bawah untuk mendemonstrasikan penambahan stempel secara langsung di
                             hadapan dosen/penguji:
                         </p>
-                        <div class="flex justify-center gap-2">
+                        <div class="flex flex-col sm:flex-row justify-center gap-2 max-w-sm mx-auto">
                             <button onclick="demoAddStamp()"
-                                class="bg-iggo-gold hover:bg-iggo-goldlight text-iggo-dark font-bold text-xs px-4 py-2.5 rounded-lg transition shadow-sm">
+                                class="w-full sm:w-auto bg-iggo-gold hover:bg-iggo-goldlight text-iggo-dark font-bold text-xs px-4 py-2.5 rounded-lg transition shadow-sm text-center">
                                 +1 Tambah Stempel Demo
                             </button>
                             <button onclick="demoResetStamp()"
-                                class="bg-stone-200 hover:bg-stone-300 text-stone-700 font-semibold text-xs px-4 py-2.5 rounded-lg transition">
+                                class="w-full sm:w-auto bg-stone-200 hover:bg-stone-300 text-stone-700 font-semibold text-xs px-4 py-2.5 rounded-lg transition text-center">
                                 Reset ke Data Asli Sheet
                             </button>
                         </div>
@@ -963,37 +928,37 @@
                 <!-- ============================================================== -->
                 <!-- BAGIAN 3: BIODATA ANGGOTA LENGKAP -->
                 <!-- ============================================================== -->
-                <div class="no-print border-t border-iggo-warmborder pt-8">
+                <div class="no-print border-t border-iggo-warmborder pt-6 sm:pt-8">
                     <h4 class="text-xs font-bold text-iggo-maroon uppercase tracking-wider mb-3">Detail Biodata Member
                     </h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                        <div class="bg-white p-3.5 rounded-xl border border-iggo-warmborder">
-                            <span class="text-[9px] text-stone-400 font-bold uppercase block">Alamat Lengkap</span>
-                            <span id="viewAlamat" class="font-semibold text-iggo-dark block mt-0.5">-</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-xs">
+                        <div class="bg-white p-3 sm:p-3.5 rounded-xl border border-iggo-warmborder">
+                            <span class="text-[8px] sm:text-[9px] text-stone-400 font-bold uppercase block">Alamat Lengkap</span>
+                            <span id="viewAlamat" class="font-semibold text-iggo-dark block mt-0.5 break-words">-</span>
                         </div>
-                        <div class="bg-white p-3.5 rounded-xl border border-iggo-warmborder">
-                            <span class="text-[9px] text-stone-400 font-bold uppercase block">No. HP / WhatsApp</span>
-                            <span id="viewHp" class="font-semibold text-iggo-dark block mt-0.5">-</span>
+                        <div class="bg-white p-3 sm:p-3.5 rounded-xl border border-iggo-warmborder">
+                            <span class="text-[8px] sm:text-[9px] text-stone-400 font-bold uppercase block">No. HP / WhatsApp</span>
+                            <span id="viewHp" class="font-semibold text-iggo-dark block mt-0.5 font-mono">-</span>
                         </div>
-                        <div class="bg-white p-3.5 rounded-xl border border-iggo-warmborder">
-                            <span class="text-[9px] text-stone-400 font-bold uppercase block">Instagram</span>
-                            <span id="viewIg" class="font-semibold text-iggo-dark block mt-0.5">-</span>
+                        <div class="bg-white p-3 sm:p-3.5 rounded-xl border border-iggo-warmborder">
+                            <span class="text-[8px] sm:text-[9px] text-stone-400 font-bold uppercase block">Instagram</span>
+                            <span id="viewIg" class="font-semibold text-iggo-dark block mt-0.5 font-mono">-</span>
                         </div>
-                        <div class="bg-white p-3.5 rounded-xl border border-iggo-warmborder">
-                            <span class="text-[9px] text-stone-400 font-bold uppercase block">Email & Tanggal</span>
-                            <span id="viewEmail" class="font-semibold text-iggo-dark block mt-0.5">-</span>
+                        <div class="bg-white p-3 sm:p-3.5 rounded-xl border border-iggo-warmborder">
+                            <span class="text-[8px] sm:text-[9px] text-stone-400 font-bold uppercase block">Email & Tanggal</span>
+                            <span id="viewEmail" class="font-semibold text-iggo-dark block mt-0.5 break-all">-</span>
                             <span id="viewTanggal" class="text-[10px] text-stone-400 block mt-0.5">-</span>
                         </div>
                     </div>
 
                     <!-- Tombol WhatsApp & Salin Link -->
-                    <div class="mt-4 flex flex-wrap justify-center gap-3">
+                    <div class="mt-4 flex flex-col sm:flex-row justify-center gap-2 sm:gap-3 max-w-lg mx-auto">
                         <button onclick="shareToWhatsApp()"
-                            class="bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs px-5 py-3 rounded-xl shadow-sm transition flex items-center gap-2">
+                            class="w-full sm:w-auto bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs px-5 py-3 rounded-xl shadow-sm transition flex items-center justify-center gap-2">
                             <span>📲</span> Tunjukkan ke WhatsApp Kasir
                         </button>
                         <button onclick="copyCardLink()"
-                            class="bg-white border border-iggo-warmborder text-iggo-maroon hover:bg-iggo-creambg font-semibold text-xs px-4 py-3 rounded-xl transition flex items-center gap-1.5">
+                            class="w-full sm:w-auto bg-white border border-iggo-warmborder text-iggo-maroon hover:bg-iggo-creambg font-semibold text-xs px-4 py-3 rounded-xl transition flex items-center justify-center gap-1.5">
                             <span>🔗</span> Salin Tautan Kartu Member
                         </button>
                     </div>

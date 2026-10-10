@@ -19,7 +19,37 @@ let transactionHistory = [];
 window.addEventListener("DOMContentLoaded", () => {
     checkPinAuth();
     startClock();
+    updateAppsScriptStatus();
 });
+
+function configureAppsScript() {
+    const current = localStorage.getItem("iggo_apps_script_url") || "";
+    const url = prompt("Masukkan URL Web App Google Apps Script Anda:\n(Contoh: https://script.google.com/macros/s/.../exec)", current);
+    if (url !== null) {
+        if (url.trim()) {
+            localStorage.setItem("iggo_apps_script_url", url.trim());
+            alert("✅ Google Apps Script Berhasil Dihubungkan!\n\nSetiap kali stempel ditambah di Kasir, kolom TOTAL CAP di Google Sheets akan otomatis terisi secara live.");
+        } else {
+            localStorage.removeItem("iggo_apps_script_url");
+            alert("Pengaturan Google Apps Script dihapus.");
+        }
+        updateAppsScriptStatus();
+    }
+}
+
+function updateAppsScriptStatus() {
+    const el = document.getElementById("appsScriptStatusBadge");
+    const url = localStorage.getItem("iggo_apps_script_url");
+    if (el) {
+        if (url) {
+            el.innerHTML = "🟢 <span class='text-emerald-300 font-bold'>Sheets Sync: AKTIF</span>";
+            el.title = "Tersambung ke Google Apps Script: " + url;
+        } else {
+            el.innerHTML = "⚪ <span class='text-stone-300'>Hubungkan Sheets</span>";
+            el.title = "Klik untuk memasukkan URL Web App Google Apps Script";
+        }
+    }
+}
 
 // 1. PIN SECURITY CONTROLLER
 function checkPinAuth() {
@@ -199,22 +229,22 @@ function renderKasirMember() {
         for (let i = 1; i <= 10; i++) {
             const isFilled = i <= currentCapCount;
             const slot = document.createElement("div");
-            let base = "h-12 flex flex-col items-center justify-center rounded-xl text-xs font-bold transition-all ";
+            let base = "h-11 sm:h-12 flex flex-col items-center justify-center rounded-xl text-[10px] sm:text-xs font-bold transition-all p-0.5 text-center leading-none ";
 
             if (isFilled) {
                 if (i === 5) {
                     slot.className = base + "bg-amber-400 text-stone-900 border-2 border-yellow-500 shadow-sm font-extrabold";
-                    slot.innerHTML = "<span>🍹</span><span class='text-[8px]'>Cap 5</span>";
+                    slot.innerHTML = "<span>🍹</span><span class='text-[7px] sm:text-[8px] font-black mt-0.5'>Cap 5</span>";
                 } else if (i === 10) {
                     slot.className = base + "bg-gradient-to-r from-yellow-400 to-amber-500 text-stone-900 border-2 border-yellow-600 shadow-md font-black";
-                    slot.innerHTML = "<span>👑</span><span class='text-[8px]'>50%</span>";
+                    slot.innerHTML = "<span>👑</span><span class='text-[7px] sm:text-[8px] font-black mt-0.5'>50%</span>";
                 } else {
                     slot.className = base + "bg-iggo-maroon text-white border border-red-900 shadow-xs";
-                    slot.innerHTML = "<span>🍤</span><span class='text-[8px]'>" + i + "</span>";
+                    slot.innerHTML = "<span>🍤</span><span class='text-[7px] sm:text-[8px] mt-0.5'>" + i + "</span>";
                 }
             } else {
                 slot.className = base + "bg-stone-100 text-stone-400 border border-dashed border-stone-300";
-                slot.innerHTML = "<span>" + i + "</span>";
+                slot.innerHTML = "<span class='font-mono font-medium'>" + i + "</span>";
             }
             grid.appendChild(slot);
         }
@@ -257,7 +287,22 @@ async function kasirAddStamp() {
         console.warn("Gagal simpan ke server sync API:", e);
     }
 
-    // 2. Simpan ke localStorage cadangan
+    // 2. Simpan ke Google Sheets via Google Apps Script (Jika sudah dikonfigurasi)
+    const appsScriptUrl = localStorage.getItem("iggo_apps_script_url");
+    if (appsScriptUrl) {
+        try {
+            fetch(`${appsScriptUrl}?id=${encodeURIComponent(memberId)}&action=set&value=${currentCapCount}`, {
+                method: "GET",
+                mode: "no-cors"
+            }).then(() => {
+                console.log("[GOOGLE SHEETS SYNC] Berhasil mengirim pembaruan stempel ke spreadsheet.");
+            }).catch(err => console.warn("[GOOGLE SHEETS SYNC] Gagal:", err));
+        } catch (scriptErr) {
+            console.warn("Apps Script trigger error:", scriptErr);
+        }
+    }
+
+    // 3. Simpan ke localStorage cadangan
     localStorage.setItem("iggo_cap_override_" + memberId, currentCapCount);
 
     renderKasirMember();
@@ -286,6 +331,17 @@ async function kasirResetToSheet() {
                 body: JSON.stringify({ id: memberId, action: "reset" })
             });
         } catch (e) {}
+
+        const appsScriptUrl = localStorage.getItem("iggo_apps_script_url");
+        if (appsScriptUrl) {
+            try {
+                fetch(`${appsScriptUrl}?id=${encodeURIComponent(memberId)}&action=reset`, {
+                    method: "GET",
+                    mode: "no-cors"
+                });
+            } catch (e) {}
+        }
+
         localStorage.removeItem("iggo_cap_override_" + memberId);
         currentCapCount = currentKasirMember.totalCap;
         renderKasirMember();

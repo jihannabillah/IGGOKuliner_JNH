@@ -44,7 +44,7 @@
     </script>
 
     <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="css/style.css?v=2.7">
+    <link rel="stylesheet" href="css/style.css?v=3.0">
 </head>
 
 <body class="bg-gradient-to-b from-[#1E0505] via-[#2D0808] to-[#120202] text-stone-100 min-h-screen font-sans antialiased">
@@ -59,7 +59,7 @@
                     <h1 class="font-serif font-black text-sm tracking-wider gold-emboss leading-tight">
                         IGGO KULINER VIP PASS
                     </h1>
-                    <span class="text-[9px] text-yellow-200/80 block uppercase tracking-widest">Verifikasi Resmi Keanggotaan</span>
+                    <span class="text-[9px] text-yellow-200/80 block uppercase tracking-widest">🍤 Spesialis Seafood & Gorengan • Member Resmi</span>
                 </div>
             </div>
             <a href="index.html"
@@ -96,59 +96,59 @@
         </div>
 
         <!-- MAIN PASS CONTENT -->
-        <div id="passContent" class="hidden space-y-6">
+        <div id="passContent" class="hidden space-y-5 sm:space-y-6">
 
             <!-- 1. LIVE HIGHLIGHT: TOTAL CAP & REWARD STATUS -->
-            <div class="bg-gradient-to-br from-[#2D0808] via-iggo-maroon to-[#1A0303] rounded-3xl p-5 sm:p-6 shadow-card-gold gold-card-border relative overflow-hidden">
+            <div class="bg-gradient-to-br from-[#2D0808] via-iggo-maroon to-[#1A0303] rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-card-gold gold-card-border relative overflow-hidden">
                 <div class="card-geometric-pattern"></div>
 
-                <div class="relative z-10 space-y-4">
+                <div class="relative z-10 space-y-3.5 sm:space-y-4">
                     <!-- Verification Badge -->
-                    <div class="flex items-center justify-between border-b border-white/15 pb-2.5">
-                        <span class="inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2.5 py-0.5 rounded-full text-[10px] font-bold">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <div class="flex items-center justify-between border-b border-white/15 pb-2 sm:pb-2.5">
+                        <span class="inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold">
+                            <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                             VIP GOLD PASS AKTIF
                         </span>
-                        <span id="passMemberId" class="font-mono text-xs font-bold text-yellow-300 bg-black/40 px-2 py-0.5 rounded border border-yellow-400/20">-</span>
+                        <span id="passMemberId" class="font-mono text-[11px] sm:text-xs font-bold text-yellow-300 bg-black/40 px-2 py-0.5 rounded border border-yellow-400/20">-</span>
                     </div>
 
                     <!-- Customer Welcome Name -->
                     <div>
-                        <span class="text-[11px] text-stone-300 uppercase tracking-wider block font-medium">Pelanggan VIP:</span>
-                        <h2 id="passNama" class="font-serif text-2xl font-black text-white capitalize gold-emboss leading-tight">-</h2>
+                        <span class="text-[10px] sm:text-[11px] text-stone-300 uppercase tracking-wider block font-medium">Pelanggan VIP:</span>
+                        <h2 id="passNama" class="font-serif text-xl sm:text-2xl font-black text-white capitalize gold-emboss leading-tight">-</h2>
                     </div>
 
                     <!-- GOLDEN STAMP ACCUMULATION BOX -->
-                    <div class="bg-black/50 backdrop-blur-md rounded-2xl p-4 border border-yellow-400/30 space-y-3">
+                    <div class="bg-black/50 backdrop-blur-md rounded-xl sm:rounded-2xl p-3.5 sm:p-4 border border-yellow-400/30 space-y-2.5 sm:space-y-3">
                         <div class="flex items-center justify-between">
                             <div>
-                                <span class="text-[10px] uppercase font-bold text-yellow-300 tracking-wider block">
+                                <span class="text-[9px] sm:text-[10px] uppercase font-bold text-yellow-300 tracking-wider block">
                                     🎯 Total Stempel Terkumpul:
                                 </span>
-                                <div class="text-3xl font-black font-mono text-yellow-300 flex items-baseline gap-1 mt-0.5">
+                                <div class="text-2xl sm:text-3xl font-black font-mono text-yellow-300 flex items-baseline gap-1 mt-0.5">
                                     <span id="passCapCount">0</span>
-                                    <span class="text-sm font-normal text-stone-300">/ 10 Stempel</span>
+                                    <span class="text-xs sm:text-sm font-normal text-stone-300">/ 10 Stempel</span>
                                 </div>
                             </div>
                             <div class="text-right">
                                 <span id="passPercentText" class="font-mono text-xs font-bold text-yellow-300">0%</span>
-                                <span class="text-[9px] text-stone-400 block">Progres Reward</span>
+                                <span class="text-[8px] sm:text-[9px] text-stone-400 block">Progres Reward</span>
                             </div>
                         </div>
 
                         <!-- Progress Bar -->
-                        <div class="w-full bg-white/10 rounded-full h-3 p-0.5 border border-white/15 overflow-hidden">
+                        <div class="w-full bg-white/10 rounded-full h-2.5 sm:h-3 p-0.5 border border-white/15 overflow-hidden">
                             <div id="passProgressBar" class="bg-gradient-to-r from-amber-400 via-yellow-400 to-yellow-500 h-full rounded-full transition-all duration-700 shadow-sm" style="width: 0%"></div>
                         </div>
 
                         <!-- Dynamic Milestone Badge -->
-                        <div id="passMilestoneText" class="bg-amber-400/15 border border-yellow-300/30 text-yellow-200 text-xs font-medium p-2.5 rounded-xl text-center leading-snug">
+                        <div id="passMilestoneText" class="bg-amber-400/15 border border-yellow-300/30 text-yellow-200 text-[11px] sm:text-xs font-medium p-2 sm:p-2.5 rounded-xl text-center leading-snug">
                             Memuat status hadiah...
                         </div>
                     </div>
 
                     <!-- Usage Notice -->
-                    <div class="flex items-center justify-between text-[10px] text-stone-300 border-t border-white/15 pt-2.5">
+                    <div class="flex items-center justify-between text-[9px] sm:text-[10px] text-stone-300 border-t border-white/15 pt-2 sm:pt-2.5">
                         <span>🍽️ Tunjukkan layar ini saat pembayaran</span>
                         <span class="text-yellow-300 font-semibold">1 Transaksi = 1 Cap</span>
                     </div>
@@ -156,21 +156,21 @@
             </div>
 
             <!-- 2. VISUAL 10-STEMPEL LOYALTY CARD -->
-            <div class="bg-[#1C0505] rounded-3xl p-5 border border-yellow-500/30 shadow-md space-y-3">
+            <div class="bg-[#1C0505] rounded-2xl sm:rounded-3xl p-3.5 sm:p-5 border border-yellow-500/30 shadow-md space-y-2.5 sm:space-y-3">
                 <div class="flex items-center justify-between border-b border-white/10 pb-2">
-                    <span class="text-xs font-bold text-yellow-300 uppercase tracking-wider flex items-center gap-1.5">
+                    <span class="text-[11px] sm:text-xs font-bold text-yellow-300 uppercase tracking-wider flex items-center gap-1.5">
                         <span>🏆</span> Kartu Stempel Loyalitas
                     </span>
-                    <span class="text-[10px] text-stone-400">Target 10 Kunjungan</span>
+                    <span class="text-[9px] sm:text-[10px] text-stone-400">Target 10 Kunjungan</span>
                 </div>
 
                 <!-- 10 Slots Grid -->
-                <div id="passStampsGrid" class="grid grid-cols-5 gap-2 pt-1">
+                <div id="passStampsGrid" class="grid grid-cols-5 gap-1.5 sm:gap-2 pt-1">
                     <!-- Rendered by pass.js -->
                 </div>
 
                 <!-- Reward Rules Footnote -->
-                <div class="bg-black/30 rounded-xl p-2.5 text-[10px] text-stone-300 space-y-1 border border-white/5">
+                <div class="bg-black/30 rounded-xl p-2 sm:p-2.5 text-[9px] sm:text-[10px] text-stone-300 space-y-1 border border-white/5">
                     <div class="flex items-center gap-1.5 text-yellow-200 font-semibold">
                         <span>🍹</span> <span>Cap ke-5: <strong>Gratis Es Teh Jumbo</strong></span>
                     </div>
@@ -180,73 +180,86 @@
                 </div>
             </div>
 
-            <!-- 3. KARTU MEMBER DIGITAL (IDENTITAS VIP) -->
+            <!-- 3. KARTU MEMBER DIGITAL (IDENTITAS RESMI SEAFOOD IGGO) -->
             <div class="space-y-2">
-                <span class="text-[11px] font-bold text-stone-400 uppercase tracking-wider block">
-                    💳 Kartu Anggota Digital Anda:
-                </span>
+                <div class="flex items-center justify-between px-1">
+                    <span class="text-[10px] sm:text-[11px] font-bold text-stone-300 uppercase tracking-wider flex items-center gap-1.5">
+                        <span>💳</span> Kartu Anggota Digital Anda:
+                    </span>
+                    <span class="text-[9px] font-extrabold text-amber-900 bg-amber-200 border border-amber-400 px-2 py-0.5 rounded-full flex items-center gap-1 shadow-xs">
+                        <span>🍤</span> Seafood Signature
+                    </span>
+                </div>
 
-                <div class="w-full aspect-[1.58/1] rounded-3xl p-4 sm:p-5 iggo-card-mesh gold-card-border text-white flex flex-col justify-between relative shadow-card-gold overflow-hidden">
-                    <div class="card-geometric-pattern"></div>
+                <div class="w-full aspect-[1024/569] rounded-2xl sm:rounded-3xl relative shadow-card-gold overflow-hidden border-2 border-red-900/60 select-none iggo-seafood-card">
+                    <!-- Background Gambar Asli Seafood IGGO (Ada Logo IGGO, Udang Windu Merah, Kepiting & Frame QR) -->
+                    <img src="assets/card-bg-iggo.png" alt="Kartu Member Seafood IGGO Kuliner"
+                        class="absolute inset-0 w-full h-full object-cover pointer-events-none z-0">
 
-                    <!-- Card Top -->
-                    <div class="relative z-10 flex items-center justify-between border-b border-white/15 pb-2">
-                        <div class="flex items-center gap-2">
-                            <img src="assets/logo-iggo.jpg" alt="Logo" class="w-6 h-6 rounded-full border border-yellow-400">
-                            <div>
-                                <span class="font-serif font-black text-xs text-white tracking-wider block leading-none">IGGO KULINER</span>
-                                <span class="text-[7px] text-yellow-300 uppercase tracking-widest font-mono">VIP GOLD CARD</span>
+                    <!-- OVERLAY INFORMASI MEMBER (Di area terbuka antara Logo Atas dan Kepiting Bawah) -->
+                    <div class="absolute z-10 left-[7.5%] top-[37.5%] max-w-[58%] flex flex-col justify-center space-y-0.5 sm:space-y-1.5 pointer-events-none">
+                        
+                        <!-- Nama Anggota -->
+                        <div class="leading-tight">
+                            <span class="text-[7px] sm:text-[9px] font-black uppercase tracking-wider text-[#691212] block">
+                                Nama Anggota
+                            </span>
+                            <h3 id="cardNamaText"
+                                class="text-[13px] sm:text-base md:text-lg font-serif font-black text-[#260505] capitalize truncate tracking-wide drop-shadow-[0_1px_1px_rgba(255,255,255,0.9)]">
+                                -
+                            </h3>
+                        </div>
+
+                        <!-- Nomor ID Member & Badge VIP -->
+                        <div>
+                            <span class="text-[6.5px] sm:text-[8px] font-black uppercase tracking-wider text-[#691212] block">
+                                Nomor ID Member
+                            </span>
+                            <div class="flex items-center gap-1 sm:gap-1.5 mt-0.5">
+                                <span id="cardIdText"
+                                    class="font-mono text-[9px] sm:text-xs md:text-sm font-black text-amber-100 bg-[#7B1818] px-1.5 sm:px-2 py-0.5 rounded sm:rounded-md border border-amber-400/60 shadow-xs inline-block">
+                                    -
+                                </span>
+                                <span class="text-[6px] sm:text-[7.5px] font-black uppercase tracking-wider bg-gradient-to-r from-amber-400 to-yellow-500 text-stone-900 px-1 sm:px-1.5 py-0.5 rounded-full shadow-xs">
+                                    VIP PASS
+                                </span>
                             </div>
                         </div>
-                        <!-- Chip -->
-                        <div class="w-8 h-6 bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 rounded-md border border-yellow-200/80 shadow-xs flex items-center justify-center">
-                            <span class="text-[7px] font-bold text-stone-900 font-mono">VIP</span>
-                        </div>
-                    </div>
 
-                    <!-- Card Center -->
-                    <div class="relative z-10 my-auto py-2">
-                        <span class="text-[7.5px] uppercase tracking-wider text-stone-300 block">NAMA ANGGOTA</span>
-                        <div id="cardNamaText" class="font-serif text-lg font-black text-white tracking-wide truncate capitalize gold-emboss">
-                            -
-                        </div>
-                        <div class="mt-1">
-                            <span class="text-[7px] uppercase tracking-wider text-stone-300 block">NOMOR ID MEMBER</span>
-                            <span id="cardIdText" class="font-mono text-xs font-black text-yellow-300 bg-black/40 px-2 py-0.5 rounded border border-yellow-400/30 inline-block">
-                                -
+                        <!-- Tanggal Bergabung -->
+                        <div class="pt-0.5">
+                            <span id="cardDateText"
+                                class="font-mono text-[6.5px] sm:text-[8px] font-bold text-[#551010] drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)] block truncate">
+                                MEMBER SEJAK: -
                             </span>
                         </div>
                     </div>
 
-                    <!-- Card Bottom -->
-                    <div class="relative z-10 flex items-center justify-between border-t border-white/15 pt-2 text-[7.5px] text-stone-300">
-                        <span id="cardDateText" class="font-mono text-yellow-200 truncate">
-                            MEMBER SEJAK: -
-                        </span>
-                        <span class="font-semibold uppercase tracking-wider text-stone-300">
-                            Since 2005
-                        </span>
+                    <!-- OVERLAY QR CODE DI DALAM KOTAK PUTIH KARTU SEAFOOD -->
+                    <div class="absolute z-10 right-[16.6%] top-[50.8%] w-[14.6%] h-[26.4%] flex items-center justify-center p-0.5 sm:p-1 pointer-events-auto">
+                        <img id="cardQrImg" src="" alt="QR Member"
+                            class="w-full h-full object-contain rounded-md sm:rounded-lg">
                     </div>
                 </div>
             </div>
 
             <!-- 4. INFO OUTLET & TOMBOL CEPAT -->
-            <div class="bg-black/40 rounded-2xl p-4 border border-white/10 text-xs text-stone-300 space-y-2.5">
-                <div class="flex items-center justify-between font-semibold text-yellow-200 border-b border-white/10 pb-1.5">
+            <div class="bg-black/40 rounded-2xl p-3.5 sm:p-4 border border-white/10 text-xs text-stone-300 space-y-2 sm:space-y-2.5">
+                <div class="flex items-center justify-between font-semibold text-yellow-200 border-b border-white/10 pb-1.5 text-[11px] sm:text-xs">
                     <span>📍 OUTLET IGGO KULINER</span>
-                    <span class="text-[10px] bg-green-900/60 text-green-300 border border-green-500/30 px-2 py-0.5 rounded-full">Buka Setiap Hari</span>
+                    <span class="text-[9px] sm:text-[10px] bg-green-900/60 text-green-300 border border-green-500/30 px-2 py-0.5 rounded-full">Buka Setiap Hari</span>
                 </div>
-                <p class="text-[11px] text-stone-300 leading-relaxed">
+                <p class="text-[10px] sm:text-[11px] text-stone-300 leading-relaxed">
                     Jl. Kol. Abunjani No. 28, Sipin, Kota Jambi<br>
-                    <span class="text-stone-400 text-[10px]">Weekday: 10.00 - 21.30 WIB • Weekend: 10.00 - 22.00 WIB</span>
+                    <span class="text-stone-400 text-[9px] sm:text-[10px]">Weekday: 10.00 - 21.30 WIB • Weekend: 10.00 - 22.00 WIB</span>
                 </p>
-                <div class="pt-1 flex gap-2">
+                <div class="pt-1 flex flex-col sm:flex-row gap-2">
                     <a href="https://wa.me/6282179717946?text=Halo%20IGGO%20Kuliner,%20saya%20member%20VIP" target="_blank"
-                        class="flex-1 bg-green-600 hover:bg-green-500 text-white font-bold text-center py-2.5 rounded-xl transition text-[11px] flex items-center justify-center gap-1.5 shadow-sm">
+                        class="w-full sm:w-auto flex-1 bg-green-600 hover:bg-green-500 text-white font-bold text-center py-2.5 rounded-xl transition text-[11px] flex items-center justify-center gap-1.5 shadow-sm">
                         <span>💬</span> WhatsApp Kasir
                     </a>
                     <a href="index.html"
-                        class="flex-1 bg-white/10 hover:bg-white/20 text-yellow-200 font-semibold text-center py-2.5 rounded-xl border border-white/20 transition text-[11px] flex items-center justify-center gap-1.5">
+                        class="w-full sm:w-auto flex-1 bg-white/10 hover:bg-white/20 text-yellow-200 font-semibold text-center py-2.5 rounded-xl border border-white/20 transition text-[11px] flex items-center justify-center gap-1.5">
                         <span>📖</span> Lihat Menu Resto
                     </a>
                 </div>
@@ -262,7 +275,7 @@
     </footer>
 
     <!-- SCRIPT LOGIC KHUSUS VIP PASS -->
-    <script src="js/pass.js?v=2.0"></script>
+    <script src="js/pass.js?v=3.0"></script>
 </body>
 
 </html>

@@ -1,0 +1,19 @@
+# System
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Data runtime (data stempel dibuat otomatis oleh server)
+# Uncomment baris di bawah jika tidak ingin push data stempel:
+# data/stamps.json

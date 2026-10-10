@@ -47,31 +47,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="css/style.css?v=2.7">
+    <link rel="stylesheet" href="css/style.css?v=3.0">
 </head>
 
 <body class="bg-iggo-cream text-iggo-dark font-sans antialiased min-h-screen">
 
     <!-- TOP NAVBAR ADMIN -->
     <header class="no-print bg-iggo-maroondark text-white border-b-2 border-iggo-gold shadow-md">
-        <div class="max-w-6xl mx-auto px-4 py-3.5 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <img src="assets/logo-iggo.jpg" alt="Logo" class="w-10 h-10 rounded-full border border-iggo-gold object-cover">
+        <div class="max-w-6xl mx-auto px-3 sm:px-4 py-2.5 sm:py-3.5 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                <img src="assets/logo-iggo.jpg" alt="Logo" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-iggo-gold object-cover">
                 <div>
-                    <h1 class="font-serif font-black text-base sm:text-lg tracking-wider text-yellow-300 leading-tight">
-                        IGGO KULINER • PORTAL OWNER & ADMIN
+                    <h1 class="font-serif font-black text-sm sm:text-lg tracking-wider text-yellow-300 leading-tight">
+                        <span class="sm:hidden">IGGO ADMIN</span>
+                        <span class="hidden sm:inline">IGGO KULINER • PORTAL OWNER & ADMIN</span>
                     </h1>
-                    <span class="text-[10px] text-stone-300 block">Pusat Cetak Kartu Member & Manajemen CRM</span>
+                    <span class="text-[9px] text-stone-300 hidden sm:block">Pusat Cetak Kartu Member & Manajemen CRM</span>
                 </div>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
                 <a href="kasir.html"
-                    class="bg-yellow-400 hover:bg-yellow-300 text-stone-900 font-bold text-xs px-3 py-1.5 rounded-lg shadow-sm transition flex items-center gap-1">
-                    <span>🛒</span> Terminal Kasir
+                    class="bg-yellow-400 hover:bg-yellow-300 text-stone-900 font-bold text-[11px] sm:text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg shadow-sm transition flex items-center gap-1">
+                    <span>🛒</span> <span class="hidden sm:inline">Terminal Kasir</span><span class="sm:hidden">Kasir</span>
                 </a>
                 <a href="index.html"
-                    class="bg-white/10 hover:bg-white/20 text-stone-200 text-xs px-3 py-1.5 rounded-lg border border-white/20 transition flex items-center gap-1">
-                    <span>🏠</span> Web Resto
+                    class="bg-white/10 hover:bg-white/20 text-stone-200 text-[11px] sm:text-xs px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg border border-white/20 transition flex items-center gap-1">
+                    <span>🏠</span> <span class="hidden sm:inline">Web Resto</span><span class="sm:hidden">Web</span>
                 </a>
             </div>
         </div>
@@ -148,62 +149,67 @@
 
                 <!-- SISI DEPAN (FRONT) -->
                 <div class="flex flex-col items-center w-full max-w-[460px]">
-                    <span class="no-print text-xs font-bold text-stone-500 mb-2 uppercase tracking-wider flex items-center gap-1.5">
-                        <span>💳</span> Sisi Depan (Front)
-                    </span>
+                    <div class="no-print flex items-center justify-between w-full mb-2 px-1">
+                        <span class="text-xs font-bold text-stone-500 uppercase tracking-wider flex items-center gap-1.5">
+                            <span>💳</span> Sisi Depan (Front)
+                        </span>
+                        <span class="text-[10px] font-extrabold text-amber-900 bg-amber-100 border border-amber-300 px-2 py-0.5 rounded-full flex items-center gap-1 shadow-xs">
+                            <span>🍤</span> Ciri Khas Seafood IGGO
+                        </span>
+                    </div>
 
                     <div id="memberCardFront"
-                        class="w-full aspect-[1.58/1] rounded-3xl p-5 sm:p-6 iggo-card-mesh gold-card-border text-white flex flex-col justify-between relative shadow-card-gold overflow-hidden">
-                        <div class="card-geometric-pattern"></div>
+                        class="w-full aspect-[1024/569] rounded-2xl sm:rounded-3xl relative shadow-card-gold overflow-hidden border-2 border-red-900/60 select-none iggo-seafood-card">
 
-                        <!-- Card Top: Logo & VIP Chip -->
-                        <div class="relative z-10 flex items-center justify-between border-b border-white/15 pb-2.5">
-                            <div class="flex items-center gap-2.5">
-                                <img src="assets/logo-iggo.jpg" alt="Logo" class="w-8 h-8 rounded-full border border-yellow-400">
-                                <div>
-                                    <h4 class="font-serif font-black text-sm tracking-wider text-white leading-none">IGGO KULINER</h4>
-                                    <span class="text-[8px] text-yellow-300 font-mono tracking-widest uppercase">VIP MEMBER PASS</span>
-                                </div>
-                            </div>
-                            <div class="w-10 h-7 bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 rounded-md border border-yellow-200/90 shadow-sm flex items-center justify-center">
-                                <span class="text-[8px] font-black text-stone-900 font-mono">CHIP</span>
-                            </div>
-                        </div>
+                        <!-- Gambar Latar Belakang Kartu Asli Seafood IGGO (Ada Logo IGGO, Udang Windu Merah, Kepiting & Frame QR) -->
+                        <img src="assets/card-bg-iggo.png" alt="Kartu Member Seafood IGGO Kuliner"
+                            class="absolute inset-0 w-full h-full object-cover pointer-events-none z-0">
 
-                        <!-- Card Center: Name & ID & QR -->
-                        <div class="relative z-10 flex items-center justify-between my-auto py-2">
-                            <div class="space-y-2 max-w-[65%]">
-                                <div>
-                                    <span class="text-[8px] uppercase tracking-wider text-stone-300 block font-medium">NAMA ANGGOTA</span>
-                                    <h3 id="printCardNama" class="font-serif text-lg sm:text-xl font-black text-white tracking-wide truncate capitalize gold-emboss">
-                                        Jihan Salsabila
-                                    </h3>
-                                </div>
-                                <div>
-                                    <span class="text-[8px] uppercase tracking-wider text-stone-300 block font-medium">NOMOR ID MEMBER</span>
-                                    <span id="printCardId" class="font-mono text-xs sm:text-sm font-black text-yellow-300 bg-black/40 px-2 py-0.5 rounded border border-yellow-400/30 inline-block">
+                        <!-- OVERLAY INFORMASI MEMBER (Di area terbuka antara Logo Atas dan Kepiting Bawah) -->
+                        <div
+                            class="absolute z-10 left-[7.5%] top-[37.5%] max-w-[58%] flex flex-col justify-center space-y-0.5 sm:space-y-1.5 pointer-events-none">
+                            
+                            <!-- Nama Anggota -->
+                            <div class="leading-tight">
+                                <span class="text-[7.5px] sm:text-[9.5px] font-black uppercase tracking-wider text-[#691212] block">
+                                    Nama Anggota
+                                </span>
+                                <h3 id="printCardNama"
+                                    class="text-[13px] sm:text-base md:text-lg font-serif font-black text-[#260505] capitalize truncate tracking-wide drop-shadow-[0_1px_1px_rgba(255,255,255,0.9)]">
+                                    Jihan Salsabila
+                                </h3>
+                            </div>
+
+                            <!-- Nomor ID Member & Badge VIP -->
+                            <div>
+                                <span class="text-[7px] sm:text-[8.5px] font-black uppercase tracking-wider text-[#691212] block">
+                                    Nomor ID Member
+                                </span>
+                                <div class="flex items-center gap-1 sm:gap-1.5 mt-0.5">
+                                    <span id="printCardId"
+                                        class="font-mono text-[9px] sm:text-xs md:text-sm font-black text-amber-100 bg-[#7B1818] px-1.5 sm:px-2.5 py-0.5 rounded sm:rounded-md border border-amber-400/60 shadow-xs inline-block">
                                         JNH-016
+                                    </span>
+                                    <span class="text-[6px] sm:text-[7.5px] font-black uppercase tracking-wider bg-gradient-to-r from-amber-400 to-yellow-500 text-stone-900 px-1 sm:px-1.5 py-0.5 rounded-full shadow-xs">
+                                        VIP DINING
                                     </span>
                                 </div>
                             </div>
 
-                            <!-- QR Code Box -->
-                            <div class="flex flex-col items-center flex-shrink-0">
-                                <div class="card-qr-box bg-white p-1 rounded-xl shadow-md border-2 border-yellow-400/50">
-                                    <img id="printCardQr" src="" alt="QR Member" class="w-20 h-20 sm:w-24 sm:h-24">
-                                </div>
-                                <span class="text-[7.5px] text-yellow-200 font-mono tracking-wider mt-1 uppercase font-semibold">Scan VIP Pass</span>
+                            <!-- Tanggal Bergabung -->
+                            <div class="pt-0.5">
+                                <span id="printCardDate"
+                                    class="font-mono text-[6.5px] sm:text-[8px] font-bold text-[#551010] drop-shadow-[0_1px_1px_rgba(255,255,255,0.7)] block truncate">
+                                    MEMBER SEJAK: 15/05/2024
+                                </span>
                             </div>
                         </div>
 
-                        <!-- Card Bottom -->
-                        <div class="relative z-10 flex items-center justify-between border-t border-white/15 pt-2 text-[8px] text-stone-300 font-mono">
-                            <span id="printCardDate" class="text-yellow-200 truncate">
-                                MEMBER SEJAK: 15/05/2024
-                            </span>
-                            <span class="uppercase tracking-widest text-stone-300">
-                                Since 2005
-                            </span>
+                        <!-- OVERLAY QR CODE DI DALAM KOTAK PUTIH KARTU SEAFOOD -->
+                        <div
+                            class="absolute z-10 right-[16.6%] top-[50.8%] w-[14.6%] h-[26.4%] flex items-center justify-center p-0.5 sm:p-1 pointer-events-auto">
+                            <img id="printCardQr" src="" alt="QR Member"
+                                class="w-full h-full object-contain rounded-md sm:rounded-lg">
                         </div>
                     </div>
                 </div>
@@ -215,28 +221,28 @@
                     </span>
 
                     <div id="memberCardBack"
-                        class="w-full aspect-[1.58/1] rounded-3xl iggo-card-mesh gold-card-border text-white flex flex-col justify-between relative shadow-card-gold overflow-hidden">
+                        class="w-full aspect-[1.58/1] rounded-2xl sm:rounded-3xl iggo-card-mesh gold-card-border text-white flex flex-col justify-between relative shadow-card-gold overflow-hidden">
                         <div class="card-geometric-pattern"></div>
 
                         <!-- Magnetic Stripe -->
-                        <div class="w-full h-9 sm:h-10 magnetic-stripe mt-4 relative z-10"></div>
+                        <div class="w-full h-7 sm:h-9 magnetic-stripe mt-2.5 sm:mt-4 relative z-10"></div>
 
                         <!-- Signature & Outlet Info -->
-                        <div class="relative z-10 px-5 sm:px-6 space-y-2.5 my-auto">
+                        <div class="relative z-10 px-3.5 sm:px-6 space-y-1.5 sm:space-y-2.5 my-auto">
                             <!-- Signature Panel -->
                             <div class="flex items-center justify-between">
-                                <div class="h-6 sm:h-7 w-44 sm:w-56 signature-strip rounded px-2.5 flex items-center justify-between shadow-inner">
-                                    <span id="printCardBackNama" class="font-serif text-[9px] font-bold text-stone-800 capitalize">Jihan Salsabila</span>
-                                    <span class="font-mono text-[7px] text-stone-500 italic">Authorized</span>
+                                <div class="h-5 sm:h-7 w-36 sm:w-56 signature-strip rounded px-2 sm:px-2.5 flex items-center justify-between shadow-inner">
+                                    <span id="printCardBackNama" class="font-serif text-[8px] sm:text-[9px] font-bold text-stone-800 capitalize truncate">Jihan Salsabila</span>
+                                    <span class="font-mono text-[6px] sm:text-[7px] text-stone-500 italic">Authorized</span>
                                 </div>
                                 <div class="text-right">
-                                    <span id="printCardBackId" class="font-mono text-xs font-bold text-yellow-300">ID: JNH-016</span>
+                                    <span id="printCardBackId" class="font-mono text-[10px] sm:text-xs font-bold text-yellow-300">ID: JNH-016</span>
                                 </div>
                             </div>
 
                             <!-- Outlet Details Bento -->
-                            <div class="bg-black/40 backdrop-blur-sm border border-white/15 rounded-xl p-2.5 text-[8px] sm:text-[9px] text-stone-200 space-y-1">
-                                <div class="flex items-center justify-between font-semibold text-yellow-200 border-b border-white/10 pb-1">
+                            <div class="bg-black/40 backdrop-blur-sm border border-white/15 rounded-xl p-2 sm:p-2.5 text-[7px] sm:text-[9px] text-stone-200 space-y-0.5 sm:space-y-1">
+                                <div class="flex items-center justify-between font-semibold text-yellow-200 border-b border-white/10 pb-0.5 sm:pb-1">
                                     <span>🕒 JAM OPERASIONAL:</span>
                                     <span>Senin - Minggu</span>
                                 </div>
@@ -245,14 +251,14 @@
                                     <span>Weekend: 10.00 - 22.00 WIB</span>
                                 </div>
                                 <div class="text-stone-300 pt-0.5 flex justify-between">
-                                    <span>📍 Jl. Kol. Abunjani No. 28, Sipin, Jambi</span>
-                                    <span class="text-yellow-200">WA: +62 821-7971-7946</span>
+                                    <span>📍 Jl. Kol. Abunjani No. 28, Sipin</span>
+                                    <span class="text-yellow-200">WA: 0821-7971-7946</span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Card Back Footnote -->
-                        <div class="relative z-10 bg-black/50 px-5 py-2 text-center text-[7px] sm:text-[8px] text-stone-400 border-t border-white/10 leading-tight">
+                        <div class="relative z-10 bg-black/50 px-3 sm:px-5 py-1.5 sm:py-2 text-center text-[6.5px] sm:text-[8px] text-stone-400 border-t border-white/10 leading-tight">
                             <p>Tunjukkan kartu ini saat transaksi di kasir untuk klaim stempel & diskon keanggotaan.</p>
                             <p class="text-stone-500 mt-0.5">© 2005 - 2026 IGGO Kuliner • Hak Cipta Dilindungi</p>
                         </div>
@@ -262,17 +268,17 @@
             </div>
 
             <!-- PRINT & DOWNLOAD ACTION BUTTONS -->
-            <div class="no-print flex flex-wrap justify-center gap-3 pt-4 border-t border-stone-200">
+            <div class="no-print flex flex-col sm:flex-row justify-center gap-2 sm:gap-3 pt-4 border-t border-stone-200 max-w-xl mx-auto">
                 <button onclick="window.print()"
-                    class="bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight hover:brightness-110 text-white font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl shadow-md transition flex items-center gap-2">
-                    <span>🖨️</span> Cetak Kartu Member (Print / PDF)
+                    class="w-full sm:w-auto bg-gradient-to-r from-iggo-maroon to-iggo-maroonlight hover:brightness-110 text-white font-bold text-xs sm:text-sm px-5 py-3 sm:py-3.5 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                    <span>🖨️</span> Cetak Kartu (Print / PDF)
                 </button>
                 <button onclick="adminDownloadFront()"
-                    class="bg-white border-2 border-iggo-gold text-iggo-maroon hover:bg-iggo-creambg font-bold text-xs sm:text-sm px-5 py-3.5 rounded-xl transition shadow-sm flex items-center gap-1.5">
+                    class="w-full sm:w-auto bg-white border-2 border-iggo-gold text-iggo-maroon hover:bg-iggo-creambg font-bold text-xs sm:text-sm px-4 py-3 sm:py-3.5 rounded-xl transition shadow-sm flex items-center justify-center gap-1.5">
                     <span>📥</span> Unduh Kartu Depan (PNG)
                 </button>
                 <button onclick="adminDownloadBack()"
-                    class="bg-white border border-iggo-warmborder text-iggo-maroon hover:bg-iggo-creambg font-semibold text-xs sm:text-sm px-5 py-3.5 rounded-xl transition shadow-sm flex items-center gap-1.5">
+                    class="w-full sm:w-auto bg-white border border-iggo-warmborder text-iggo-maroon hover:bg-iggo-creambg font-semibold text-xs sm:text-sm px-4 py-3 sm:py-3.5 rounded-xl transition shadow-sm flex items-center justify-center gap-1.5">
                     <span>📥</span> Unduh Kartu Belakang (PNG)
                 </button>
             </div>

@@ -59,6 +59,25 @@ function updateDisplayServerIp() {
     }
 }
 
+async function autoDetectServerIp() {
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+        try {
+            const res = await fetch("/api/ip");
+            if (res.ok) {
+                const data = await res.json();
+                if (data.primary_ip && data.primary_ip !== "127.0.0.1") {
+                    CONFIG.SERVER_IP = data.primary_ip;
+                    if (!localStorage.getItem("iggo_server_ip")) {
+                        localStorage.setItem("iggo_server_ip", data.primary_ip);
+                    }
+                    updateDisplayServerIp();
+                    if (currentMemberData) renderCard(currentMemberData);
+                }
+            }
+        } catch (e) {}
+    }
+}
+
 function copyPassLink() {
     if (!currentMemberData) return;
     const baseOrigin = getServerOrigin();
@@ -90,6 +109,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 function initApp() {
     updateDisplayServerIp();
+    autoDetectServerIp();
 
     // Set default tanggal pendaftaran ke hari ini (YYYY-MM-DD)
     const today = new Date().toISOString().split("T")[0];
@@ -504,29 +524,29 @@ function renderCard(m) {
         for (let i = 1; i <= 10; i++) {
             const isFilled = i <= effectiveCap;
             const slot = document.createElement("div");
-            let baseClass = "h-12 sm:h-14 flex flex-col items-center justify-center rounded-2xl text-xs font-bold transition-all ";
+            let baseClass = "h-11 sm:h-14 flex flex-col items-center justify-center rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-bold transition-all p-0.5 sm:p-1 text-center leading-none ";
 
             if (isFilled) {
                 if (i === 5) {
                     slot.className = baseClass + "bg-gradient-to-br from-amber-400 to-yellow-600 text-iggo-dark shadow-md border-2 border-yellow-300 font-extrabold";
-                    slot.innerHTML = "<span class='text-base'>🍹</span><span class='text-[9px]'>Cap 5 Free</span>";
+                    slot.innerHTML = "<span class='text-sm sm:text-base'>🍹</span><span class='text-[7.5px] sm:text-[9px] font-black mt-0.5'>Free Teh</span>";
                 } else if (i === 10) {
                     slot.className = baseClass + "bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-500 text-iggo-dark shadow-lg border-2 border-white animate-subtle font-black";
-                    slot.innerHTML = "<span class='text-base'>👑</span><span class='text-[9px]'>50% OFF</span>";
+                    slot.innerHTML = "<span class='text-sm sm:text-base'>👑</span><span class='text-[7.5px] sm:text-[9px] font-black mt-0.5'>50% OFF</span>";
                 } else {
                     slot.className = baseClass + "bg-gradient-to-br from-iggo-amber to-red-600 text-white shadow-sm border border-orange-300";
-                    slot.innerHTML = "<span class='text-sm'>🍤</span><span class='text-[8px] opacity-80'>Cap " + i + "</span>";
+                    slot.innerHTML = "<span class='text-xs sm:text-sm'>🍤</span><span class='text-[7.5px] sm:text-[8px] opacity-90 mt-0.5'>Cap " + i + "</span>";
                 }
             } else {
                 if (i === 5) {
                     slot.className = baseClass + "bg-white/10 text-yellow-300 border-2 border-dashed border-yellow-400/60";
-                    slot.innerHTML = "<span class='text-xs'>5</span><span class='text-[8px] text-yellow-200'>FREE TEH</span>";
+                    slot.innerHTML = "<span class='text-[10px] sm:text-xs font-mono font-bold'>5</span><span class='text-[6.5px] sm:text-[8px] text-yellow-200 font-bold mt-0.5'>FREE TEH</span>";
                 } else if (i === 10) {
                     slot.className = baseClass + "bg-white/10 text-yellow-300 border-2 border-dashed border-yellow-400/80";
-                    slot.innerHTML = "<span class='text-xs'>10</span><span class='text-[8px] text-yellow-200'>50% OFF</span>";
+                    slot.innerHTML = "<span class='text-[10px] sm:text-xs font-mono font-bold'>10</span><span class='text-[6.5px] sm:text-[8px] text-yellow-200 font-bold mt-0.5'>50% OFF</span>";
                 } else {
                     slot.className = baseClass + "bg-white/5 text-stone-400 border border-dashed border-white/20";
-                    slot.innerHTML = "<span class='text-xs'>" + i + "</span>";
+                    slot.innerHTML = "<span class='text-[11px] sm:text-xs font-mono font-medium'>" + i + "</span>";
                 }
             }
             grid.appendChild(slot);

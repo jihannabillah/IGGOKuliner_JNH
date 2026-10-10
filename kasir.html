@@ -52,27 +52,29 @@
 
     <!-- TOP NAVBAR KASIR -->
     <header class="bg-iggo-maroondark text-white border-b-2 border-iggo-gold shadow-md">
-        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <img src="assets/logo-iggo.jpg" alt="Logo" class="w-10 h-10 rounded-full border border-iggo-gold">
+        <div class="max-w-5xl mx-auto px-3 sm:px-4 py-2.5 sm:py-3 flex items-center justify-between gap-2">
+            <div class="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                <img src="assets/logo-iggo.jpg" alt="Logo" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-iggo-gold">
                 <div>
-                    <h1 class="font-serif font-black text-base sm:text-lg tracking-wider text-yellow-300 leading-tight">
-                        IGGO KULINER • TERMINAL KASIR
+                    <h1 class="font-serif font-black text-sm sm:text-lg tracking-wider text-yellow-300 leading-tight">
+                        <span class="sm:hidden">IGGO KASIR</span>
+                        <span class="hidden sm:inline">IGGO KULINER • TERMINAL KASIR</span>
                     </h1>
-                    <span class="text-[10px] text-stone-300 block">Sistem Validasi & Penambahan Stempel Transaksi</span>
+                    <span class="text-[9px] text-stone-300 hidden sm:block">Sistem Validasi & Penambahan Stempel Transaksi</span>
                 </div>
             </div>
-            <div class="flex items-center gap-2">
-                <span class="hidden sm:inline-flex items-center gap-1.5 bg-green-500/20 text-green-300 border border-green-500/30 px-3 py-1 rounded-full text-xs font-semibold">
-                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> Kasir Aktif
-                </span>
+            <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+                <button id="appsScriptStatusBadge" onclick="configureAppsScript()"
+                    class="bg-white/10 hover:bg-white/20 text-[10px] sm:text-[11px] px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border border-white/20 transition flex items-center gap-1 cursor-pointer">
+                    ⚪ <span class="text-stone-300">Sheets</span>
+                </button>
                 <button onclick="lockTerminal()"
-                    class="bg-white/10 hover:bg-white/20 text-stone-200 text-xs px-3 py-1.5 rounded-lg border border-white/20 transition flex items-center gap-1">
-                    <span>🔒</span> Kunci
+                    class="bg-white/10 hover:bg-white/20 text-stone-200 text-[11px] px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border border-white/20 transition flex items-center gap-1" title="Kunci Terminal">
+                    <span>🔒</span> <span class="hidden sm:inline">Kunci</span>
                 </button>
                 <a href="index.html"
-                    class="bg-white/10 hover:bg-white/20 text-yellow-300 text-xs px-3 py-1.5 rounded-lg border border-yellow-400/30 transition flex items-center gap-1">
-                    <span>🏠</span> Web
+                    class="bg-white/10 hover:bg-white/20 text-yellow-300 text-[11px] px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg border border-yellow-400/30 transition flex items-center gap-1" title="Buka Website">
+                    <span>🏠</span> <span class="hidden sm:inline">Web</span>
                 </a>
             </div>
         </div>

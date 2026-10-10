@@ -189,29 +189,29 @@ function renderPassData(m) {
         for (let i = 1; i <= 10; i++) {
             const isFilled = i <= cap;
             const slot = document.createElement("div");
-            let base = "h-14 flex flex-col items-center justify-center rounded-2xl text-xs font-bold transition-all ";
+            let base = "h-11 sm:h-14 flex flex-col items-center justify-center rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-bold transition-all p-0.5 sm:p-1 text-center leading-none ";
 
             if (isFilled) {
                 if (i === 5) {
                     slot.className = base + "bg-gradient-to-br from-amber-400 to-yellow-600 text-stone-900 shadow-md border-2 border-yellow-300 font-extrabold";
-                    slot.innerHTML = "<span class='text-base'>🍹</span><span class='text-[8px] font-black'>Cap 5 Free</span>";
+                    slot.innerHTML = "<span class='text-sm sm:text-base'>🍹</span><span class='text-[7px] sm:text-[8px] font-black mt-0.5'>Free Teh</span>";
                 } else if (i === 10) {
                     slot.className = base + "bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-500 text-stone-900 shadow-lg border-2 border-white font-black animate-pulse";
-                    slot.innerHTML = "<span class='text-base'>👑</span><span class='text-[8px] font-black'>50% OFF</span>";
+                    slot.innerHTML = "<span class='text-sm sm:text-base'>👑</span><span class='text-[7px] sm:text-[8px] font-black mt-0.5'>50% OFF</span>";
                 } else {
                     slot.className = base + "bg-gradient-to-br from-amber-500 to-red-600 text-white shadow-sm border border-orange-300";
-                    slot.innerHTML = "<span class='text-base'>🍤</span><span class='text-[8px] opacity-90'>Cap " + i + "</span>";
+                    slot.innerHTML = "<span class='text-xs sm:text-base'>🍤</span><span class='text-[7px] sm:text-[8px] opacity-90 mt-0.5'>Cap " + i + "</span>";
                 }
             } else {
                 if (i === 5) {
                     slot.className = base + "bg-white/10 text-yellow-300 border-2 border-dashed border-yellow-400/60";
-                    slot.innerHTML = "<span class='text-xs'>5</span><span class='text-[8px] text-yellow-200'>FREE TEH</span>";
+                    slot.innerHTML = "<span class='text-[10px] sm:text-xs font-mono font-bold'>5</span><span class='text-[6.5px] sm:text-[8px] text-yellow-200 font-bold mt-0.5'>FREE TEH</span>";
                 } else if (i === 10) {
                     slot.className = base + "bg-white/10 text-yellow-300 border-2 border-dashed border-yellow-400/80";
-                    slot.innerHTML = "<span class='text-xs'>10</span><span class='text-[8px] text-yellow-200'>50% OFF</span>";
+                    slot.innerHTML = "<span class='text-[10px] sm:text-xs font-mono font-bold'>10</span><span class='text-[6.5px] sm:text-[8px] text-yellow-200 font-bold mt-0.5'>50% OFF</span>";
                 } else {
                     slot.className = base + "bg-white/5 text-stone-500 border border-dashed border-white/15";
-                    slot.innerHTML = "<span class='text-xs'>" + i + "</span>";
+                    slot.innerHTML = "<span class='text-[11px] sm:text-xs font-mono font-medium'>" + i + "</span>";
                 }
             }
             grid.appendChild(slot);
@@ -222,6 +222,11 @@ function renderPassData(m) {
     setTxt("cardNamaText", m.nama);
     setTxt("cardIdText", m.idMember);
     setTxt("cardDateText", "MEMBER SEJAK: " + m.tanggal);
+
+    const qrImg = document.getElementById("cardQrImg");
+    if (qrImg && m.idMember) {
+        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(m.idMember)}&margin=1`;
+    }
 }
 
 function showError() {

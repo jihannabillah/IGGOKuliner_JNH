@@ -15,9 +15,29 @@ let currentAdminMember = null;
 
 window.addEventListener("DOMContentLoaded", () => {
     updateAdminHostIpDisplay();
+    autoDetectAdminIp();
     // Auto-load demo default JNH-016
     quickAdminSelect("JNH-016");
 });
+
+async function autoDetectAdminIp() {
+    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
+        try {
+            const res = await fetch("/api/ip");
+            if (res.ok) {
+                const data = await res.json();
+                if (data.primary_ip && data.primary_ip !== "127.0.0.1") {
+                    ADMIN_CONFIG.SERVER_IP = data.primary_ip;
+                    if (!localStorage.getItem("iggo_server_ip")) {
+                        localStorage.setItem("iggo_server_ip", data.primary_ip);
+                    }
+                    updateAdminHostIpDisplay();
+                    if (currentAdminMember) renderAdminCard(currentAdminMember);
+                }
+            }
+        } catch (e) {}
+    }
+}
 
 function getAdminServerOrigin() {
     if (window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1" && window.location.hostname !== "[::]") {

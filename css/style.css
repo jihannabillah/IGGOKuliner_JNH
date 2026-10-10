@@ -73,14 +73,86 @@
 }
 
 #printCardQr {
-    width: 80px !important;
-    height: 80px !important;
-    min-width: 80px !important;
-    min-height: 80px !important;
-    max-width: 80px !important;
-    max-height: 80px !important;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Styling Khusus Kartu Member Seafood IGGO (Ada Logo Udang & Kepiting Asli) */
+.iggo-seafood-card {
+    background-color: #FCD561;
+    aspect-ratio: 1024 / 569 !important;
+    position: relative;
+    border: 2px solid #8B1E1E !important;
+    box-shadow: 0 16px 36px -8px rgba(139, 30, 30, 0.35), 0 0 20px rgba(245, 158, 11, 0.25) !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+.iggo-seafood-card #printCardQr,
+.iggo-seafood-card #cardQrImg {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
     object-fit: contain !important;
-    display: block !important;
+    border-radius: 6px !important;
+    background: #ffffff !important;
+    padding: 2px !important;
+}
+
+/* Responsif Mobile Sempurna untuk Kartu & QR Code */
+@media (max-width: 640px) {
+    .card-qr-box {
+        width: 72px !important;
+        height: 72px !important;
+        min-width: 72px !important;
+        min-height: 72px !important;
+        max-width: 72px !important;
+        max-height: 72px !important;
+        padding: 4px !important;
+        border-radius: 10px !important;
+    }
+
+    #printCardQr {
+        width: 64px;
+        height: 64px;
+    }
+
+    .iggo-seafood-card #printCardQr,
+    .iggo-seafood-card #cardQrImg {
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+
+@media (max-width: 380px) {
+    .card-qr-box {
+        width: 64px !important;
+        height: 64px !important;
+        min-width: 64px !important;
+        min-height: 64px !important;
+        max-width: 64px !important;
+        max-height: 64px !important;
+        padding: 3px !important;
+        border-radius: 8px !important;
+    }
+
+    #printCardQr {
+        width: 56px !important;
+        height: 56px !important;
+        min-width: 56px !important;
+        min-height: 56px !important;
+        max-width: 56px !important;
+        max-height: 56px !important;
+    }
+
+    #memberCardFront, #memberCardBack {
+        min-height: 210px !important;
+    }
 }
 
 /* Glossy Magnetic Stripe for Card Back */
@@ -236,4 +308,25 @@ body.member-pass-mode .pass-only {
 
 body.member-pass-mode .pass-hide {
     display: none !important;
+}
+
+/* ==============================================================
+   RESPONSIF MOBILE UMUM & SENTUHAN SMARPHONE
+   ============================================================== */
+html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    -webkit-text-size-adjust: 100%;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Responsif Grid 10 Stempel Kunjungan di Layar Kecil */
+@media (max-width: 640px) {
+    .stamp-slot-content {
+        line-height: 1.1;
+        text-align: center;
+    }
 }

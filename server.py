@@ -12,10 +12,12 @@ ke HP Pelanggan (pass.html) saat scan QR Code.
 import http.server
 import json
 import os
+import socket
 import socketserver
+import subprocess
 import urllib.parse
 
-PORT = 3000
+PORT = int(os.environ.get("PORT", 3000))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(BASE_DIR, "data")
 DATA_FILE = os.path.join(DATA_DIR, "stamps.json")
@@ -25,6 +27,31 @@ os.makedirs(DATA_DIR, exist_ok=True)
 if not os.path.exists(DATA_FILE):
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump({}, f, indent=2)
+
+def get_local_ips():
+    ips = []
+    # 1. Cek Wi-Fi / interface jaringan macOS & Linux
+    for iface in ("en0", "en1", "wlan0", "eth0"):
+        try:
+            out = subprocess.check_output(["ipconfig", "getifaddr", iface], stderr=subprocess.DEVNULL).decode().strip()
+            if out and out not in ips:
+                ips.append(out)
+        except Exception:
+            pass
+
+    # 2. Cek socket routing default
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.settimeout(0.3)
+        s.connect(("8.8.8.8", 80))
+        sock_ip = s.getsockname()[0]
+        s.close()
+        if sock_ip and sock_ip != "127.0.0.1" and sock_ip not in ips:
+            ips.append(sock_ip)
+    except Exception:
+        pass
+
+    return ips
 
 def read_stamps():
     try:
@@ -56,6 +83,15 @@ class IGGORequestHandler(http.server.SimpleHTTPRequestHandler):
         self.send_response(200)
         self.end_headers()
 
+    def do_HEAD(self):
+        parsed = urllib.parse.urlparse(self.path)
+        if parsed.path in ("/api/stamps", "/api/ip", "/api/info"):
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.end_headers()
+            return
+        super().do_HEAD()
+
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
         if parsed.path == "/api/stamps":
@@ -74,6 +110,20 @@ class IGGORequestHandler(http.server.SimpleHTTPRequestHandler):
                 res = {"success": True, "stamps": stamps}
 
             self.wfile.write(json.dumps(res).encode("utf-8"))
+            return
+
+        if parsed.path in ("/api/ip", "/api/info"):
+            ips = get_local_ips()
+            primary_ip = ips[0] if ips else "127.0.0.1"
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(json.dumps({
+                "success": True,
+                "primary_ip": primary_ip,
+                "all_ips": ips,
+                "port": PORT
+            }).encode("utf-8"))
             return
 
         # Fallback to standard static file server
@@ -131,8 +181,25 @@ class ThreadedHTTPServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
 if __name__ == "__main__":
     server_address = ("", PORT)
     with ThreadedHTTPServer(server_address, IGGORequestHandler) as httpd:
-        print(f"🚀 IGGO Kuliner Server aktif di port {PORT} (http://localhost:{PORT})")
-        print(f"📡 Real-time Sync API tersedia di /api/stamps")
+        ips = get_local_ips()
+        primary_ip = ips[0] if ips else "127.0.0.1"
+        print("=" * 64)
+        print("🚀 IGGO KULINER — LOCAL SERVER & REALTIME STAMP ENGINE")
+        print("=" * 64)
+        print(f"💻 Akses Komputer (Lokal) : http://localhost:{PORT}")
+        print(f"📱 Akses HP (Wi-Fi / QR)  : http://{primary_ip}:{PORT}")
+        if len(ips) > 1:
+            print(f"   IP Tambahan            : {', '.join(ips[1:])}")
+        print("-" * 64)
+        print("📄 Halaman Tersedia:")
+        print(f"  • Pendaftaran & Member  : http://localhost:{PORT}/index.html")
+        print(f"  • Portal Kasir (Cap QR) : http://localhost:{PORT}/kasir.html")
+        print(f"  • Pass Pelanggan        : http://localhost:{PORT}/pass.html?id=JNH-020")
+        print(f"  • Portal Cetak Admin    : http://localhost:{PORT}/admin.html")
+        print("=" * 64)
+        print(f"📡 Real-time Sync API aktif di http://localhost:{PORT}/api/stamps")
+        print("Tekan Ctrl+C untuk menghentikan server.")
+        print("=" * 64)
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:
